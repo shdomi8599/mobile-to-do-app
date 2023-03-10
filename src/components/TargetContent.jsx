@@ -29,7 +29,7 @@ const TargetContent = ({
   changeTodayTarget,
   idx,
 }) => {
-  //인풋 타겟
+  //input 타겟
   const targetInput = useRef(null);
 
   //글 수정 상태

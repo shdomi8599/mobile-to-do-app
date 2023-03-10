@@ -5,12 +5,14 @@ import MainContent from "../components/MainContent";
 import TitleBox from "../components/TitleBox";
 import { useRecoilValue } from "recoil";
 import {
-  bedTimeState,
+  bedState,
   scheduleDataState,
   todayValueState,
-  wakeUpTimeState,
+  wakeUpState,
 } from "../atom";
 import { createTimeArr } from "../function/createTimeArr";
+import { useNavigate } from "react-router-dom";
+import ContentBox from "../components/ContentBox";
 
 const MainBox = styled.div.attrs({
   className:
@@ -40,20 +42,16 @@ const TomorrowTarget = styled.div.attrs({
   className: "d-flex justify-content-start align-items-center w-100",
 })``;
 
-const ContentBox = styled.div.attrs({
-  className:
-    "d-flex justify-content-center align-items-center w-100 flex-column border-top",
-})``;
-
 const MainPage = () => {
+  const navigate = useNavigate();
   //오늘의 목표
   const todayContent = useRecoilValue(todayValueState);
 
   //기상 시간 값
-  const wakeUp = Number(useRecoilValue(wakeUpTimeState).slice(0, 2));
+  const wakeUp = useRecoilValue(wakeUpState);
 
   //취침 시간 값
-  const bed = Number(useRecoilValue(bedTimeState).slice(0, 2));
+  const bed = useRecoilValue(bedState);
 
   //시간 배열
   const contentArr =
@@ -73,7 +71,7 @@ const MainPage = () => {
             <span>어제의 목표 : 코딩 테스트</span>
           </TodayTarget>
           <TomorrowTarget>
-            <span>
+            <span onClick={() => navigate("/target")}>
               오늘의 목표 :{" "}
               {!todayContent ? "목표를 설정해주세요." : todayContent}
             </span>

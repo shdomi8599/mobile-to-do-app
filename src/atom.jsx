@@ -24,10 +24,28 @@ export const wakeUpTimeState = atom({
   default: "08:00",
 });
 
+//기상 시간 값
+export const wakeUpState = selector({
+  key: "wakeUpState",
+  get: ({ get }) => {
+    const wakeupTime = Number(get(wakeUpTimeState).slice(0, 2));
+    return wakeupTime;
+  },
+});
+
 //취침 시간
 export const bedTimeState = atom({
   key: "bedTimeState",
   default: "23:00",
+});
+
+//취침 시간 값
+export const bedState = selector({
+  key: "bedState",
+  get: ({ get }) => {
+    const bedTime = Number(get(bedTimeState).slice(0, 2));
+    return bedTime;
+  },
 });
 
 //오늘의 목표 인덱스

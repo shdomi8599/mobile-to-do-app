@@ -3,6 +3,7 @@ import { faBell as faBellS } from "@fortawesome/free-solid-svg-icons";
 import { faBell as faBellR } from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Content = styled.div.attrs({
   className:
@@ -19,6 +20,7 @@ const ShareBox = styled.div.attrs({
 })``;
 
 const MainContent = ({ time, content }) => {
+  const navigate = useNavigate();
   //시간 길이 체크
   const timeLength = String(time).length;
 
@@ -34,6 +36,13 @@ const MainContent = ({ time, content }) => {
       : setBell(!bell);
   };
 
+  /**
+   * 스케줄 페이지로 이동
+   */
+  const moveSchedule = () => {
+    navigate("/schedule", { state: { time: time } });
+  };
+
   return (
     <Content>
       <MainContentBox>
@@ -41,7 +50,9 @@ const MainContent = ({ time, content }) => {
           {timeLength === 1 ? `0${time}:00` : `${time}:00`}
         </div>
         <div>
-          <span>{!content ? "스케줄을 등록해주세요" : content}</span>
+          <span onClick={moveSchedule} className={!content ? "opacity-25" : ""}>
+            {!content ? "스케줄을 등록해주세요" : content}
+          </span>
         </div>
       </MainContentBox>
       <ShareBox>

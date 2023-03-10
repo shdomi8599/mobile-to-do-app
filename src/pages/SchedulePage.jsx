@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import {
-  bedTimeState,
+  bedState,
   scheduleDataState,
   textBoxState,
-  wakeUpTimeState,
+  wakeUpState,
 } from "../atom";
+import ContentBox from "../components/ContentBox";
 import ScheduleContent from "../components/ScheduleContent";
 import SubTitleBox from "../components/SubTitleBox";
 import TextBox from "../components/TextBox";
@@ -18,20 +19,15 @@ const ScheduleBox = styled.div.attrs({
     "d-flex justify-content-center align-items-center flex-column w-100",
 })``;
 
-const ContentBox = styled.div.attrs({
-  className:
-    "d-flex justify-content-center align-items-center w-100 flex-column border-top",
-})``;
-
 const SchedulePage = () => {
   //box 상태 체크
   const boxState = useRecoilValue(textBoxState);
 
   //기상 시간 값
-  const wakeUp = Number(useRecoilValue(wakeUpTimeState).slice(0, 2));
+  const wakeUp = useRecoilValue(wakeUpState);
 
   //취침 시간 값
-  const bed = Number(useRecoilValue(bedTimeState).slice(0, 2));
+  const bed = useRecoilValue(bedState);
 
   //스케줄 데이터 상태
   const [scheduleDataArr, setScheduleDataArr] =

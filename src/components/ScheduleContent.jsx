@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Content = styled.div.attrs({
@@ -11,6 +13,29 @@ const MainContentBox = styled.div.attrs({
 })``;
 
 const ScheduleContent = ({ time, content, textBoxHandler, changePick }) => {
+  const location = useLocation();
+
+  //location 데이터가 존재할때 일어나는 이펙트
+  useEffect(() => {
+    if (location.state && location.state.time === time) {
+      setAddStyle("text-danger opacity-100");
+      setTimeout(() => {
+        setAddStyle("");
+      }, 2000);
+      window.scrollTo({
+        top: target.current.offsetTop,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
+  //박스 타겟 설정
+  const target = useRef(null);
+
+  //추가 스타일 상태
+  const [addStyle, setAddStyle] = useState("");
+
   //시간 길이 체크
   const timeLength = String(time).length;
 
@@ -24,12 +49,14 @@ const ScheduleContent = ({ time, content, textBoxHandler, changePick }) => {
 
   return (
     <Content>
-      <MainContentBox onClick={clickEvent}>
+      <MainContentBox onClick={clickEvent} ref={target}>
         <div className="me-2">
           <span>{timeLength === 1 ? <>0{time}</> : time}:00</span> :
         </div>
         <div>
-          <span>{!content ? "계획을 등록해주세요." : content}</span>
+          <span className={!content ? `${addStyle} opacity-25` : `${addStyle}`}>
+            {!content ? "계획을 등록해주세요." : content}
+          </span>
         </div>
       </MainContentBox>
     </Content>

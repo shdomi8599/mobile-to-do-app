@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { targetContentValue, todayTargetState } from "../atom";
 import ButtonBox from "../components/ButtonBox";
+import ContentBox from "../components/ContentBox";
 import SubTitleBox from "../components/SubTitleBox";
 import TargetContent from "../components/TargetContent";
 import TextBox from "../components/TextBox";
@@ -11,11 +12,6 @@ import TitleBox from "../components/TitleBox";
 const TargetBox = styled.div.attrs({
   className:
     "d-flex justify-content-start align-items-center flex-column w-100",
-})``;
-
-const ContentBox = styled.div.attrs({
-  className:
-    "d-flex justify-content-center align-items-center w-100 flex-column border-top",
 })``;
 
 const TargetPage = () => {

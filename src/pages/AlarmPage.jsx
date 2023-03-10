@@ -2,6 +2,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { bedTimeState, wakeUpTimeState } from "../atom";
 import AlarmContent from "../components/AlarmContent";
+import ContentBox from "../components/ContentBox";
 import SubTitleBox from "../components/SubTitleBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
@@ -9,11 +10,6 @@ import { createTimeArr } from "../function/createTimeArr";
 const AlarmBox = styled.div.attrs({
   className:
     "d-flex justify-content-center align-items-center flex-column w-100",
-})``;
-
-const ContentBox = styled.div.attrs({
-  className:
-    "d-flex justify-content-center align-items-center w-100 flex-column border-top",
 })``;
 
 const AlarmPage = () => {
