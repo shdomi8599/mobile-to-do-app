@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: "NEXON Lv2 Gothic OTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  font-family: "NEXON Lv2 Gothic OTF";
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+  text-decoration: none;
+  color: black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+li {
+  list-style: none;
 }
 
-.App-link {
-  color: #61dafb;
+.pointer {
+  cursor: pointer;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hidden {
+  display: none;
+}
+
+.non-resize {
+  resize: none;
+}
+
+.flex-01 {
+  flex: 0.1;
+}
+.flex-02 {
+  flex: 0.2;
+}
+.flex-03 {
+  flex: 0.3;
+}
+.flex-04 {
+  flex: 0.4;
+}
+.flex-05 {
+  flex: 0.5;
+}
+.flex-06 {
+  flex: 0.6;
+}
+.flex-07 {
+  flex: 0.7;
+}
+.flex-08 {
+  flex: 0.8;
+}
+.flex-09 {
+  flex: 0.9;
+}
+.flex-10 {
+  flex: 1;
 }
