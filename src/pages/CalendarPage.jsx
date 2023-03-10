@@ -14,7 +14,6 @@ const CalendarPage = () => {
       <TitleBox message={"달력 보기"} />
       <SubTitleBox message={"3월"} />
       <ContentBox>
-        dsada
       </ContentBox>
     </CalendarBox>
   );
