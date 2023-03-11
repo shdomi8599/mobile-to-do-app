@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { navArr, sigObj } from "../type";
+import { sigObj } from "../type";
 
 const NavContentBox = styled.div.attrs({
   className:
@@ -41,7 +41,7 @@ const NavContent = ({ navHandler }: NavContentProps) => {
   const navigate = useNavigate();
 
   //네비 li데이터들
-  const navArr: navArr = [
+  const navArr: sigObj[] = [
     { "목표 설정": "/target" },
     { "스케줄 설정": "/schedule" },
     { "알람 설정": "/alarm" },

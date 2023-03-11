@@ -41,6 +41,7 @@ const ScheduleContent = ({
         behavior: "smooth",
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //박스 타겟 설정

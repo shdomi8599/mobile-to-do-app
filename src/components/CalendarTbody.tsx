@@ -4,6 +4,7 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, addDays } from "date-fns";
 import { startDateState } from "../atom";
 import { useRecoilValue } from "recoil";
+import { v4 as uuidv4 } from "uuid";
 import React from "react";
 
 const BodyTr = styled.tr.attrs({
@@ -17,7 +18,7 @@ const CheckedSpan = styled.span.attrs({
 })``;
 
 const CalendarTbody = () => {
-  // 현재 선택되있는 달력 상태 값
+  //현재 선택되있는 달력 상태 값
   const startDate = useRecoilValue(startDateState);
 
   //현재 선택되있는 달력 값 달 시작 날짜
@@ -35,7 +36,7 @@ const CalendarTbody = () => {
   //td를 모두 담은 배열
   const rows = [];
 
-  //1주 값 배열
+  //1주 값을 담을 배열
   let days = [];
   let day = firstDate;
   let formattedDate = "";
@@ -48,7 +49,7 @@ const CalendarTbody = () => {
           className={`flex-grow-1 d-flex justify-content-start align-items-center flex-column w-100 ${
             !isSameMonth(day, monthStart) && "disabled"
           }`}
-          key={day.getDay()}
+          key={uuidv4()}
         >
           <div className="pb-1">
             <span>{formattedDate}</span>
@@ -60,7 +61,7 @@ const CalendarTbody = () => {
       );
       day = addDays(day, 1);
     }
-    rows.push(<BodyTr key={day.getDay()}>{days}</BodyTr>);
+    rows.push(<BodyTr key={uuidv4()}>{days}</BodyTr>);
     days = [];
   }
   return <tbody className="w-100">{rows}</tbody>;

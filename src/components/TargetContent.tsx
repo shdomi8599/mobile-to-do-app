@@ -68,6 +68,21 @@ const TargetContent = ({
     setMessageContent(e.target.value);
   };
 
+  /**
+   * 1글자 이상 작성하지않으면 다시 포커스
+   */
+  const blurEvent = () => {
+    if (messageContent.length === 0) {
+      alert("1글자 이상 작성해주세요");
+      if (messageContent.length === 0) {
+        return setTimeout(() => {
+          if (targetInput.current) targetInput.current.focus();
+        }, 50);
+      }
+    }
+    editHandler();
+  };
+
   //메세지가 바뀔때마다 다시 설정
   useEffect(() => {
     setMessageContent(message);
@@ -102,7 +117,7 @@ const TargetContent = ({
               className="text-center w-75"
               value={messageContent}
               onChange={changeMessageContent}
-              onBlur={editHandler}
+              onBlur={blurEvent}
             />
           ) : (
             <span onClick={editHandler}>{messageContent}</span>

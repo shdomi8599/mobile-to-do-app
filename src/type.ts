@@ -35,20 +35,3 @@ export type footerIconData = {
   src: string;
 };
 
-type navIndex0 = {
-  "목표 설정": string;
-};
-type navIndex1 = {
-  "스케줄 설정": string;
-};
-type navIndex2 = {
-  "알람 설정": string;
-};
-type navIndex3 = {
-  "달력 보기": string;
-};
-type navIndex4 = {
-  "만든 사람": string;
-};
-
-export type navArr = [navIndex0, navIndex1, navIndex2, navIndex3, navIndex4];

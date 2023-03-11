@@ -6,12 +6,22 @@ import { useRecoilState } from "recoil";
 import { navState } from "../atom";
 import { useEffect } from "react";
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 const NavBox = styled.nav.attrs({
   className: "d-flex justify-content-end align-items-center mb-2 pt-2",
 })``;
 
+const WakeTimeBox = styled.div.attrs({
+  className: "position-absolute ps-3 pt-2 text-center",
+})`
+  left: 0px;
+  font-size: 0.7rem;
+`;
+
 const Nav = () => {
+  const location = useLocation();
+  const pathName = location.pathname;
   //네비 상태
   const [nav, setNav] = useRecoilState(navState);
 
@@ -33,6 +43,12 @@ const Nav = () => {
   return (
     <>
       <NavBox>
+        {pathName === "/" && (
+          <WakeTimeBox>
+            <div className="bg-dark text-white p-1 rounded">기상시간</div>
+            <div>07:33</div>
+          </WakeTimeBox>
+        )}
         <FontAwesomeIcon
           icon={faBars}
           className="fs-2 me-3"
