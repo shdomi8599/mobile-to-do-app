@@ -3,14 +3,10 @@ import styled from "styled-components";
 import { bedTimeState, wakeUpTimeState } from "../atom";
 import AlarmContent from "../components/AlarmContent";
 import ContentBox from "../components/ContentBox";
+import MainContainer from "../components/MainContainer";
 import SubTitleBox from "../components/SubTitleBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
-
-const AlarmBox = styled.div.attrs({
-  className:
-    "d-flex justify-content-center align-items-center flex-column w-100",
-})``;
 
 const AlarmPage = () => {
   //기상 시간 상태
@@ -40,7 +36,7 @@ const AlarmPage = () => {
   }
 
   return (
-    <AlarmBox>
+    <MainContainer>
       <TitleBox message={"알람 설정"} />
       <SubTitleBox message={"세부 설정"} />
       <ContentBox>
@@ -56,7 +52,7 @@ const AlarmPage = () => {
           />
         ))}
       </ContentBox>
-    </AlarmBox>
+    </MainContainer>
   );
 };
 

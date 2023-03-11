@@ -13,13 +13,9 @@ import {
 import { createTimeArr } from "../function/createTimeArr";
 import { useNavigate } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
+import MainContainer from "../components/MainContainer";
 
-const MainBox = styled.div.attrs({
-  className:
-    "d-flex justify-content-center align-items-center flex-column w-100",
-})``;
-
-const SubTitle = styled.div.attrs({
+const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
 })`
   height: 10vh;
@@ -63,7 +59,7 @@ const MainPage = () => {
   const scheduleDataArr = useRecoilValue(scheduleDataState);
 
   return (
-    <MainBox>
+    <MainContainer>
       <TitleBox message={"취준생의 하루"} />
       <SubTitle>
         <TargetBox>
@@ -86,7 +82,7 @@ const MainPage = () => {
           <MainContent key={i} time={time} content={scheduleDataArr[time]} />
         ))}
       </ContentBox>
-    </MainBox>
+    </MainContainer>
   );
 };
 

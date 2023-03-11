@@ -8,16 +8,12 @@ import {
   wakeUpState,
 } from "../atom";
 import ContentBox from "../components/ContentBox";
+import MainContainer from "../components/MainContainer";
 import ScheduleContent from "../components/ScheduleContent";
 import SubTitleBox from "../components/SubTitleBox";
 import TextBox from "../components/TextBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
-
-const ScheduleBox = styled.div.attrs({
-  className:
-    "d-flex justify-content-center align-items-center flex-column w-100",
-})``;
 
 const SchedulePage = () => {
   //box 상태 체크
@@ -52,7 +48,7 @@ const SchedulePage = () => {
   const [pick, setPick] = useState(0);
 
   /**
-   *시간 선택
+   * 시간 선택
    */
   const changePick = (time) => {
     setPick(time);
@@ -66,7 +62,7 @@ const SchedulePage = () => {
 
   return (
     <>
-      <ScheduleBox>
+      <MainContainer>
         <TitleBox message={"스케줄 설정"} />
         <SubTitleBox message={"오늘의 스케줄"} />
         <ContentBox>
@@ -80,7 +76,7 @@ const SchedulePage = () => {
             />
           ))}
         </ContentBox>
-      </ScheduleBox>
+      </MainContainer>
       {boxState && (
         <TextBox
           message={pick}

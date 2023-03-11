@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ContentSection = styled.div.attrs({
+const ContentSection = styled.main.attrs({
   className:
     "d-flex justify-content-center align-items-center w-100 flex-column border-top",
 })``;

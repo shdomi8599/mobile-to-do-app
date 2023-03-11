@@ -61,3 +61,7 @@ li {
 .flex-10 {
   flex: 1;
 }
+
+.trans-click:active {
+  opacity: 0.6;
+}
