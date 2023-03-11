@@ -33,12 +33,12 @@ const CalendarSubTitle = () => {
       </div>
       <div className="me-3">
         <FontAwesomeIcon
-          onClick={upEvent}
+          onClick={downEvent}
           className="fs-1 mx-2 pointer trans-click"
           icon={faCaretUp}
         />
         <FontAwesomeIcon
-          onClick={downEvent}
+          onClick={upEvent}
           className="fs-1 mx-2 pointer trans-click pb-1"
           icon={faCaretDown}
         />

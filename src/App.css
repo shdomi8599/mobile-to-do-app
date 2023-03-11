@@ -5,32 +5,25 @@
   font-weight: normal;
   font-style: normal;
 }
-
 * {
   font-family: "NEXON Lv2 Gothic OTF";
 }
-
 a {
   text-decoration: none;
   color: black;
 }
-
 li {
   list-style: none;
 }
-
 .pointer {
   cursor: pointer;
 }
-
 .hidden {
   display: none;
 }
-
 .non-resize {
   resize: none;
 }
-
 .flex-01 {
   flex: 0.1;
 }
@@ -61,7 +54,13 @@ li {
 .flex-10 {
   flex: 1;
 }
-
 .trans-click:active {
   opacity: 0.6;
+}
+.disabled {
+  opacity: 0.35;
+}
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }

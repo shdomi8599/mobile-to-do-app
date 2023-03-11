@@ -3,6 +3,7 @@ import TitleBox from "./TitleBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const NavContentBox = styled.div.attrs({
   className:
@@ -10,6 +11,14 @@ const NavContentBox = styled.div.attrs({
 })`
   height: 100%;
   top: 0px;
+  z-index: 1;
+`;
+
+const BlockBox = styled.div.attrs({
+  className: "w-25 position-fixed",
+})`
+  height: 200%;
+  left: 0px;
   z-index: 1;
 `;
 
@@ -44,19 +53,22 @@ const NavContent = ({ navHandler }) => {
   };
 
   return (
-    <NavContentBox>
-      <div className="py-3 d-flex justify-content-start align-items-center w-100 px-3">
-        <FontAwesomeIcon icon={faX} onClick={navHandler} className="fs-3" />
-      </div>
-      <TitleBox message={"취준생의 하루"} navHandler={navHandler} />
-      <MainContentBox>
-        {navArr.map((obj, i) => (
-          <Content key={i}>
-            <span onClick={() => clickEvent(obj)}>{Object.keys(obj)[0]}</span>
-          </Content>
-        ))}
-      </MainContentBox>
-    </NavContentBox>
+    <>
+      <BlockBox onClick={navHandler} />
+      <NavContentBox>
+        <div className="py-3 d-flex justify-content-start align-items-center w-100 px-3">
+          <FontAwesomeIcon icon={faX} onClick={navHandler} className="fs-3" />
+        </div>
+        <TitleBox message={"취준생의 하루"} navHandler={navHandler} />
+        <MainContentBox>
+          {navArr.map((obj, i) => (
+            <Content key={i}>
+              <span onClick={() => clickEvent(obj)}>{Object.keys(obj)[0]}</span>
+            </Content>
+          ))}
+        </MainContentBox>
+      </NavContentBox>
+    </>
   );
 };
 
