@@ -82,6 +82,7 @@ const TargetContent = ({
               type="text"
               ref={targetInput}
               maxLength="10"
+              placeholder="10글자 이내로 작성해주세요."
               className="text-center w-75"
               value={messageContent}
               onChange={changeMessageContent}

@@ -1,5 +1,4 @@
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import { bedTimeState, wakeUpTimeState } from "../atom";
 import AlarmContent from "../components/AlarmContent";
 import ContentBox from "../components/ContentBox";

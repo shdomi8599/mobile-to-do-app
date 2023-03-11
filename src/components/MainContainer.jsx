@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const MainBox = styled.div.attrs({
+  id: "container",
   className:
     "d-flex justify-content-center align-items-center flex-column w-100",
 })``;

@@ -40,7 +40,7 @@ const TextBox = ({
    */
   const sumbitText = () => {
     if (text.length === 0) {
-      return alert("1글자라도 작성해주세요.");
+      return alert("1글자 이상 작성해주세요.");
     }
     if (addTargetContent) {
       addTargetContent(text);
@@ -78,7 +78,7 @@ const TextBox = ({
           type="text"
           maxLength="10"
           className="form-control"
-          placeholder="10글자 이내로 적어주세요."
+          placeholder="10글자 이내로 작성해주세요."
         />
       </InputBox>
     </TargetTextBox>

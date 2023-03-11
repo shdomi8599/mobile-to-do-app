@@ -8,8 +8,7 @@ const Content = styled.div.attrs({
 })``;
 
 const MainContentBox = styled.div.attrs({
-  className:
-    "flex-10 d-flex justify-content-start align-items-center px-4 w-100",
+  className: " d-flex justify-content-start align-items-center px-4 w-100",
 })``;
 
 const ScheduleContent = ({ time, content, textBoxHandler, changePick }) => {

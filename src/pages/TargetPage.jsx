@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import { targetContentValue, todayTargetState } from "../atom";
 import ButtonBox from "../components/ButtonBox";
 import ContentBox from "../components/ContentBox";

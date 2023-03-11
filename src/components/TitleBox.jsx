@@ -7,7 +7,7 @@ const Title = styled.header.attrs({
   className: "fs-1 mb-4 w-100 d-flex justify-content-center align-items-center",
 })``;
 
-const TitleMessage = styled.span.attrs({
+const TitleMessage = styled.h1.attrs({
   className: "bg-dark rounded text-white p-2",
 })``;
 
