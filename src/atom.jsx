@@ -1,12 +1,6 @@
 import { atom, selector } from "recoil";
 
-//타겟 val
-export const targetContentValue = atom({
-  key: "targetContentValue",
-  default: ["리코일 공부"],
-});
-
-//텍스트 val
+//텍스트 값
 export const textState = atom({
   key: "textState",
   default: "",
@@ -48,6 +42,12 @@ export const bedState = selector({
   },
 });
 
+//목표 설정 값들
+export const targetContentValue = atom({
+  key: "targetContentValue",
+  default: ["리코일 공부"],
+});
+
 //오늘의 목표 인덱스
 export const todayTargetState = atom({
   key: "todayTarget",
@@ -74,4 +74,26 @@ export const scheduleDataState = atom({
 export const navState = atom({
   key: "navState",
   default: false,
+});
+
+//달력 값 상태
+export const startDateState = atom({
+  key: "startDateState",
+  default: new Date(),
+});
+
+//년 월 상태
+export const yearMonthState = selector({
+  key: "yearMonthState",
+  get: ({ get }) => {
+    const TIME_ZONE = 9 * 60 * 60 * 1000;
+    const date = get(startDateState);
+    const yearMonth = new Date(date.getTime() + TIME_ZONE)
+      .toISOString()
+      .replace("T", " ")
+      .slice(0, 7);
+    const year = yearMonth.slice(0, 4);
+    const month = yearMonth.slice(5, 7);
+    return [year, month];
+  },
 });

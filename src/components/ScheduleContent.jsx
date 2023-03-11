@@ -22,7 +22,7 @@ const ScheduleContent = ({ time, content, textBoxHandler, changePick }) => {
         setAddStyle("");
       }, 2000);
       window.scrollTo({
-        top: target.current.offsetTop,
+        top: target.current.offsetTop - 300,
         left: 0,
         behavior: "smooth",
       });

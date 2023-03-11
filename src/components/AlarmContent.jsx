@@ -12,6 +12,10 @@ const MainContentBox = styled.div.attrs({
     " d-flex justify-content-start align-items-center flex-column h-100 w-100",
 })``;
 
+const Category = styled.span`
+  font-size: 0.75rem;
+`;
+
 const AlarmContent = ({ category, valueArr, value, setWakeUp, setBed }) => {
   /**
    * 기상 시간 설정
@@ -29,7 +33,7 @@ const AlarmContent = ({ category, valueArr, value, setWakeUp, setBed }) => {
     <Content>
       <MainContentBox>
         <div className="flex-01 d-flex justify-content-start align-items-start w-100 ps-3">
-          {category}
+          <Category>{category}</Category>
         </div>
         <div className="flex-10 fs-3 w-100 d-flex justify-content-center align-items-start">
           <select

@@ -8,9 +8,9 @@ const CalendarPage = () => {
   return (
     <MainContainer>
       <TitleBox message={"달력 보기"} />
-      <SubTitleBox message={"2023년 3월"} />
+      <SubTitleBox />
       <ContentBox>
-        <Calendar/>
+        <Calendar />
       </ContentBox>
     </MainContainer>
   );
