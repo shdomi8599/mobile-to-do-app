@@ -45,7 +45,7 @@ export const bedState = selector({
 //목표 설정 값들
 export const targetContentValue = atom({
   key: "targetContentValue",
-  default: ["리코일 공부"],
+  default: [],
 });
 
 //등록된 목표의 개수

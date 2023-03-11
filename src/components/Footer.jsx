@@ -33,7 +33,7 @@ const Footer = () => {
     },
     {
       href: "https://mail.google.com/mail/u/0/?fs=1&to=shdomi8599@gmail.com&tf=cm",
-      name: "EMAIL",
+      name: "GMAIL",
       src: "https://img.shields.io/badge/GMAIL-4285F4?style=for-the-badge&logo=Google&logoColor=white",
     },
     {
