@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -11,16 +12,29 @@ const MainContentBox = styled.div.attrs({
   className: " d-flex justify-content-start align-items-center px-4 w-100",
 })``;
 
-const ScheduleContent = ({ time, content, textBoxHandler, changePick }) => {
+type ScheduleContentProps = {
+  time: number;
+  content: string;
+  textBoxHandler: () => void;
+  changePick: (idx: number) => void;
+};
+
+const ScheduleContent = ({
+  time,
+  content,
+  textBoxHandler,
+  changePick,
+}: ScheduleContentProps) => {
   const location = useLocation();
 
   //location 데이터가 존재할때 일어나는 이펙트
   useEffect(() => {
-    if (location.state && location.state.time === time) {
+    if (target.current && location.state && location.state.time === time) {
       setAddStyle("text-danger opacity-100");
       setTimeout(() => {
         setAddStyle("");
       }, 2000);
+
       window.scrollTo({
         top: target.current.offsetTop - 300,
         left: 0,
@@ -30,7 +44,7 @@ const ScheduleContent = ({ time, content, textBoxHandler, changePick }) => {
   }, []);
 
   //박스 타겟 설정
-  const target = useRef(null);
+  const target = useRef<HTMLDivElement>(null);
 
   //추가 스타일 상태
   const [addStyle, setAddStyle] = useState("");

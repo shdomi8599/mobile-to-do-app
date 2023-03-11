@@ -1,4 +1,11 @@
-const FooterIcon = ({ data }) => {
+import React from "react";
+import { footerIconData } from "../type";
+
+type FooterIconProps = {
+  data: footerIconData;
+};
+
+const FooterIcon = ({ data }: FooterIconProps) => {
   const { href, name, src } = data;
   return (
     <div className="flex-10 d-flex justify-content-center align-items-center">

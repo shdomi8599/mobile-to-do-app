@@ -1,10 +1,18 @@
-import React, { forwardRef } from "react";
+import React, { ForwardedRef, forwardRef } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker, { registerLocale } from "react-datepicker";
+import DatePicker, {
+  ReactDatePickerProps,
+  registerLocale,
+} from "react-datepicker";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { startDateState, yearMonthState } from "../atom";
 import ko from "date-fns/locale/ko"; // 한국어적용
 registerLocale("ko", ko); // 한국어적용
+// ForwardedRef<HTMLSpanElement>
+interface Props extends Omit<ReactDatePickerProps, "onChange"> {
+  onClick(): void;
+  ref: ForwardedRef<HTMLSpanElement>;
+}
 
 const SelectionCalendar = () => {
   //현재 달력값 상태
@@ -14,7 +22,7 @@ const SelectionCalendar = () => {
   const [year, month] = useRecoilValue(yearMonthState);
 
   //커스텀 input
-  const CustomInput = forwardRef(({ onClick }, ref) => (
+  const CustomInput = forwardRef(({ onClick, ref }: Props) => (
     <span onClick={onClick} ref={ref}>
       {`${year}년 ${month}월`}
     </span>
@@ -23,10 +31,16 @@ const SelectionCalendar = () => {
   return (
     <DatePicker
       selected={startDate}
-      onChange={(date) => setStartDate(date)}
+      onChange={(date: Date) => setStartDate(date)}
       locale={ko}
       showMonthYearPicker //년,월만 선택가능한 옵션
-      customInput={<CustomInput />}
+      customInput={
+        <CustomInput
+          onClick={function (): void {
+            throw new Error("Function not implemented.");
+          }}
+        />
+      }
     />
   );
 };

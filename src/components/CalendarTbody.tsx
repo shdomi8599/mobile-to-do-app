@@ -4,6 +4,7 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, addDays } from "date-fns";
 import { startDateState } from "../atom";
 import { useRecoilValue } from "recoil";
+import React from "react";
 
 const BodyTr = styled.tr.attrs({
   className: "d-flex w-100 pb-2",
@@ -47,7 +48,7 @@ const CalendarTbody = () => {
           className={`flex-grow-1 d-flex justify-content-start align-items-center flex-column w-100 ${
             !isSameMonth(day, monthStart) && "disabled"
           }`}
-          key={day}
+          key={day.getDay()}
         >
           <div className="pb-1">
             <span>{formattedDate}</span>
@@ -59,7 +60,7 @@ const CalendarTbody = () => {
       );
       day = addDays(day, 1);
     }
-    rows.push(<BodyTr key={day}>{days}</BodyTr>);
+    rows.push(<BodyTr key={day.getDay()}>{days}</BodyTr>);
     days = [];
   }
   return <tbody className="w-100">{rows}</tbody>;

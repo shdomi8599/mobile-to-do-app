@@ -4,6 +4,7 @@ import { faBell as faBellR } from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Content = styled.div.attrs({
   className:
@@ -19,7 +20,12 @@ const ShareBox = styled.div.attrs({
   className: "flex-02 d-flex justify-content-center align-items-center",
 })``;
 
-const MainContent = ({ time, content }) => {
+type MainContentProps = {
+  time: number;
+  content: string;
+};
+
+const MainContent = ({ time, content }: MainContentProps) => {
   const navigate = useNavigate();
   //시간 길이 체크
   const timeLength = String(time).length;

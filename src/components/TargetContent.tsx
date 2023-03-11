@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
+import React from "react";
 
 const Content = styled.div.attrs({
   className:
@@ -16,11 +17,24 @@ const MainContentBox = styled.div.attrs({
 
 const TodayMark = styled.span.attrs({
   className: "p-1 rounded border",
-})`
+})<TodayMarkProps>`
   color: ${(props) => (props.idx === props.today ? "white" : "black")};
   background-color: ${(props) => (props.idx === props.today ? "red" : "white")};
   font-size: 0.7rem;
 `;
+
+type TodayMarkProps = {
+  readonly idx: number;
+  readonly today: number;
+};
+
+type TargetContentProps = {
+  message: string;
+  deleteTargetContent: (idx: number) => void;
+  today: number;
+  changeTodayTarget: (idx: number) => void;
+  idx: number;
+};
 
 const TargetContent = ({
   message,
@@ -28,9 +42,9 @@ const TargetContent = ({
   today,
   changeTodayTarget,
   idx,
-}) => {
+}: TargetContentProps) => {
   //input 타겟
-  const targetInput = useRef(null);
+  const targetInput = useRef<HTMLInputElement>(null);
 
   //글 수정 상태
   const [edit, setEdit] = useState(false);
@@ -48,7 +62,9 @@ const TargetContent = ({
   /**
    *change 메세지 val
    */
-  const changeMessageContent = (e) => {
+  const changeMessageContent = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setMessageContent(e.target.value);
   };
 
@@ -59,7 +75,7 @@ const TargetContent = ({
 
   //input이 포커스 될 수 있도록 이펙트 설정
   useEffect(() => {
-    if (edit) {
+    if (edit && targetInput.current) {
       targetInput.current.focus();
     }
   }, [edit]);
@@ -81,7 +97,7 @@ const TargetContent = ({
             <input
               type="text"
               ref={targetInput}
-              maxLength="10"
+              maxLength={10}
               placeholder="10글자 이내로 작성해주세요."
               className="text-center w-75"
               value={messageContent}

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const Content = styled.div.attrs({
@@ -16,11 +17,25 @@ const Category = styled.span`
   font-size: 0.75rem;
 `;
 
-const AlarmContent = ({ category, valueArr, value, setWakeUp, setBed }) => {
+type AlarmContentProps = {
+  category: string;
+  valueArr: string[];
+  value: string;
+  setWakeUp: (target: string) => void;
+  setBed: (target: string) => void;
+};
+
+const AlarmContent = ({
+  category,
+  valueArr,
+  value,
+  setWakeUp,
+  setBed,
+}: AlarmContentProps) => {
   /**
    * 기상 시간 설정
    */
-  const changeSelect = (e) => {
+  const changeSelect = (e: { target: { name: string; value: string } }) => {
     if (e.target.name === "기상 시간") {
       setWakeUp(e.target.value);
     }

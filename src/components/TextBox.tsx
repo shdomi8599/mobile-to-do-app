@@ -1,6 +1,8 @@
+import React from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { textState } from "../atom";
+import { sigObj } from "../type";
 import ButtonBox from "./ButtonBox";
 
 const TargetTextBox = styled.div.attrs({
@@ -19,19 +21,28 @@ const InputBox = styled.div.attrs({
   className: "d-flex justify-content-start align-items-center w-100",
 })``;
 
+type TextBoxProps = {
+  message: number | string;
+  addTargetContent?: (data: string) => void;
+  changeScheduleData?: (scheduleData: sigObj) => void;
+  textBoxHandler?: () => void;
+};
+
 const TextBox = ({
   message,
   addTargetContent,
-  changeScheduleDataArr,
+  changeScheduleData,
   textBoxHandler,
-}) => {
+}: TextBoxProps) => {
   //텍스트 상태
   const [text, setText] = useRecoilState(textState);
 
   /**
    * 텍스트 change 이벤트
    */
-  const changeText = (e) => {
+  const changeText = (e: {
+    target: { value: string | ((currVal: string) => string) };
+  }) => {
     setText(e.target.value);
   };
 
@@ -46,16 +57,16 @@ const TextBox = ({
       addTargetContent(text);
       return setText("");
     }
-    if (changeScheduleDataArr) {
+    if (changeScheduleData && textBoxHandler) {
       const scheduleData = { [`${message}`]: text };
-      changeScheduleDataArr(scheduleData);
+      changeScheduleData(scheduleData);
       textBoxHandler();
       return setText("");
     }
   };
 
   //메세지 변경
-  const changeMessage = changeScheduleDataArr
+  const changeMessage = changeScheduleData
     ? message < 12
       ? `오전 ${message}:00`
       : `오후 ${message}:00`
@@ -76,7 +87,7 @@ const TextBox = ({
           onChange={changeText}
           value={text}
           type="text"
-          maxLength="10"
+          maxLength={10}
           className="form-control"
           placeholder="10글자 이내로 작성해주세요."
         />

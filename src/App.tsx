@@ -8,6 +8,7 @@ import AlarmPage from "./pages/AlarmPage";
 import CalendarPage from "./pages/CalendarPage";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import React from "react";
 
 const App = () => {
   return (

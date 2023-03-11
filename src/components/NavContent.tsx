@@ -3,6 +3,8 @@ import TitleBox from "./TitleBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+import { navArr, sigObj } from "../type";
 
 const NavContentBox = styled.div.attrs({
   className:
@@ -31,11 +33,15 @@ const Content = styled.li.attrs({
     "py-3 border-bottom w-100 d-flex justify-content-center align-items-center fs-3",
 })``;
 
-const NavContent = ({ navHandler }) => {
+type NavContentProps = {
+  navHandler: () => void;
+};
+
+const NavContent = ({ navHandler }: NavContentProps) => {
   const navigate = useNavigate();
 
   //네비 li데이터들
-  const navArr = [
+  const navArr: navArr = [
     { "목표 설정": "/target" },
     { "스케줄 설정": "/schedule" },
     { "알람 설정": "/alarm" },
@@ -46,7 +52,7 @@ const NavContent = ({ navHandler }) => {
   /**
    * 이동하면서 네비를 off하는 이벤트
    */
-  const clickEvent = (data) => {
+  const clickEvent = (data: sigObj) => {
     navigate(Object.values(data)[0]);
     navHandler();
   };

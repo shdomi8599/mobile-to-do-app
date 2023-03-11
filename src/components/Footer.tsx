@@ -1,19 +1,26 @@
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { targetContentLength } from "../atom";
+import { footerIconData } from "../type";
 import FooterIcon from "./FooterIcon";
 
 const FooterBox = styled.footer.attrs({
   className:
     "d-flex justify-content-center align-items-start flex-column px-4 w-100",
-})`
+})<FooterBoxProps>`
   font-size: 0.82rem;
   height: ${(props) =>
     props.pathName === "/target" && props.targetLength < 6
       ? "18.68vh"
       : "14.64vh"};
 `;
+
+type FooterBoxProps = {
+  pathName: string;
+  targetLength: number;
+};
 
 const Footer = () => {
   const location = useLocation();
@@ -25,7 +32,7 @@ const Footer = () => {
   const targetLength = useRecoilValue(targetContentLength);
 
   //아이콘 데이터 배열
-  const iconArr = [
+  const iconArr:footerIconData[] = [
     {
       href: "https://github.com/shdomi8599",
       name: "GITHUB",

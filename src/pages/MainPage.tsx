@@ -14,6 +14,7 @@ import { createTimeArr } from "../function/createTimeArr";
 import { useNavigate } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
+import React from "react";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -50,7 +51,7 @@ const MainPage = () => {
   const bed = useRecoilValue(bedState);
 
   //시간 배열
-  const contentArr =
+  const contentArr: number[] =
     bed > wakeUp
       ? createTimeArr().slice(wakeUp, bed)
       : createTimeArr().slice(wakeUp).concat(createTimeArr().slice(0, bed));

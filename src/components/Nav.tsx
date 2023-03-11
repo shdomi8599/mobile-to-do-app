@@ -5,6 +5,7 @@ import NavContent from "./NavContent";
 import { useRecoilState } from "recoil";
 import { navState } from "../atom";
 import { useEffect } from "react";
+import React from "react";
 
 const NavBox = styled.nav.attrs({
   className: "d-flex justify-content-end align-items-center mb-2 pt-2",

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useRecoilState } from "recoil";
 import { startDateState } from "../atom";
+import React from "react";
 
 const CalendarSubTitle = () => {
   //현재 달력값 상태

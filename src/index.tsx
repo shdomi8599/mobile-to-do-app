@@ -7,5 +7,7 @@ import App from "./App";
 //원인2 : 파생된 selector상태를 atom상태와 같이 두지않고, 다른 함수안에 넣었더니 키 중복이 떴음.
 // RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error("Failed to find the root element");
+const root = ReactDOM.createRoot(rootElement);
 root.render(<App />);

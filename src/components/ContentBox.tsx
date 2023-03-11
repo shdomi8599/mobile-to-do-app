@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const ContentSection = styled.main.attrs({
@@ -5,7 +6,11 @@ const ContentSection = styled.main.attrs({
     "d-flex justify-content-center align-items-center w-100 flex-column border-top",
 })``;
 
-const ContentBox = ({ children }) => {
+type ContentBoxProps = {
+  children: React.ReactNode;
+};
+
+const ContentBox = ({ children }: ContentBoxProps) => {
   return <ContentSection>{children}</ContentSection>;
 };
 

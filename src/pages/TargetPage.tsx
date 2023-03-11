@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { targetContentValue, todayTargetState } from "../atom";
@@ -16,7 +17,7 @@ const TargetPage = () => {
   /**
    * 컨텐츠 추가
    */
-  const addTargetContent = (data) => {
+  const addTargetContent = (data: string) => {
     setTargetContent([...targetContent, data]);
     setBox(false);
   };
@@ -24,7 +25,7 @@ const TargetPage = () => {
   /**
    * 컨텐츠 삭제
    */
-  const deleteTargetContent = (idx) => {
+  const deleteTargetContent = (idx: number) => {
     setTargetContent([
       ...targetContent.slice(0, idx),
       ...targetContent.slice(idx + 1),
@@ -37,7 +38,7 @@ const TargetPage = () => {
   /**
    * 오늘의 목표 변경
    */
-  const changeTodayTarget = (idx) => {
+  const changeTodayTarget = (idx: number) => {
     setToday(idx);
   };
 

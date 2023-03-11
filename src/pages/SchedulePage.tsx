@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
@@ -13,6 +14,7 @@ import SubTitleBox from "../components/SubTitleBox";
 import TextBox from "../components/TextBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
+import { sigObj } from "../type";
 
 const SchedulePage = () => {
   //box 상태 체크
@@ -25,12 +27,11 @@ const SchedulePage = () => {
   const bed = useRecoilValue(bedState);
 
   //스케줄 데이터 상태
-  const [scheduleDataArr, setScheduleDataArr] =
-    useRecoilState(scheduleDataState);
+  const [scheduleData, setScheduleData] = useRecoilState(scheduleDataState);
 
   //스케줄 데이터 변경
-  const changeScheduleDataArr = (data) => {
-    setScheduleDataArr({ ...scheduleDataArr, ...data });
+  const changeScheduleData = (data: sigObj) => {
+    setScheduleData({ ...scheduleData, ...data });
   };
 
   //텍스트 박스 상태
@@ -49,12 +50,12 @@ const SchedulePage = () => {
   /**
    * 시간 선택
    */
-  const changePick = (time) => {
+  const changePick = (time: number) => {
     setPick(time);
   };
 
   //시간 배열
-  const contentArr =
+  const contentArr: number[] =
     bed > wakeUp
       ? createTimeArr().slice(wakeUp, bed)
       : createTimeArr().slice(wakeUp).concat(createTimeArr().slice(0, bed));
@@ -69,7 +70,7 @@ const SchedulePage = () => {
             <ScheduleContent
               key={i}
               time={time}
-              content={scheduleDataArr[String(time)]}
+              content={scheduleData[time]}
               changePick={changePick}
               textBoxHandler={textBoxHandler}
             />
@@ -79,7 +80,7 @@ const SchedulePage = () => {
       {boxState && (
         <TextBox
           message={pick}
-          changeScheduleDataArr={changeScheduleDataArr}
+          changeScheduleData={changeScheduleData}
           textBoxHandler={textBoxHandler}
         />
       )}

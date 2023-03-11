@@ -1,3 +1,4 @@
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
@@ -7,14 +8,23 @@ const MainBox = styled.div.attrs({
   id: "container",
   className:
     "d-flex justify-content-start align-items-center flex-column w-100 ",
-})`
+})<MainBoxProps>`
   ${(props) =>
     props.pathName === "/target" && props.targetLength < 6
       ? `min-height: calc(100vh - 25vh);`
       : `min-height: calc(100vh - 21vh);`}
 `;
 
-const MainContainer = ({ children }) => {
+type MainContainerProps = {
+  children: React.ReactNode;
+};
+
+type MainBoxProps = {
+  readonly pathName: string;
+  readonly targetLength: number;
+};
+
+const MainContainer = ({ children }: MainContainerProps) => {
   const location = useLocation();
 
   //경로 이름

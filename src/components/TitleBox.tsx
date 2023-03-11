@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -11,7 +12,12 @@ const TitleMessage = styled.h1.attrs({
   className: "bg-dark rounded text-white p-2",
 })``;
 
-const TitleBox = ({ message, navHandler }) => {
+type TitleBoxProps = {
+  message: string;
+  navHandler?: () => void;
+};
+
+const TitleBox = ({ message, navHandler }: TitleBoxProps) => {
   const navigate = useNavigate();
 
   //네비 상태
