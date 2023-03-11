@@ -1,10 +1,19 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import TitleBox from "./TitleBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { sigObj } from "../type";
+
+const navFade = keyframes`
+    0% {
+      transform: translate(270px, 0);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+`;
 
 const NavContentBox = styled.div.attrs({
   className:
@@ -13,6 +22,7 @@ const NavContentBox = styled.div.attrs({
   height: 100%;
   top: 0px;
   z-index: 1;
+  animation: ${navFade} 0.25s linear alternate;
 `;
 
 const BlockBox = styled.div.attrs({

@@ -1,16 +1,25 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { textState } from "../atom";
 import { sigObj } from "../type";
 import ButtonBox from "./ButtonBox";
+
+const textBoxFade = keyframes`
+    0% {
+      transform: translate(0, 100px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+`;
 
 const TargetTextBox = styled.div.attrs({
   className:
     "position-fixed d-flex justify-content-center align-items-center  flex-column px-5 py-3 border-top border-bottom bg-white w-100",
 })`
   bottom: 0px;
-  width: 360px;
+  animation: ${textBoxFade} 0.1s linear alternate;
 `;
 
 const TextTitle = styled.div.attrs({
