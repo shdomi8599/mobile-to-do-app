@@ -11,7 +11,6 @@ registerLocale("ko", ko); // 한국어적용
 // ForwardedRef<HTMLSpanElement>
 interface Props extends Omit<ReactDatePickerProps, "onChange"> {
   onClick(): void;
-  ref: ForwardedRef<HTMLSpanElement>;
 }
 
 const SelectionCalendar = () => {
@@ -22,11 +21,13 @@ const SelectionCalendar = () => {
   const [year, month] = useRecoilValue(yearMonthState);
 
   //커스텀 input
-  const CustomInput = forwardRef(({ onClick, ref }: Props) => (
-    <span onClick={onClick} ref={ref}>
-      {`${year}년 ${month}월`}
-    </span>
-  ));
+  const CustomInput = forwardRef(
+    ({ onClick }: Props, ref: ForwardedRef<HTMLSpanElement>) => (
+      <span onClick={onClick} ref={ref}>
+        {`${year}년 ${month}월`}
+      </span>
+    )
+  );
 
   return (
     <DatePicker
