@@ -7,6 +7,7 @@ import SchedulePage from "./pages/SchedulePage";
 import AlarmPage from "./pages/AlarmPage";
 import CalendarPage from "./pages/CalendarPage";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/alarm" element={<AlarmPage />} />
           <Route path="/calendar" element={<CalendarPage />} />
         </Routes>
+        <Footer />
       </RecoilRoot>
     </BrowserRouter>
   );

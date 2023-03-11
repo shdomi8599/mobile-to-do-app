@@ -9,7 +9,9 @@ const HeadTh = styled.th.attrs({
 `;
 
 const Calendar = () => {
+  //요일 배열
   const dateArr = ["일", "월", "화", "수", "목", "금", "토"];
+  
   return (
     <table className="d-flex justify-content-center align-items-center w-100 flex-column">
       <thead className="w-100">

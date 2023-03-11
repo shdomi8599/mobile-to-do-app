@@ -7,7 +7,7 @@ import { navState } from "../atom";
 import { useEffect } from "react";
 
 const NavBox = styled.nav.attrs({
-  className: "d-flex justify-content-end align-items-center my-2 ",
+  className: "d-flex justify-content-end align-items-center mb-2 pt-2",
 })``;
 
 const Nav = () => {
@@ -21,7 +21,7 @@ const Nav = () => {
     setNav(!nav);
   };
 
-  //네비바가 켜져있을 땐, 스크롤이 막히게 해주는 이펙트
+  // 네비바가 켜져있을 땐, 스크롤이 막히게 해주는 이펙트
   useEffect(() => {
     const body = document.body;
     nav

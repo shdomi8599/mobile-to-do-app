@@ -3,7 +3,6 @@ import TitleBox from "./TitleBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const NavContentBox = styled.div.attrs({
   className:

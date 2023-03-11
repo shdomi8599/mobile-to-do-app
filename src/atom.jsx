@@ -48,10 +48,19 @@ export const targetContentValue = atom({
   default: ["리코일 공부"],
 });
 
+//등록된 목표의 개수
+export const targetContentLength = selector({
+  key: "targetContentLength",
+  get: ({ get }) => {
+    const targetContentArr = get(targetContentValue);
+    return targetContentArr.length;
+  },
+});
+
 //오늘의 목표 인덱스
 export const todayTargetState = atom({
   key: "todayTarget",
-  default: undefined,
+  default: 0,
 });
 
 //오늘의 목표 값
