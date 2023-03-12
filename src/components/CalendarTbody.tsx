@@ -2,12 +2,22 @@ import styled from "styled-components";
 import { format } from "date-fns";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, addDays } from "date-fns";
-import { startDateState, successTargetState, yearMonthState } from "../atom";
+import {
+  getUpState,
+  getUpTimeState,
+  modalState,
+  startDateState,
+  successTargetState,
+  todayValueState,
+  yearMonthState,
+} from "../atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
-import React from "react";
+import React, { useMemo } from "react";
 import { checkDate } from "../function/checkDate";
 import { currentDate } from "../function/todayDate";
+import { useNavigate } from "react-router-dom";
+import { currentTime } from "../function/ currentTime";
 
 const BodyTr = styled.tr.attrs({
   className: "d-flex w-100 pb-2",
@@ -31,20 +41,29 @@ type CheckedSpanProps = {
 };
 
 const CalendarTbody = () => {
+  const navigate = useNavigate();
   //현재 선택되있는 달력 상태 값
   const startDate = useRecoilValue(startDateState);
 
   //현재 선택되있는 달력 값 달 시작 날짜
-  const monthStart = startOfMonth(startDate);
+  const monthStart = useMemo(() => {
+    return startOfMonth(startDate);
+  }, [startDate]);
 
   //현재 선택되있는 달력 값 달 마지막 날짜
-  const monthEnd = endOfMonth(monthStart);
-
+  const monthEnd = useMemo(() => {
+    return endOfMonth(monthStart);
+  }, [monthStart]);
+  // endOfMonth(monthStart);
   //현재 선택되있는 달력의 주 첫번째 날짜
-  const firstDate = startOfWeek(monthStart);
+  const firstDate = useMemo(() => {
+    return startOfWeek(monthStart);
+  }, [monthStart]);
 
   //현재 선택되있는 달력의 이번 주 마지막 날짜
-  const endDate = endOfWeek(monthEnd);
+  const endDate = useMemo(() => {
+    return endOfWeek(monthEnd);
+  }, [monthEnd]);
 
   //년,월 값
   const [year, month] = useRecoilValue(yearMonthState);
@@ -52,12 +71,52 @@ const CalendarTbody = () => {
   //저장된 목표 값들의 상태
   const [target, setTarget] = useRecoilState(successTargetState);
 
+  //오늘의 목표 값
+  const todayTarget = useRecoilValue(todayValueState);
+
+  //모달 상태
+  const [, setModal] = useRecoilState(modalState);
+
+  /**
+   * 모달 on
+   */
+  const openModal = (getDate: string, checkTarget: string[]) => {
+    if (Object.keys(target).includes(getDate)) {
+      setModal(true);
+      navigate("", {
+        state: {
+          check: checkTarget[0],
+          target: checkTarget[1],
+          time: checkTarget[2],
+        },
+      });
+    }
+  };
+
+  //기상 상태
+  const [getUp, setGetUp] = useRecoilState(getUpState);
+
+  //기상 시간 값
+  const getUpTime = useRecoilValue(getUpTimeState);
+
   /**
    * 목표를 성공하면 값을 추가, 하루 안에 성공을 안누르면 자동으로 실패가 쌓이도록 만들어야될듯?
    */
   const addTarget = (date: string) => {
-    window.confirm("오늘 목표를 성공하셨나요?") &&
-      setTarget({ ...target, [`${date}`]: ["성공", "하하"] });
+    if (window.confirm("오늘 목표를 성공하셨나요?")) {
+      if (getUp && getUpTime) {
+        setTarget({
+          ...target,
+          [`${date}`]: ["성공", todayTarget, getUpTime],
+        });
+      } else {
+        setGetUp(true);
+        setTarget({
+          ...target,
+          [`${date}`]: ["성공", todayTarget, currentTime()],
+        });
+      }
+    }
   };
 
   //td를 모두 담은 배열
@@ -67,6 +126,7 @@ const CalendarTbody = () => {
   let days: JSX.Element[] = [];
   let day = firstDate;
   let formattedDate = "";
+  const today = currentDate();
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
@@ -79,6 +139,9 @@ const CalendarTbody = () => {
             !isSameMonth(day, monthStart) && "disabled"
           }`}
           key={uuidv4()}
+          onClick={() => {
+            openModal(getDate, checkTarget);
+          }}
         >
           <div className="pb-1">
             <span>{formattedDate}</span>
@@ -89,7 +152,7 @@ const CalendarTbody = () => {
                 {checkTarget[0]}
               </CheckedSpan>
             </div>
-          ) : getDate === currentDate() ? (
+          ) : getDate === today ? (
             <div>
               <TodaySpan onClick={() => addTarget(getDate)}>성공</TodaySpan>
             </div>
@@ -104,7 +167,11 @@ const CalendarTbody = () => {
     days = [];
   }
 
-  return <tbody className="w-100">{rows}</tbody>;
+  return (
+    <>
+      <tbody className="w-100">{rows}</tbody>
+    </>
+  );
 };
 
 export default CalendarTbody;

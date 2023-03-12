@@ -129,3 +129,9 @@ export const successTargetState = atom({
   key: "successTargetState",
   default: successTarget,
 });
+
+//모달 상태
+export const modalState = atom({
+  key: "modalState",
+  default: false,
+});
