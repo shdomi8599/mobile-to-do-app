@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { targetContentLength } from "../atom";
-import { footerIconData } from "../type";
+import { FooterIconData } from "../type";
 import FooterIcon from "./FooterIcon";
 
 const FooterBox = styled.footer.attrs({
@@ -32,7 +32,7 @@ const Footer = () => {
   const targetLength = useRecoilValue(targetContentLength);
 
   //아이콘 데이터 배열
-  const iconArr:footerIconData[] = [
+  const iconArr: FooterIconData[] = [
     {
       href: "https://github.com/shdomi8599",
       name: "GITHUB",

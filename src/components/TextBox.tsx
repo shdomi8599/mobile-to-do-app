@@ -2,7 +2,7 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
 import { textState } from "../atom";
-import { sigObj } from "../type";
+import { SigObj } from "../type";
 import ButtonBox from "./ButtonBox";
 
 const textBoxFade = keyframes`
@@ -33,7 +33,7 @@ const InputBox = styled.div.attrs({
 type TextBoxProps = {
   message: number | string;
   addTargetContent?: (data: string) => void;
-  changeScheduleData?: (scheduleData: sigObj) => void;
+  changeScheduleData?: (scheduleData: SigObj) => void;
   textBoxHandler?: () => void;
 };
 

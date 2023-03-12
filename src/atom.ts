@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-import { sigObj } from "./type";
+import { SigObj } from "./type";
 
 //텍스트 값
 export const textState = atom({
@@ -75,7 +75,7 @@ export const todayValueState = selector({
 });
 
 //스케줄 설정
-export const scheduleDataState = atom<sigObj>({
+export const scheduleDataState = atom<SigObj>({
   key: "scheduleDataState",
   default: {},
 });

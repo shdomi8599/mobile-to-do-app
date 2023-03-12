@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import { sigObj } from "../type";
+import { SigObj } from "../type";
 
 const navFade = keyframes`
     0% {
@@ -51,7 +51,7 @@ const NavContent = ({ navHandler }: NavContentProps) => {
   const navigate = useNavigate();
 
   //네비 li데이터들
-  const navArr: sigObj[] = [
+  const navArr: SigObj[] = [
     { "목표 설정": "/target" },
     { "스케줄 설정": "/schedule" },
     { "알람 설정": "/alarm" },
@@ -62,7 +62,7 @@ const NavContent = ({ navHandler }: NavContentProps) => {
   /**
    * 이동하면서 네비를 off하는 이벤트
    */
-  const clickEvent = (data: sigObj) => {
+  const clickEvent = (data: SigObj) => {
     navigate(Object.values(data)[0]);
     navHandler();
   };

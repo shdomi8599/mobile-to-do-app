@@ -7,7 +7,7 @@ import MainContainer from "../components/MainContainer";
 import SubTitleBox from "../components/SubTitleBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
-import { alarmArr } from "../type";
+import { AlarmArr } from "../type";
 
 const AlarmPage = () => {
   //기상 시간 상태
@@ -19,7 +19,7 @@ const AlarmPage = () => {
   //0시부터 24시까지 시간을 넣은 배열
   const timeArr = createTimeArr();
 
-  const alarmArr:alarmArr = [
+  const alarmArr:AlarmArr = [
     //설정 리스트
     { "효과음": ["닭 우는 소리", "개 짖는 소리", "파도 치는 소리"], select: 1 },
     { "진동 세기": ["1", "2", "3"], select: 1 },

@@ -13,7 +13,8 @@ const NavBox = styled.nav.attrs({
 })``;
 
 const WakeTimeBox = styled.div.attrs({
-  className: "position-absolute ps-3 pt-2 text-center",
+  className:
+    "position-absolute ps-3 pt-2 d-flex justify-content-center align-items-center flex-column",
 })`
   left: 0px;
   font-size: 0.7rem;

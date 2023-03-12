@@ -14,7 +14,7 @@ import SubTitleBox from "../components/SubTitleBox";
 import TextBox from "../components/TextBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
-import { sigObj } from "../type";
+import { SigObj } from "../type";
 
 const SchedulePage = () => {
   //box 상태 체크
@@ -30,7 +30,7 @@ const SchedulePage = () => {
   const [scheduleData, setScheduleData] = useRecoilState(scheduleDataState);
 
   //스케줄 데이터 변경
-  const changeScheduleData = (data: sigObj) => {
+  const changeScheduleData = (data: SigObj) => {
     setScheduleData({ ...scheduleData, ...data });
   };
 

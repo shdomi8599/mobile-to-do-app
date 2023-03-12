@@ -69,16 +69,21 @@ const TargetContent = ({
   };
 
   /**
+   * input 포커스 이벤트
+   */
+  const focusInput = () => {
+    targetInput.current && targetInput.current.focus();
+  };
+
+  /**
    * 1글자 이상 작성하지않으면 다시 포커스
    */
   const blurEvent = () => {
     if (messageContent.length === 0) {
       alert("1글자 이상 작성해주세요");
-      if (messageContent.length === 0) {
-        return setTimeout(() => {
-          if (targetInput.current) targetInput.current.focus();
-        }, 50);
-      }
+      return setTimeout(() => {
+        focusInput();
+      }, 50);
     }
     editHandler();
   };
@@ -90,9 +95,7 @@ const TargetContent = ({
 
   //input이 포커스 될 수 있도록 이펙트 설정
   useEffect(() => {
-    if (edit && targetInput.current) {
-      targetInput.current.focus();
-    }
+    edit && focusInput();
   }, [edit]);
 
   return (

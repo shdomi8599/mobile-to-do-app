@@ -1,8 +1,8 @@
 import React from "react";
-import { footerIconData } from "../type";
+import { FooterIconData } from "../type";
 
 type FooterIconProps = {
-  data: footerIconData;
+  data: FooterIconData;
 };
 
 const FooterIcon = ({ data }: FooterIconProps) => {

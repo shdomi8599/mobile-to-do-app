@@ -1,35 +1,35 @@
-export type sigObj = {
+export type SigObj = {
   [key: string]: string;
 };
 
-interface alarmBase {
+interface AlarmBase {
   select: number;
 }
-interface alarmIndex0 extends alarmBase {
+interface AlarmIndex0 extends AlarmBase {
   효과음: string[];
 }
-interface alarmIndex1 extends alarmBase {
+interface AlarmIndex1 extends AlarmBase {
   "진동 세기": string[];
 }
-interface alarmIndex2 extends alarmBase {
+interface AlarmIndex2 extends AlarmBase {
   "알람 종류": string[];
 }
-interface alarmIndex3 extends alarmBase {
+interface AlarmIndex3 extends AlarmBase {
   "기상 시간": string[];
 }
-interface alarmIndex4 extends alarmBase {
+interface AlarmIndex4 extends AlarmBase {
   "취침 시간": string[];
 }
 
-export type alarmArr = [
-  alarmIndex0,
-  alarmIndex1,
-  alarmIndex2,
-  alarmIndex3,
-  alarmIndex4
+export type AlarmArr = [
+  AlarmIndex0,
+  AlarmIndex1,
+  AlarmIndex2,
+  AlarmIndex3,
+  AlarmIndex4
 ];
 
-export type footerIconData = {
+export type FooterIconData = {
   href: string;
   name: string;
   src: string;
