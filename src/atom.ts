@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { successTarget } from "./data/successTarget";
 import { currentTime } from "./function/ currentTime";
 import { SigObj } from "./type";
 
@@ -113,12 +114,18 @@ export const yearMonthState = selector({
   get: ({ get }) => {
     const TIME_ZONE = 9 * 60 * 60 * 1000;
     const date = get(startDateState);
-    const yearMonth = new Date(date.getTime() + TIME_ZONE)
+    const yearMonthDay = new Date(date.getTime() + TIME_ZONE)
       .toISOString()
       .replace("T", " ")
       .slice(0, 7);
-    const year = yearMonth.slice(0, 4);
-    const month = yearMonth.slice(5, 7);
+    const year = yearMonthDay.slice(0, 4);
+    const month = yearMonthDay.slice(5, 7);
     return [year, month];
   },
+});
+
+//타겟 성공 데이터
+export const successTargetState = atom({
+  key: "successTargetState",
+  default: successTarget,
 });

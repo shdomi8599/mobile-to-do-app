@@ -35,3 +35,6 @@ export type ProfileIconData = {
   src: string;
 };
 
+export type SuccessData = {
+  [key: string]: string[];
+};
