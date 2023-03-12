@@ -1,11 +1,11 @@
 import React from "react";
-import { FooterIconData } from "../type";
+import { ProfileIconData } from "../type";
 
-type FooterIconProps = {
-  data: FooterIconData;
+type ProfileIconProps = {
+  data: ProfileIconData;
 };
 
-const FooterIcon = ({ data }: FooterIconProps) => {
+const ProfileIcon = ({ data }: ProfileIconProps) => {
   const { href, name, src } = data;
   return (
     <div className="flex-10 d-flex justify-content-center align-items-center">
@@ -16,4 +16,4 @@ const FooterIcon = ({ data }: FooterIconProps) => {
   );
 };
 
-export default FooterIcon;
+export default ProfileIcon;

@@ -1,10 +1,13 @@
 import styled, { keyframes } from "styled-components";
 import TitleBox from "./TitleBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faX, faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { SigObj } from "../type";
+import { profileIcon } from "../data/profileIcon";
+import ProfileIcon from "./ProfileIcon";
+import { profile } from "../data/profile";
 
 const navFade = keyframes`
     0% {
@@ -43,6 +46,12 @@ const Content = styled.li.attrs({
     "py-3 border-bottom w-100 d-flex justify-content-center align-items-center fs-3",
 })``;
 
+const MakerBox = styled.div.attrs({
+  className: "pt-3 w-75",
+})`
+  font-size: 0.9rem;
+`;
+
 type NavContentProps = {
   navHandler: () => void;
 };
@@ -56,7 +65,6 @@ const NavContent = ({ navHandler }: NavContentProps) => {
     { "스케줄 설정": "/schedule" },
     { "알람 설정": "/alarm" },
     { "달력 보기": "/calendar" },
-    { "만든 사람": "/" },
   ];
 
   /**
@@ -67,6 +75,16 @@ const NavContent = ({ navHandler }: NavContentProps) => {
     navHandler();
   };
 
+  //만든 사람 랜더링 상태
+  const [maker, setMaker] = useState(false);
+
+  /**
+   * 만든사람 on/off
+   */
+  const makerHandler = () => {
+    setMaker(!maker);
+  };
+
   return (
     <>
       <BlockBox onClick={navHandler} />
@@ -75,13 +93,38 @@ const NavContent = ({ navHandler }: NavContentProps) => {
           <FontAwesomeIcon icon={faX} onClick={navHandler} className="fs-3" />
         </div>
         <TitleBox message={"취준생의 하루"} navHandler={navHandler} />
-        <MainContentBox>
-          {navArr.map((obj, i) => (
-            <Content key={i}>
-              <span onClick={() => clickEvent(obj)}>{Object.keys(obj)[0]}</span>
+        {maker ? (
+          <>
+            <div className="w-100 ps-3 fs-2" onClick={makerHandler}>
+              <FontAwesomeIcon icon={faArrowRotateLeft} />
+            </div>
+            <MakerBox>
+              {profile.map((data, i) => (
+                <div key={i}>{data}</div>
+              ))}
+              <div className="d-flex justify-content-center align-items-center w-100 flex-column">
+                {profileIcon.map((data, i) => (
+                  <div key={i} className="py-2">
+                    <ProfileIcon data={data} />
+                  </div>
+                ))}
+              </div>
+            </MakerBox>
+          </>
+        ) : (
+          <MainContentBox>
+            {navArr.map((obj, i) => (
+              <Content key={i}>
+                <span onClick={() => clickEvent(obj)}>
+                  {Object.keys(obj)[0]}
+                </span>
+              </Content>
+            ))}
+            <Content>
+              <span onClick={makerHandler}>만든 사람</span>
             </Content>
-          ))}
-        </MainContentBox>
+          </MainContentBox>
+        )}
       </NavContentBox>
     </>
   );

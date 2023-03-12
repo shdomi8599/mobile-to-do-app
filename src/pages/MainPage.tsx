@@ -8,7 +8,7 @@ import {
   bedState,
   scheduleDataState,
   todayValueState,
-  wakeUpState,
+  wakeUpTimeValState,
 } from "../atom";
 import { createTimeArr } from "../function/createTimeArr";
 import { useNavigate } from "react-router-dom";
@@ -45,7 +45,7 @@ const MainPage = () => {
   const todayContent = useRecoilValue(todayValueState);
 
   //기상 시간 값
-  const wakeUp = useRecoilValue(wakeUpState);
+  const wakeUp = useRecoilValue(wakeUpTimeValState);
 
   //취침 시간 값
   const bed = useRecoilValue(bedState);

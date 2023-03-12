@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { currentTime } from "./function/ currentTime";
 import { SigObj } from "./type";
 
 //텍스트 값
@@ -20,11 +21,25 @@ export const wakeUpTimeState = atom({
 });
 
 //기상 시간 값
-export const wakeUpState = selector({
-  key: "wakeUpState",
+export const wakeUpTimeValState = selector({
+  key: "wakeUpTimeValState",
   get: ({ get }) => {
     const wakeupTime = Number(get(wakeUpTimeState).slice(0, 2));
     return wakeupTime;
+  },
+});
+
+//기상 체크 상태
+export const getUpState = atom({
+  key: "getUpState",
+  default: false,
+});
+
+//기상 체크 상태 저장
+export const getUpTimeState = selector({
+  key: "getUpTimeState",
+  get: ({ get }) => {
+    return get(getUpState) && currentTime();
   },
 });
 

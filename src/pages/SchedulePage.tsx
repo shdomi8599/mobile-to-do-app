@@ -5,7 +5,7 @@ import {
   bedState,
   scheduleDataState,
   textBoxState,
-  wakeUpState,
+  wakeUpTimeValState,
 } from "../atom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
@@ -21,7 +21,7 @@ const SchedulePage = () => {
   const boxState = useRecoilValue(textBoxState);
 
   //기상 시간 값
-  const wakeUp = useRecoilValue(wakeUpState);
+  const wakeUp = useRecoilValue(wakeUpTimeValState);
 
   //취침 시간 값
   const bed = useRecoilValue(bedState);

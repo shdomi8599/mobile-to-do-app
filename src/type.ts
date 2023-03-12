@@ -29,7 +29,7 @@ export type AlarmArr = [
   AlarmIndex4
 ];
 
-export type FooterIconData = {
+export type ProfileIconData = {
   href: string;
   name: string;
   src: string;
