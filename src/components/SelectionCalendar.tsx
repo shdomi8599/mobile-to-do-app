@@ -5,8 +5,9 @@ import DatePicker, {
   registerLocale,
 } from "react-datepicker";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { startDateState, yearMonthState } from "../atom";
+import { startDateState } from "../recoil/atom";
 import ko from "date-fns/locale/ko"; // 한국어적용
+import { yearMonthState } from "../recoil/selector";
 registerLocale("ko", ko); // 한국어적용
 // ForwardedRef<HTMLSpanElement>
 interface Props extends Omit<ReactDatePickerProps, "onChange"> {

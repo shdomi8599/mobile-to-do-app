@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilState } from "recoil";
-import { bedTimeState, wakeUpTimeState } from "../atom";
+import { bedTimeState, wakeUpTimeState } from "../recoil/atom";
 import AlarmContent from "../components/AlarmContent";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
@@ -19,9 +19,9 @@ const AlarmPage = () => {
   //0시부터 24시까지 시간을 넣은 배열
   const timeArr = createTimeArr();
 
-  const alarmArr:AlarmArr = [
+  const alarmArr: AlarmArr = [
     //설정 리스트
-    { "효과음": ["닭 우는 소리", "개 짖는 소리", "파도 치는 소리"], select: 1 },
+    { 효과음: ["닭 우는 소리", "개 짖는 소리", "파도 치는 소리"], select: 1 },
     { "진동 세기": ["1", "2", "3"], select: 1 },
     { "알람 종류": ["소리만", "진동만", "소리+진동"], select: 1 },
     { "기상 시간": [], select: Number(wakeUp.slice(0, 2)) },

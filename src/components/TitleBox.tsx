@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { navState } from "../atom";
+import { navState } from "../recoil/atom";
 
 const Title = styled.header.attrs({
   className: "fs-1 mb-4 w-100 d-flex justify-content-center align-items-center",

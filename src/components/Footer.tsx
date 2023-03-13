@@ -2,9 +2,9 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { targetContentLength } from "../atom";
 import { profile } from "../data/profile";
 import { profileIcon } from "../data/profileIcon";
+import { targetContentLength } from "../recoil/selector";
 import ProfileIcon from "./ProfileIcon";
 
 const FooterBox = styled.footer.attrs({

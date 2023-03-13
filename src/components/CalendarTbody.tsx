@@ -4,13 +4,10 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
 import { isSameMonth, addDays } from "date-fns";
 import {
   getUpState,
-  getUpTimeState,
   modalState,
   startDateState,
   successTargetState,
-  todayValueState,
-  yearMonthState,
-} from "../atom";
+} from "../recoil/atom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { v4 as uuidv4 } from "uuid";
 import React, { useMemo } from "react";
@@ -18,6 +15,7 @@ import { checkDate } from "../function/checkDate";
 import { currentDate } from "../function/todayDate";
 import { useNavigate } from "react-router-dom";
 import { currentTime } from "../function/ currentTime";
+import { getUpTimeState, todayValueState, yearMonthState } from "../recoil/selector";
 
 const BodyTr = styled.tr.attrs({
   className: "d-flex w-100 pb-2",

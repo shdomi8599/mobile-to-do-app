@@ -2,7 +2,7 @@ import SelectionCalendar from "./SelectionCalendar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useRecoilState } from "recoil";
-import { startDateState } from "../atom";
+import { startDateState } from "../recoil/atom";
 import React from "react";
 
 const CalendarSubTitle = () => {

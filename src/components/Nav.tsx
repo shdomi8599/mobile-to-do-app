@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import NavContent from "./NavContent";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { getUpState, getUpTimeState, navState } from "../atom";
+import { getUpState, navState } from "../recoil/atom";
 import { useEffect } from "react";
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { getUpTimeState } from "../recoil/selector";
 
 const NavBox = styled.nav.attrs({
   className: "d-flex justify-content-end align-items-start mb-2",

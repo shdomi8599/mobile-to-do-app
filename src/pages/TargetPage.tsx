@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
-import { targetContentValue, todayTargetState } from "../atom";
+import { targetContentValue, todayTargetState } from "../recoil/atom";
 import ButtonBox from "../components/ButtonBox";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";

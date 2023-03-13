@@ -2,11 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  bedState,
   scheduleDataState,
   textBoxState,
-  wakeUpTimeValState,
-} from "../atom";
+} from "../recoil/atom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
 import ScheduleContent from "../components/ScheduleContent";
@@ -15,6 +13,7 @@ import TextBox from "../components/TextBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
 import { SigObj } from "../type";
+import { bedState, wakeUpTimeValState } from "../recoil/selector";
 
 const SchedulePage = () => {
   //box 상태 체크

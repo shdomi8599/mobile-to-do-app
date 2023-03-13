@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { modalState } from "../atom";
+import { modalState } from "../recoil/atom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
@@ -53,13 +53,13 @@ const Modal = () => {
   };
 
   //성공 여부
-  const check = location.state && location.state.check;
+  const check: string = location.state && location.state.check;
 
   //목표 값
-  const target = location.state && location.state.target;
+  const target: string = location.state && location.state.target;
 
   //기상 시간 값
-  const time = location.state && location.state.time;
+  const time: string = location.state && location.state.time;
 
   return (
     <>

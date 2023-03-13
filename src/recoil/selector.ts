@@ -1,25 +1,13 @@
-import { atom, selector } from "recoil";
-import { successTarget } from "./data/successTarget";
-import { currentTime } from "./function/ currentTime";
-import { SigObj } from "./type";
-
-//텍스트 값
-export const textState = atom({
-  key: "textState",
-  default: "",
-});
-
-//텍스트 박스 상태
-export const textBoxState = atom({
-  key: "textBoxState",
-  default: false,
-});
-
-//기상 시간
-export const wakeUpTimeState = atom({
-  key: "wakeUpTime",
-  default: "08:00",
-});
+import { selector } from "recoil";
+import { currentTime } from "../function/ currentTime";
+import {
+  bedTimeState,
+  getUpState,
+  startDateState,
+  targetContentValue,
+  todayTargetState,
+  wakeUpTimeState,
+} from "./atom";
 
 //기상 시간 값
 export const wakeUpTimeValState = selector({
@@ -30,24 +18,12 @@ export const wakeUpTimeValState = selector({
   },
 });
 
-//기상 체크 상태
-export const getUpState = atom({
-  key: "getUpState",
-  default: false,
-});
-
 //기상 체크 상태 저장
 export const getUpTimeState = selector({
   key: "getUpTimeState",
   get: ({ get }) => {
     return get(getUpState) && currentTime();
   },
-});
-
-//취침 시간
-export const bedTimeState = atom({
-  key: "bedTimeState",
-  default: "23:00",
 });
 
 //취침 시간 값
@@ -59,12 +35,6 @@ export const bedState = selector({
   },
 });
 
-//목표 설정 값들
-export const targetContentValue = atom<string[]>({
-  key: "targetContentValue",
-  default: [],
-});
-
 //등록된 목표의 개수
 export const targetContentLength = selector({
   key: "targetContentLength",
@@ -72,12 +42,6 @@ export const targetContentLength = selector({
     const targetContentArr = get(targetContentValue);
     return targetContentArr.length;
   },
-});
-
-//오늘의 목표 인덱스
-export const todayTargetState = atom({
-  key: "todayTarget",
-  default: 0,
 });
 
 //오늘의 목표 값
@@ -88,24 +52,6 @@ export const todayValueState = selector({
     const todayIdx = get(todayTargetState);
     return targetContent[todayIdx];
   },
-});
-
-//스케줄 설정
-export const scheduleDataState = atom<SigObj>({
-  key: "scheduleDataState",
-  default: {},
-});
-
-//네비 상태
-export const navState = atom({
-  key: "navState",
-  default: false,
-});
-
-//달력 값 상태
-export const startDateState = atom({
-  key: "startDateState",
-  default: new Date(),
 });
 
 //년 월 상태
@@ -122,16 +68,4 @@ export const yearMonthState = selector({
     const month = yearMonthDay.slice(5, 7);
     return [year, month];
   },
-});
-
-//타겟 성공 데이터
-export const successTargetState = atom({
-  key: "successTargetState",
-  default: successTarget,
-});
-
-//모달 상태
-export const modalState = atom({
-  key: "modalState",
-  default: false,
 });

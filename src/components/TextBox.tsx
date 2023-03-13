@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
-import { textState } from "../atom";
+import { textState } from "../recoil/atom";
 import { SigObj } from "../type";
 import ButtonBox from "./ButtonBox";
 

@@ -5,16 +5,14 @@ import MainContent from "../components/MainContent";
 import TitleBox from "../components/TitleBox";
 import { useRecoilValue } from "recoil";
 import {
-  bedState,
   scheduleDataState,
-  todayValueState,
-  wakeUpTimeValState,
-} from "../atom";
+} from "../recoil/atom";
 import { createTimeArr } from "../function/createTimeArr";
 import { useNavigate } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
 import React from "react";
+import { bedState, todayValueState, wakeUpTimeValState } from "../recoil/selector";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
