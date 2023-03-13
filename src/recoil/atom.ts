@@ -38,7 +38,6 @@ export const targetContentValue = atom<string[]>({
   default: [],
 });
 
-
 //오늘의 목표 인덱스
 export const todayTargetState = atom({
   key: "todayTarget",

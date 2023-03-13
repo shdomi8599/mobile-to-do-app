@@ -8,6 +8,8 @@ import { SigObj } from "../type";
 import { profileIcon } from "../data/profileIcon";
 import ProfileIcon from "./ProfileIcon";
 import { profile } from "../data/profile";
+import { useRecoilState } from "recoil";
+import { startDateState } from "../recoil/atom";
 
 const navFade = keyframes`
     0% {
@@ -59,6 +61,9 @@ type NavContentProps = {
 const NavContent = ({ navHandler }: NavContentProps) => {
   const navigate = useNavigate();
 
+  //달력 값 상태
+  const [, setStartDate] = useRecoilState(startDateState);
+
   //네비 li데이터들
   const navArr: SigObj[] = [
     { "목표 설정": "/target" },
@@ -71,8 +76,10 @@ const NavContent = ({ navHandler }: NavContentProps) => {
    * 이동하면서 네비를 off하는 이벤트
    */
   const clickEvent = (data: SigObj) => {
+    const newDate = new Date();
     navigate(Object.values(data)[0]);
     navHandler();
+    setStartDate(newDate);
   };
 
   //만든 사람 랜더링 상태
