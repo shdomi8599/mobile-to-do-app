@@ -1,9 +1,8 @@
 import SelectionCalendar from "./SelectionCalendar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { useRecoilState } from "recoil";
 import { startDateState } from "../recoil/atom";
 import React from "react";
+import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
 
 const CalendarSubTitle = () => {
   //현재 달력값 상태
@@ -27,21 +26,20 @@ const CalendarSubTitle = () => {
     setStartDate(newDate);
   };
 
+  //아이콘 메모이제이션
+  const UpIcon = React.memo(BsCaretUpFill);
+  const DownIcon = React.memo(BsCaretDownFill);
+
   return (
     <div className="d-flex justify-content-between align-items-center w-100">
       <div>
         <SelectionCalendar />
       </div>
       <div className="me-3">
-        <FontAwesomeIcon
-          onClick={downEvent}
-          className="fs-1 mx-2 pointer trans-click"
-          icon={faCaretUp}
-        />
-        <FontAwesomeIcon
+        <UpIcon onClick={downEvent} className="fs-3 mx-2 pointer trans-click" />
+        <DownIcon
           onClick={upEvent}
-          className="fs-1 mx-2 pointer trans-click pb-1"
-          icon={faCaretDown}
+          className="fs-3 mx-2 pointer trans-click "
         />
       </div>
     </div>

@@ -1,18 +1,19 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import MainContent from "../components/MainContent";
 import TitleBox from "../components/TitleBox";
 import { useRecoilValue } from "recoil";
-import {
-  scheduleDataState,
-} from "../recoil/atom";
+import { scheduleDataState } from "../recoil/atom";
 import { createTimeArr } from "../function/createTimeArr";
 import { useNavigate } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
 import React from "react";
-import { bedState, todayValueState, wakeUpTimeValState } from "../recoil/selector";
+import {
+  bedState,
+  todayValueState,
+  wakeUpTimeValState,
+} from "../recoil/selector";
+import { BsShareFill } from "react-icons/bs";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -57,6 +58,9 @@ const MainPage = () => {
   //스케줄 데이터
   const scheduleDataArr = useRecoilValue(scheduleDataState);
 
+  //아이콘 메모이제이션
+  const ShareIcon = React.memo(BsShareFill);
+
   return (
     <MainContainer>
       <TitleBox message={"취준생의 하루"} />
@@ -73,7 +77,7 @@ const MainPage = () => {
           </TomorrowTarget>
         </TargetBox>
         <ShareBox>
-          <FontAwesomeIcon className="fs-2" icon={faShareFromSquare} />
+          <ShareIcon className="fs-2" />
         </ShareBox>
       </SubTitle>
       <ContentBox>

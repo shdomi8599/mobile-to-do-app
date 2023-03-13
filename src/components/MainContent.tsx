@@ -1,10 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell as faBellS } from "@fortawesome/free-solid-svg-icons";
-import { faBell as faBellR } from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { BsBell, BsBellFill } from "react-icons/bs";
 
 const Content = styled.div.attrs({
   className:
@@ -49,6 +47,10 @@ const MainContent = ({ time, content }: MainContentProps) => {
     navigate("/schedule", { state: { time: time } });
   };
 
+  //아이콘 메모이제이션
+  const BellIcon = React.memo(BsBell);
+  const BellFillIcon = React.memo(BsBellFill);
+
   return (
     <Content>
       <MainContentBox>
@@ -62,11 +64,11 @@ const MainContent = ({ time, content }: MainContentProps) => {
         </div>
       </MainContentBox>
       <ShareBox>
-        <FontAwesomeIcon
-          onClick={bellHandler}
-          icon={bell ? faBellS : faBellR}
-          className="fs-1"
-        />
+        {bell ? (
+          <BellFillIcon onClick={bellHandler} className="fs-1" />
+        ) : (
+          <BellIcon onClick={bellHandler} className="fs-1" />
+        )}
       </ShareBox>
     </Content>
   );

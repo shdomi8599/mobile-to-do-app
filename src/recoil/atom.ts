@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import { successTarget } from "../data/successTarget";
-import { SigObj } from "../type";
+import { SigObj } from "../type/type";
 
 //텍스트 값
 export const textState = atom({

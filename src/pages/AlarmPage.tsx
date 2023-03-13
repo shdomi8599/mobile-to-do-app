@@ -7,7 +7,7 @@ import MainContainer from "../components/MainContainer";
 import SubTitleBox from "../components/SubTitleBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
-import { AlarmArr } from "../type";
+import { AlarmArr } from "../type/type";
 
 const AlarmPage = () => {
   //기상 시간 상태

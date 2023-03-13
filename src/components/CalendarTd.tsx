@@ -1,12 +1,7 @@
 import { isSameMonth, startOfMonth, startOfWeek } from "date-fns";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { checkDate } from "../function/checkDate";
-import {
-  getUpState,
-  modalState,
-  startDateState,
-  successTargetState,
-} from "../recoil/atom";
+import { modalState, startDateState, successTargetState } from "../recoil/atom";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import {
@@ -15,7 +10,6 @@ import {
   yearMonthState,
 } from "../recoil/selector";
 import styled from "styled-components";
-import { currentTime } from "../function/ currentTime";
 import { currentDate } from "../function/todayDate";
 
 const CheckedSpan = styled.span.attrs({
@@ -81,9 +75,6 @@ const CalendarTd = ({
   //오늘의 목표 값
   const todayTarget = useRecoilValue(todayValueState);
 
-  //기상 상태
-  const [getUp, setGetUp] = useRecoilState(getUpState);
-
   //기상 시간 값
   const getUpTime = useRecoilValue(getUpTimeState);
 
@@ -91,19 +82,20 @@ const CalendarTd = ({
    * 목표를 성공하면 값을 추가, 하루 안에 성공을 안누르면 자동으로 실패가 쌓이도록 만들어야될듯?
    */
   const addTarget = (date: string) => {
+    if (!todayTarget && !getUpTime) {
+      return alert("기상 체크와 오늘의 목표를 먼저 등록해주세요.");
+    }
+    if (!todayTarget) {
+      return alert("오늘의 목표를 먼저 등록해주세요.");
+    }
+    if (!getUpTime) {
+      return alert("기상 체크를 먼저 해주세요.");
+    }
     if (window.confirm("오늘 목표를 성공하셨나요?")) {
-      if (getUp && getUpTime) {
-        setTarget({
-          ...target,
-          [`${date}`]: ["성공", todayTarget, getUpTime],
-        });
-      } else {
-        setGetUp(true);
-        setTarget({
-          ...target,
-          [`${date}`]: ["성공", todayTarget, currentTime()],
-        });
-      }
+      setTarget({
+        ...target,
+        [`${date}`]: ["성공", todayTarget, getUpTime],
+      });
     }
   };
 

@@ -44,4 +44,4 @@ const TitleBox = ({ message, navHandler }: TitleBoxProps) => {
   );
 };
 
-export default TitleBox;
+export default React.memo(TitleBox);

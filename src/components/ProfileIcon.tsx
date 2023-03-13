@@ -1,5 +1,5 @@
 import React from "react";
-import { ProfileIconData } from "../type";
+import { ProfileIconData } from "../type/type";
 
 type ProfileIconProps = {
   data: ProfileIconData;

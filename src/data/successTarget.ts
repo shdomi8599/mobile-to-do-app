@@ -1,4 +1,4 @@
-import { SuccessData } from "../type";
+import { SuccessData } from "../type/type";
 
 //프로필 데이터
 export const successTarget: SuccessData = {

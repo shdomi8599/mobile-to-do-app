@@ -1,10 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  scheduleDataState,
-  textBoxState,
-} from "../recoil/atom";
+import { scheduleDataState, textBoxState } from "../recoil/atom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
 import ScheduleContent from "../components/ScheduleContent";
@@ -12,7 +9,7 @@ import SubTitleBox from "../components/SubTitleBox";
 import TextBox from "../components/TextBox";
 import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
-import { SigObj } from "../type";
+import { SigObj } from "../type/type";
 import { bedState, wakeUpTimeValState } from "../recoil/selector";
 
 const SchedulePage = () => {

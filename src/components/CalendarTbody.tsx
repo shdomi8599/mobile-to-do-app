@@ -5,6 +5,7 @@ import { startDateState } from "../recoil/atom";
 import { useRecoilValue } from "recoil";
 import React, { useMemo } from "react";
 import CalendarTr from "./CalendarTr";
+import { v4 as uuidv4 } from "uuid";
 
 const CalendarTbody = () => {
   //현재 선택되있는 달력 상태 값
@@ -49,9 +50,9 @@ const CalendarTbody = () => {
 
   return (
     <>
-      <tbody className="w-100">
+      <tbody key={uuidv4()} className="w-100">
         {trData.map((tr, i) => (
-          <CalendarTr data={tr} key={i} trIdx={i} />
+          <CalendarTr dateArr={tr} key={i} trIdx={i} />
         ))}
       </tbody>
     </>

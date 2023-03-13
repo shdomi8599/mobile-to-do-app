@@ -1,15 +1,15 @@
 import styled, { keyframes } from "styled-components";
 import TitleBox from "./TitleBox";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faArrowRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import { SigObj } from "../type";
+import React, { useCallback, useState } from "react";
 import { profileIcon } from "../data/profileIcon";
 import ProfileIcon from "./ProfileIcon";
 import { profile } from "../data/profile";
 import { useRecoilState } from "recoil";
 import { startDateState } from "../recoil/atom";
+import { SigObj } from "../type/type";
+import { AiOutlineClose } from "react-icons/ai";
+import { FiRotateCcw } from "react-icons/fi";
 
 const navFade = keyframes`
     0% {
@@ -75,12 +75,13 @@ const NavContent = ({ navHandler }: NavContentProps) => {
   /**
    * 이동하면서 네비를 off하는 이벤트
    */
-  const clickEvent = (data: SigObj) => {
+  const clickEvent = useCallback((data: SigObj) => {
     const newDate = new Date();
     navigate(Object.values(data)[0]);
     navHandler();
     setStartDate(newDate);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //만든 사람 랜더링 상태
   const [maker, setMaker] = useState(false);
@@ -92,18 +93,22 @@ const NavContent = ({ navHandler }: NavContentProps) => {
     setMaker(!maker);
   };
 
+  //아이콘 메모이제이션
+  const XIcon = React.memo(AiOutlineClose);
+  const RotateIcon = React.memo(FiRotateCcw);
+
   return (
     <>
       <BlockBox onClick={navHandler} />
       <NavContentBox>
         <div className="py-3 d-flex justify-content-start align-items-center w-100 px-3">
-          <FontAwesomeIcon icon={faX} onClick={navHandler} className="fs-3" />
+          <XIcon onClick={navHandler} className="fs-3" />
         </div>
         <TitleBox message={"취준생의 하루"} navHandler={navHandler} />
         {maker ? (
           <>
-            <div className="w-100 ps-3 fs-2" onClick={makerHandler}>
-              <FontAwesomeIcon icon={faArrowRotateLeft} />
+            <div className="w-100 ps-3 fs-2">
+              <RotateIcon onClick={makerHandler} />
             </div>
             <MakerBox>
               {profile.map((data, i) => (
@@ -137,4 +142,4 @@ const NavContent = ({ navHandler }: NavContentProps) => {
   );
 };
 
-export default NavContent;
+export default React.memo(NavContent);

@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import NavContent from "./NavContent";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getUpState, navState } from "../recoil/atom";
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { getUpTimeState } from "../recoil/selector";
+import { FaBars } from "react-icons/fa";
 
 const NavBox = styled.nav.attrs({
   className: "d-flex justify-content-end align-items-start mb-2",
@@ -48,11 +47,12 @@ const Nav = () => {
   };
 
   // 네비바가 켜져있을 땐, 스크롤이 막히게 해주는 이펙트
+  const body = useMemo(() => document.body, []);
   useEffect(() => {
-    const body = document.body;
     nav
       ? body.classList.add("stop-scrolling")
       : body.classList.remove("stop-scrolling");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nav]);
 
   //기상 체크 상태
@@ -64,11 +64,15 @@ const Nav = () => {
   /**
    * 기상 체크하기 ,00시 이후 하루 1번만 가능하게 바꿀 예정
    */
-  const checkWakeUpHandler = () => {
+  const checkWakeUpHandler = useCallback(() => {
     if (!checkWakeUp && window.confirm("기상 체크를 하시겠습니까?")) {
       setCheckWakeUp(true);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  //아이콘 메모이제이션
+  const BarIcon = React.memo(FaBars);
 
   return (
     <>
@@ -84,11 +88,7 @@ const Nav = () => {
             {checkWakeUp && <div>{getUpTime}</div>}
           </WakeTimeBox>
         )}
-        <FontAwesomeIcon
-          icon={faBars}
-          className="fs-2 me-3 pt-2"
-          onClick={navHandler}
-        />
+        <BarIcon className="fs-1 me-3 pt-2" onClick={navHandler} />
         {nav && <NavContent navHandler={navHandler} />}
       </NavBox>
     </>

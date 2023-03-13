@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
 import CalendarTd from "./CalendarTd";
 
 const BodyTr = styled.tr.attrs({
@@ -9,10 +8,16 @@ const BodyTr = styled.tr.attrs({
   height: 12vh;
 `;
 
-const CalendarTr = ({ data, trIdx }: { data: string[]; trIdx: number }) => {
+const CalendarTr = ({
+  dateArr,
+  trIdx,
+}: {
+  dateArr: string[];
+  trIdx: number;
+}) => {
   return (
-    <BodyTr key={uuidv4()}>
-      {data.map((date, i) => (
+    <BodyTr>
+      {dateArr.map((date, i) => (
         <CalendarTd formattedDate={date} key={i} tdIdx={i} trIdx={trIdx} />
       ))}
     </BodyTr>
