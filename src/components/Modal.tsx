@@ -2,9 +2,8 @@ import React from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { modalState } from "../recoil/atom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Background = styled.div.attrs({
   className: "position-absolute w-100 ",
@@ -61,12 +60,15 @@ const Modal = () => {
   //기상 시간 값
   const time: string = location.state && location.state.time;
 
+  //아이콘 메모이제이션
+  const XIcon = React.memo(AiOutlineClose);
+
   return (
     <>
       <Background bodyHeight={bodyHeight} onClick={closeModal}></Background>
       <ModalContent>
         <div className="h-25 text-end pt-2 pe-2">
-          <FontAwesomeIcon onClick={closeModal} icon={faX} className="fs-4" />
+          <XIcon onClick={closeModal} className="fs-4 pointer" />
         </div>
         <div className="h-100 d-flex justify-content-start align-items-center w-100 flex-column">
           <div>{`<목표>`}</div>

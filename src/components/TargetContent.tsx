@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import React from "react";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Content = styled.div.attrs({
   className:
@@ -98,6 +97,9 @@ const TargetContent = ({
     edit && focusInput();
   }, [edit]);
 
+  //아이콘 메모이제이션
+  const XIcon = React.memo(AiOutlineClose);
+
   return (
     <Content>
       <MainContentBox>
@@ -127,9 +129,9 @@ const TargetContent = ({
           )}
         </div>
         <div className="flex-04 d-flex justify-content-end align-items-start pe-3 pt-2 h-100">
-          <FontAwesomeIcon
-            icon={faX}
+          <XIcon
             onClick={() => deleteTargetContent(idx)}
+            className="pointer fs-5"
           />
         </div>
       </MainContentBox>

@@ -33,19 +33,20 @@ const CalendarTbody = () => {
   }, [monthEnd]);
 
   //선택된 달의 날짜 값을 배열에 담는 작업
+  //큐 개념을 활용해서 만드는 방법이 없을까 고민중
   const trData: string[][] = [];
   let tdData: string[] = [];
   let day = firstDate;
   let formattedDate = "";
 
   while (day <= endDate) {
-    for (let i = 0; i < 7; i++) {
-      formattedDate = format(day, "d");
-      tdData.push(formattedDate);
-      day = addDays(day, 1);
+    formattedDate = format(day, "d");
+    tdData.push(formattedDate);
+    day = addDays(day, 1);
+    if (tdData.length === 7) {
+      trData.push(tdData);
+      tdData = [];
     }
-    trData.push(tdData);
-    tdData = [];
   }
 
   return (
