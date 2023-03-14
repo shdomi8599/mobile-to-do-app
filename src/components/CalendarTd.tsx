@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { checkDate } from "../function/checkDate";
 import { modalState, startDateState, successTargetState } from "../recoil/atom";
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useMemo } from "react";
 import {
   getUpTimeState,
   todayValueState,
@@ -27,15 +27,13 @@ type CheckedSpanProps = {
   checkTarget: string;
 };
 
-const CalendarTd = ({
-  formattedDate,
-  tdIdx,
-  trIdx,
-}: {
+type CalendarTdProps = {
   formattedDate: string;
   tdIdx: number;
   trIdx: number;
-}) => {
+};
+
+const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
   const navigate = useNavigate();
 
   //현재 선택되있는 달력 상태 값
@@ -112,7 +110,7 @@ const CalendarTd = ({
   const checkTarget = target[getDate];
 
   //오늘 날짜
-  const today = currentDate();
+  const today = useMemo(() => currentDate(), []);
 
   return (
     <td

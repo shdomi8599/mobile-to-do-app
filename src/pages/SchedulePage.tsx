@@ -1,7 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { scheduleDataState, textBoxState } from "../recoil/atom";
+import { pickTimeState, scheduleDataState, textBoxState } from "../recoil/atom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
 import ScheduleContent from "../components/ScheduleContent";
@@ -41,20 +40,18 @@ const SchedulePage = () => {
   };
 
   //선택 상태
-  const [pick, setPick] = useState(0);
-
-  /**
-   * 시간 선택
-   */
-  const changePick = (time: number) => {
-    setPick(time);
-  };
+  const pick = useRecoilValue(pickTimeState);
 
   //시간 배열
-  const contentArr: number[] =
-    bed > wakeUp
-      ? createTimeArr().slice(wakeUp, bed)
-      : createTimeArr().slice(wakeUp).concat(createTimeArr().slice(0, bed));
+  const timeArr = useMemo(() => createTimeArr(), []);
+  const contentArr: number[] = useMemo(
+    () =>
+      bed > wakeUp
+        ? timeArr.slice(wakeUp, bed)
+        : timeArr.slice(wakeUp).concat(timeArr.slice(0, bed)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [bed, wakeUp]
+  );
 
   return (
     <>
@@ -62,13 +59,11 @@ const SchedulePage = () => {
         <TitleBox message={"스케줄 설정"} />
         <SubTitleBox message={"오늘의 스케줄"} />
         <ContentBox>
-          {contentArr.map((time, i) => (
+          {contentArr.map((time) => (
             <ScheduleContent
-              key={i}
+              key={time}
               time={time}
               content={scheduleData[time]}
-              changePick={changePick}
-              textBoxHandler={textBoxHandler}
             />
           ))}
         </ContentBox>

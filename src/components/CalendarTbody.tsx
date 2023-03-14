@@ -5,7 +5,6 @@ import { startDateState } from "../recoil/atom";
 import { useRecoilValue } from "recoil";
 import React, { useMemo } from "react";
 import CalendarTr from "./CalendarTr";
-import { v4 as uuidv4 } from "uuid";
 
 const CalendarTbody = () => {
   //현재 선택되있는 달력 상태 값
@@ -48,12 +47,16 @@ const CalendarTbody = () => {
       tdData = [];
     }
   }
-
+  /**
+   * key 속성을 부모에게 부여했을 때는
+   * React가 각 요소를 개별적으로 인식해 각 요소가 크게 하나로 묶여 렌더링이
+   * 되는 원리를 이용해서 하나로 묶어서 한번에 랜더링이 되도록 tbody에 키를 부여
+   */
   return (
     <>
-      <tbody key={uuidv4()} className="w-100">
+      <tbody key={formattedDate} className="w-100">
         {trData.map((tr, i) => (
-          <CalendarTr dateArr={tr} key={i} trIdx={i} />
+          <CalendarTr dateArr={tr} key={`${i}+${tr[0]}`} trIdx={i} />
         ))}
       </tbody>
     </>

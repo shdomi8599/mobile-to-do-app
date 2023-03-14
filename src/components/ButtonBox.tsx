@@ -18,4 +18,4 @@ const ButtonBox = ({ message, addStyle, buttonEvent }: ButtonBoxProps) => {
   );
 };
 
-export default ButtonBox;
+export default React.memo(ButtonBox);

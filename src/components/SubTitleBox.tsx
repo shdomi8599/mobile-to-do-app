@@ -18,4 +18,4 @@ const SubTitleBox = ({ message }: SubTitleBoxProps) => {
   );
 };
 
-export default SubTitleBox;
+export default React.memo(SubTitleBox);

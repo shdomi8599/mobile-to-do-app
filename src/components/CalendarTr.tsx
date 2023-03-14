@@ -8,17 +8,16 @@ const BodyTr = styled.tr.attrs({
   height: 12vh;
 `;
 
-const CalendarTr = ({
-  dateArr,
-  trIdx,
-}: {
+type CalendarTrProps = {
   dateArr: string[];
   trIdx: number;
-}) => {
+};
+
+const CalendarTr = ({ dateArr, trIdx }: CalendarTrProps) => {
   return (
     <BodyTr>
       {dateArr.map((date, i) => (
-        <CalendarTd formattedDate={date} key={i} tdIdx={i} trIdx={trIdx} />
+        <CalendarTd formattedDate={date} key={date} tdIdx={i} trIdx={trIdx} />
       ))}
     </BodyTr>
   );

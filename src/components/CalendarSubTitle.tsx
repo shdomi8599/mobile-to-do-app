@@ -1,7 +1,7 @@
 import SelectionCalendar from "./SelectionCalendar";
 import { useRecoilState } from "recoil";
 import { startDateState } from "../recoil/atom";
-import React from "react";
+import React, { useCallback } from "react";
 import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
 
 const CalendarSubTitle = () => {
@@ -11,20 +11,22 @@ const CalendarSubTitle = () => {
   /**
    * 다음 달 이동
    */
-  const upEvent = () => {
+  const upEvent = useCallback(() => {
     const month = startDate.getMonth();
     const newDate = new Date(startDate.setMonth(month + 1));
     setStartDate(newDate);
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /**
    * 이전 달 이동
    */
-  const downEvent = () => {
+  const downEvent = useCallback(() => {
     const month = startDate.getMonth();
     const newDate = new Date(startDate.setMonth(month - 1));
     setStartDate(newDate);
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //아이콘 메모이제이션
   const UpIcon = React.memo(BsCaretUpFill);
@@ -46,4 +48,4 @@ const CalendarSubTitle = () => {
   );
 };
 
-export default CalendarSubTitle;
+export default CalendarSubTitle

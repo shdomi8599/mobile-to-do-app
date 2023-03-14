@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { targetContentValue, todayTargetState } from "../recoil/atom";
@@ -30,6 +30,7 @@ const TargetPage = () => {
       ...targetContent.slice(0, idx),
       ...targetContent.slice(idx + 1),
     ]);
+    setToday(undefined)
   };
 
   //오늘의 목표 상태
@@ -38,9 +39,10 @@ const TargetPage = () => {
   /**
    * 오늘의 목표 변경
    */
-  const changeTodayTarget = (idx: number) => {
+  const changeTodayTarget = useCallback((idx: number) => {
     setToday(idx);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //목표 등록 박스 상태
   const [box, setBox] = useState(false);

@@ -1,15 +1,14 @@
 import styled, { keyframes } from "styled-components";
 import TitleBox from "./TitleBox";
 import { useNavigate } from "react-router-dom";
-import React, { useCallback, useState } from "react";
-import { profileIcon } from "../data/profileIcon";
-import ProfileIcon from "./ProfileIcon";
-import { profile } from "../data/profile";
+import React, { useCallback, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
 import { startDateState } from "../recoil/atom";
 import { SigObj } from "../type/type";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiRotateCcw } from "react-icons/fi";
+import ProfileIcon from "./ProfileIcon";
+import Profile from "./Profile";
 
 const navFade = keyframes`
     0% {
@@ -65,12 +64,15 @@ const NavContent = ({ navHandler }: NavContentProps) => {
   const [, setStartDate] = useRecoilState(startDateState);
 
   //네비 li데이터들
-  const navArr: SigObj[] = [
-    { "목표 설정": "/target" },
-    { "스케줄 설정": "/schedule" },
-    { "알람 설정": "/alarm" },
-    { "달력 보기": "/calendar" },
-  ];
+  const navArr: {}[] = useMemo(
+    () => [
+      { "목표 설정": "/target" },
+      { "스케줄 설정": "/schedule" },
+      { "알람 설정": "/alarm" },
+      { "달력 보기": "/calendar" },
+    ],
+    []
+  );
 
   /**
    * 이동하면서 네비를 off하는 이벤트
@@ -111,15 +113,9 @@ const NavContent = ({ navHandler }: NavContentProps) => {
               <RotateIcon onClick={makerHandler} />
             </div>
             <MakerBox>
-              {profile.map((data, i) => (
-                <div key={i}>{data}</div>
-              ))}
-              <div className="d-flex justify-content-center align-items-center w-100 flex-column">
-                {profileIcon.map((data, i) => (
-                  <div key={i} className="py-2">
-                    <ProfileIcon data={data} />
-                  </div>
-                ))}
+              <Profile />
+              <div className="d-flex justify-content-center align-items-center w-100">
+                <ProfileIcon addStyle={"flex-column"} addSpanStyle={"pt-3"} />
               </div>
             </MakerBox>
           </>

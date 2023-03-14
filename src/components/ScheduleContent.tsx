@@ -1,7 +1,9 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+import { pickTimeState, textBoxState } from "../recoil/atom";
 
 const Content = styled.div.attrs({
   className:
@@ -15,16 +17,9 @@ const MainContentBox = styled.div.attrs({
 type ScheduleContentProps = {
   time: number;
   content: string;
-  textBoxHandler: () => void;
-  changePick: (idx: number) => void;
 };
 
-const ScheduleContent = ({
-  time,
-  content,
-  textBoxHandler,
-  changePick,
-}: ScheduleContentProps) => {
+const ScheduleContent = ({ time, content }: ScheduleContentProps) => {
   const location = useLocation();
 
   //location 데이터가 존재할때 일어나는 이펙트
@@ -53,11 +48,24 @@ const ScheduleContent = ({
   //시간 길이 체크
   const timeLength = String(time).length;
 
+  //텍스트 박스 상태
+  const [textBox, setTextBox] = useRecoilState(textBoxState);
+
+  //선택 상태
+  const [,setPick] = useRecoilState(pickTimeState);
+
+  /**
+   * 시간 선택
+   */
+  const changePick = (time: number) => {
+    setPick(time);
+  };
+
   /**
    * 박스 상태를 변경하고 pick number를 변경하는 이벤트
    */
   const clickEvent = () => {
-    textBoxHandler();
+    setTextBox(!textBox);
     changePick(time);
   };
 
@@ -77,4 +85,4 @@ const ScheduleContent = ({
   );
 };
 
-export default ScheduleContent;
+export default React.memo(ScheduleContent);

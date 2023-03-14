@@ -7,7 +7,7 @@ import { createTimeArr } from "../function/createTimeArr";
 import { useNavigate } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
-import React from "react";
+import React, { useMemo } from "react";
 import {
   bedState,
   todayValueState,
@@ -50,10 +50,15 @@ const MainPage = () => {
   const bed = useRecoilValue(bedState);
 
   //시간 배열
-  const contentArr: number[] =
-    bed > wakeUp
-      ? createTimeArr().slice(wakeUp, bed)
-      : createTimeArr().slice(wakeUp).concat(createTimeArr().slice(0, bed));
+  const timeArr = useMemo(() => createTimeArr(), []);
+  const contentArr: number[] = useMemo(
+    () =>
+      bed > wakeUp
+        ? timeArr.slice(wakeUp, bed)
+        : timeArr.slice(wakeUp).concat(timeArr.slice(0, bed)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [bed, wakeUp]
+  );
 
   //스케줄 데이터
   const scheduleDataArr = useRecoilValue(scheduleDataState);

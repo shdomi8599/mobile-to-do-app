@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -26,10 +26,11 @@ const TitleBox = ({ message, navHandler }: TitleBoxProps) => {
   /**
    * 네비 클릭 이벤트
    */
-  const clickEvent = () => {
+  const clickEvent = useCallback(() => {
     setNav(!nav);
     navigate("/");
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Title>

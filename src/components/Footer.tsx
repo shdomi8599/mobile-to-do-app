@@ -2,9 +2,8 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { profile } from "../data/profile";
-import { profileIcon } from "../data/profileIcon";
 import { targetContentLength } from "../recoil/selector";
+import Profile from "./Profile";
 import ProfileIcon from "./ProfileIcon";
 
 const FooterBox = styled.footer.attrs({
@@ -34,13 +33,9 @@ const Footer = () => {
 
   return (
     <FooterBox targetLength={targetLength} pathName={pathName}>
-      {profile.map((data, i) => (
-        <div key={i}>{data}</div>
-      ))}
+      <Profile />
       <div className="d-flex justify-content-center align-items-center w-100 pt-1">
-        {profileIcon.map((data, i) => (
-          <ProfileIcon data={data} key={i} />
-        ))}
+        <ProfileIcon addSpanStyle={"px-1"} />
       </div>
     </FooterBox>
   );

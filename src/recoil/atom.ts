@@ -39,7 +39,7 @@ export const targetContentValue = atom<string[]>({
 });
 
 //오늘의 목표 인덱스
-export const todayTargetState = atom({
+export const todayTargetState = atom<number | undefined>({
   key: "todayTarget",
   default: 0,
 });
@@ -73,3 +73,9 @@ export const modalState = atom({
   key: "modalState",
   default: false,
 });
+
+//선택한 시간 상태
+export const pickTimeState = atom({
+  key : "pickTimeState",
+  default:0
+})

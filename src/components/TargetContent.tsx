@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -24,13 +24,13 @@ const TodayMark = styled.span.attrs({
 
 type TodayMarkProps = {
   readonly idx: number;
-  readonly today: number;
+  readonly today: number | undefined;
 };
 
 type TargetContentProps = {
   message: string;
   deleteTargetContent: (idx: number) => void;
-  today: number;
+  today: number | undefined;
   changeTodayTarget: (idx: number) => void;
   idx: number;
 };
@@ -61,11 +61,12 @@ const TargetContent = ({
   /**
    *change 메세지 val
    */
-  const changeMessageContent = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setMessageContent(e.target.value);
-  };
+  const changeMessageContent = useCallback(
+    (e: { target: { value: React.SetStateAction<string> } }) => {
+      setMessageContent(e.target.value);
+    },
+    []
+  );
 
   /**
    * input 포커스 이벤트

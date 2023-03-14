@@ -50,7 +50,7 @@ export const todayValueState = selector({
   get: ({ get }) => {
     const targetContent = get(targetContentValue);
     const todayIdx = get(todayTargetState);
-    return targetContent[todayIdx];
+    return todayIdx && targetContent[todayIdx];
   },
 });
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { modalState } from "../recoil/atom";
@@ -39,7 +39,7 @@ type ModalBoxProps = {
 const Modal = () => {
   const location = useLocation();
   //바디의 높이
-  const bodyHeight = document.body.offsetHeight;
+  const bodyHeight = useMemo(() => document.body.offsetHeight, []);
 
   //모달 상태
   const [, setModal] = useRecoilState(modalState);
@@ -47,9 +47,10 @@ const Modal = () => {
   /**
    * 모달 off
    */
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setModal(false);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //성공 여부
   const check: string = location.state && location.state.check;
