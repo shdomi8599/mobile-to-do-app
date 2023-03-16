@@ -14,6 +14,8 @@ import {
   wakeUpTimeValState,
 } from "../recoil/selector";
 import { BsShareFill } from "react-icons/bs";
+import { trackingPast } from "../function/trackingPast";
+import { formatDate } from "../function/formatDate";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -39,6 +41,7 @@ const TomorrowTarget = styled.div.attrs({
 })``;
 
 const MainPage = () => {
+  // console.log(trackingPast(formatDate()));
   const navigate = useNavigate();
   //오늘의 목표
   const todayContent = useRecoilValue(todayValueState);

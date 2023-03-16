@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
+import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { pickTimeState, scheduleDataState, textBoxState } from "../recoil/atom";
+import { scheduleDataState, textBoxState } from "../recoil/atom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
 import ScheduleContent from "../components/ScheduleContent";
@@ -10,8 +11,16 @@ import TitleBox from "../components/TitleBox";
 import { createTimeArr } from "../function/createTimeArr";
 import { SigObj } from "../type/type";
 import { bedState, wakeUpTimeValState } from "../recoil/selector";
+import { useLocation } from "react-router-dom";
 
 const SchedulePage = () => {
+  const location = useLocation();
+
+  const timeArr = useMemo(() => createTimeArr(), []);
+
+  //메인 페이지에서 선택한 시간
+  const selectTime: number = location.state && location.state.time;
+
   //box 상태 체크
   const boxState = useRecoilValue(textBoxState);
 
@@ -40,10 +49,9 @@ const SchedulePage = () => {
   };
 
   //선택 상태
-  const pick = useRecoilValue(pickTimeState);
+  const [pick, setPick] = useState(0);
 
   //시간 배열
-  const timeArr = useMemo(() => createTimeArr(), []);
   const contentArr: number[] = useMemo(
     () =>
       bed > wakeUp
@@ -52,6 +60,14 @@ const SchedulePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [bed, wakeUp]
   );
+
+  /**
+   * 컨텐츠의 클릭이벤트
+   */
+  const clickContent = (time: number) => {
+    textBoxHandler();
+    setPick(time);
+  };
 
   return (
     <>
@@ -64,6 +80,8 @@ const SchedulePage = () => {
               key={time}
               time={time}
               content={scheduleData[time]}
+              selectTime={selectTime}
+              clickContent={clickContent}
             />
           ))}
         </ContentBox>

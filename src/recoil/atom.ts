@@ -74,8 +74,14 @@ export const modalState = atom({
   default: false,
 });
 
+//모달 값 상태
+export const modalValState = atom<SigObj>({
+  key: "modalValState",
+  default: undefined,
+});
+
 //선택한 시간 상태
 export const pickTimeState = atom({
-  key : "pickTimeState",
-  default:0
-})
+  key: "pickTimeState",
+  default: 0,
+});

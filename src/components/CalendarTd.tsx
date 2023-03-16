@@ -1,9 +1,13 @@
 import { isSameMonth, startOfMonth, startOfWeek } from "date-fns";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { checkDate } from "../function/checkDate";
-import { modalState, startDateState, successTargetState } from "../recoil/atom";
-import { useNavigate } from "react-router-dom";
-import React, { useMemo } from "react";
+import {
+  modalState,
+  modalValState,
+  startDateState,
+  successTargetState,
+} from "../recoil/atom";
+import React, { useCallback, useMemo } from "react";
 import {
   getUpTimeState,
   todayValueState,
@@ -34,38 +38,17 @@ type CalendarTdProps = {
 };
 
 const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
-  const navigate = useNavigate();
-
   //현재 선택되있는 달력 상태 값
   const startDate = useRecoilValue(startDateState);
 
   //현재 선택되있는 달력 값 달 시작 날짜
-  const monthStart = startOfMonth(startDate);
+  const monthStart = useMemo(() => startOfMonth(startDate), [startDate]);
 
   //현재 선택되있는 달력의 주 첫번째 날짜
-  const firstDate = startOfWeek(monthStart);
+  const firstDate = useMemo(() => startOfWeek(monthStart), [monthStart]);
 
   //년,월 값
   const [year, month] = useRecoilValue(yearMonthState);
-
-  //모달 상태
-  const [, setModal] = useRecoilState(modalState);
-
-  /**
-   * 모달 on
-   */
-  const openModal = (getDate: string, checkTarget: string[]) => {
-    if (Object.keys(target).includes(getDate)) {
-      setModal(true);
-      navigate("", {
-        state: {
-          check: checkTarget[0],
-          target: checkTarget[1],
-          time: checkTarget[2],
-        },
-      });
-    }
-  };
 
   //저장된 목표 값들의 상태
   const [target, setTarget] = useRecoilState(successTargetState);
@@ -76,26 +59,54 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
   //기상 시간 값
   const getUpTime = useRecoilValue(getUpTimeState);
 
+  //모달 상태
+  const [, setModal] = useRecoilState(modalState);
+
+  //모달 값 상태
+  const [, setModalVal] = useRecoilState(modalValState);
+
   /**
-   * 목표를 성공하면 값을 추가, 하루 안에 성공을 안누르면 자동으로 실패가 쌓이도록 만들어야될듯?
+   * 모달 on
    */
-  const addTarget = (date: string) => {
-    if (!todayTarget && !getUpTime) {
-      return alert("기상 체크와 오늘의 목표를 먼저 등록해주세요.");
-    }
-    if (!todayTarget) {
-      return alert("오늘의 목표를 먼저 등록해주세요.");
-    }
-    if (!getUpTime) {
-      return alert("기상 체크를 먼저 해주세요.");
-    }
-    if (window.confirm("오늘 목표를 성공하셨나요?")) {
-      setTarget({
-        ...target,
-        [`${date}`]: ["성공", todayTarget, getUpTime],
-      });
-    }
-  };
+  const openModal = useCallback(
+    (getDate: string, checkTarget: string[]) => {
+      if (Object.keys(target).includes(getDate)) {
+        setModal(true);
+        setModalVal({
+          check: checkTarget[0],
+          target: checkTarget[1],
+          time: checkTarget[2],
+        });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [target]
+  );
+
+  /**
+   * 목표를 성공하면 값을 추가
+   */
+  const addTarget = useCallback(
+    (date: string) => {
+      if (!todayTarget && !getUpTime) {
+        return alert("기상 체크와 오늘의 목표를 먼저 등록해주세요.");
+      }
+      if (!todayTarget) {
+        return alert("오늘의 목표를 먼저 등록해주세요.");
+      }
+      if (!getUpTime) {
+        return alert("기상 체크를 먼저 해주세요.");
+      }
+      if (window.confirm("오늘 목표를 성공하셨나요?")) {
+        setTarget({
+          ...target,
+          [`${date}`]: ["성공", todayTarget, getUpTime],
+        });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [todayTarget]
+  );
 
   //날짜값 가져오기
   const day = new Date(firstDate);
@@ -104,10 +115,15 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
   day.setDate(firstDate.getDate() + 7 * trIdx + tdIdx);
 
   //날짜값을 달에 맞게 string화
-  const getDate = checkDate(formattedDate, year, month, day, monthStart);
+  const getDate = useMemo(
+    () => checkDate(formattedDate, year, month, day, monthStart),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
   //목표값이 설정된 날짜가 있는지 체크
-  const checkTarget = target[getDate];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const checkTarget = useMemo(() => target[getDate], [getDate]);
 
   //오늘 날짜
   const today = useMemo(() => currentDate(), []);
@@ -141,4 +157,4 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
   );
 };
 
-export default CalendarTd;
+export default React.memo(CalendarTd);

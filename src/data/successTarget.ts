@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { SuccessData } from "../type/type";
 
 //프로필 데이터

@@ -17,16 +17,19 @@ const Calendar = () => {
   //요일 배열
   const dateArr = useMemo(() => ["일", "월", "화", "수", "목", "금", "토"], []);
 
+  const th = useMemo(() => {
+    return dateArr.map((date) => (
+      <HeadTh key={date} date={date}>
+        {date}
+      </HeadTh>
+    ));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <table className="d-flex justify-content-center align-items-center w-100 flex-column">
       <thead className="w-100">
-        <tr className="d-flex w-100 pb-2">
-          {dateArr.map((date) => (
-            <HeadTh key={date} date={date}>
-              {date}
-            </HeadTh>
-          ))}
-        </tr>
+        <tr className="d-flex w-100 pb-2">{th}</tr>
       </thead>
       <CalendarTbody />
     </table>

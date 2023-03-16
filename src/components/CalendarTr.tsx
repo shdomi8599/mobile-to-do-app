@@ -5,7 +5,7 @@ import CalendarTd from "./CalendarTd";
 const BodyTr = styled.tr.attrs({
   className: "d-flex w-100 pb-2",
 })`
-  height: 12vh;
+  height: 10vh;
 `;
 
 type CalendarTrProps = {
@@ -23,4 +23,4 @@ const CalendarTr = ({ dateArr, trIdx }: CalendarTrProps) => {
   );
 };
 
-export default CalendarTr;
+export default CalendarTr

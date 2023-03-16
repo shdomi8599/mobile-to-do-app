@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { modalState } from "../recoil/atom";
-import { useLocation } from "react-router-dom";
+import { modalState, modalValState } from "../recoil/atom";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Background = styled.div.attrs({
@@ -37,12 +36,14 @@ type ModalBoxProps = {
 };
 
 const Modal = () => {
-  const location = useLocation();
   //바디의 높이
   const bodyHeight = useMemo(() => document.body.offsetHeight, []);
 
   //모달 상태
   const [, setModal] = useRecoilState(modalState);
+
+  //모달 값
+  const modalVal = useRecoilValue(modalValState);
 
   /**
    * 모달 off
@@ -53,13 +54,13 @@ const Modal = () => {
   }, []);
 
   //성공 여부
-  const check: string = location.state && location.state.check;
+  const check: string = useMemo(() => modalVal.check, [modalVal]);
 
   //목표 값
-  const target: string = location.state && location.state.target;
+  const target: string = useMemo(() => modalVal.target, [modalVal]);
 
   //기상 시간 값
-  const time: string = location.state && location.state.time;
+  const time: string = useMemo(() => modalVal.time, [modalVal]);
 
   //아이콘 메모이제이션
   const XIcon = React.memo(AiOutlineClose);

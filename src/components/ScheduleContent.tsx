@@ -1,9 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { pickTimeState, textBoxState } from "../recoil/atom";
 
 const Content = styled.div.attrs({
   className:
@@ -17,14 +14,19 @@ const MainContentBox = styled.div.attrs({
 type ScheduleContentProps = {
   time: number;
   content: string;
+  clickContent: (idx: number) => void;
+  selectTime: number;
 };
 
-const ScheduleContent = ({ time, content }: ScheduleContentProps) => {
-  const location = useLocation();
-
-  //location 데이터가 존재할때 일어나는 이펙트
+const ScheduleContent = ({
+  time,
+  content,
+  clickContent,
+  selectTime,
+}: ScheduleContentProps) => {
+  //메인페이지에서 선택해서 들어오면 일어나는 effect
   useEffect(() => {
-    if (target.current && location.state && location.state.time === time) {
+    if (target.current && selectTime === time) {
       setAddStyle("text-danger opacity-100");
       setTimeout(() => {
         setAddStyle("");
@@ -48,30 +50,9 @@ const ScheduleContent = ({ time, content }: ScheduleContentProps) => {
   //시간 길이 체크
   const timeLength = String(time).length;
 
-  //텍스트 박스 상태
-  const [textBox, setTextBox] = useRecoilState(textBoxState);
-
-  //선택 상태
-  const [,setPick] = useRecoilState(pickTimeState);
-
-  /**
-   * 시간 선택
-   */
-  const changePick = (time: number) => {
-    setPick(time);
-  };
-
-  /**
-   * 박스 상태를 변경하고 pick number를 변경하는 이벤트
-   */
-  const clickEvent = () => {
-    setTextBox(!textBox);
-    changePick(time);
-  };
-
   return (
     <Content>
-      <MainContentBox onClick={clickEvent} ref={target}>
+      <MainContentBox onClick={() => clickContent(time)} ref={target}>
         <div className="me-2">
           <span>{timeLength === 1 ? <>0{time}</> : time}:00</span> :
         </div>
@@ -85,4 +66,4 @@ const ScheduleContent = ({ time, content }: ScheduleContentProps) => {
   );
 };
 
-export default React.memo(ScheduleContent);
+export default ScheduleContent
