@@ -20,7 +20,6 @@ const CalendarTbody = () => {
     return endOfMonth(monthStart);
   }, [monthStart]);
 
-  // endOfMonth(monthStart);
   //현재 선택되있는 달력의 주 첫번째 날짜
   const firstDate = useMemo(() => {
     return startOfWeek(monthStart);

@@ -15,8 +15,7 @@ const CalendarSubTitle = () => {
     const month = startDate.getMonth();
     const newDate = new Date(startDate.setMonth(month + 1));
     setStartDate(newDate);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setStartDate, startDate]);
 
   /**
    * 이전 달 이동
@@ -25,8 +24,7 @@ const CalendarSubTitle = () => {
     const month = startDate.getMonth();
     const newDate = new Date(startDate.setMonth(month - 1));
     setStartDate(newDate);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setStartDate, startDate]);
 
   //아이콘 메모이제이션
   const UpIcon = React.memo(BsCaretUpFill);

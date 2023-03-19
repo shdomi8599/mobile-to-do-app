@@ -50,8 +50,7 @@ const Modal = () => {
    */
   const closeModal = useCallback(() => {
     setModal(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setModal]);
 
   //성공 여부
   const check: string = useMemo(() => modalVal.check, [modalVal]);

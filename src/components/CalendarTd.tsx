@@ -7,14 +7,14 @@ import {
   startDateState,
   successTargetState,
 } from "../recoil/atom";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import {
   getUpTimeState,
   todayValueState,
   yearMonthState,
 } from "../recoil/selector";
 import styled from "styled-components";
-import { currentDate } from "../function/todayDate";
+import { currentDate } from "../function/currentDate";
 
 const CheckedSpan = styled.span.attrs({
   className: "pointer border p-1 rounded text-white",
@@ -79,8 +79,7 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
         });
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [target]
+    [setModal, setModalVal, target]
   );
 
   /**
@@ -104,8 +103,7 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
         });
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [todayTarget]
+    [getUpTime, setTarget, target, todayTarget]
   );
 
   //날짜값 가져오기
@@ -117,16 +115,18 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
   //날짜값을 달에 맞게 string화
   const getDate = useMemo(
     () => checkDate(formattedDate, year, month, day, monthStart),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [day, formattedDate, month, monthStart, year]
   );
 
   //목표값이 설정된 날짜가 있는지 체크
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const checkTarget = useMemo(() => target[getDate], [getDate]);
+  const checkTarget = useMemo(() => target[getDate], [getDate, target]);
 
   //오늘 날짜
   const today = useMemo(() => currentDate(), []);
+
+  useEffect(()=>{
+
+  },[])
 
   return (
     <td

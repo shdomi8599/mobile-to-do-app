@@ -29,8 +29,7 @@ const TitleBox = ({ message, navHandler }: TitleBoxProps) => {
   const clickEvent = useCallback(() => {
     setNav(!nav);
     navigate("/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate, setNav]);
 
   return (
     <Title>

@@ -1,6 +1,6 @@
-import React from "react";
-import { useRecoilValue } from "recoil";
-import { modalState } from "../recoil/atom";
+import React, { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { modalState, successTargetState } from "../recoil/atom";
 import Calendar from "../components/Calendar";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";

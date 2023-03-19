@@ -52,8 +52,7 @@ const Nav = () => {
     nav
       ? body.classList.add("stop-scrolling")
       : body.classList.remove("stop-scrolling");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nav]);
+  }, [body.classList, nav]);
 
   //기상 체크 상태
   const [checkWakeUp, setCheckWakeUp] = useRecoilState(getUpState);
@@ -68,8 +67,7 @@ const Nav = () => {
     if (!checkWakeUp && window.confirm("기상 체크를 하시겠습니까?")) {
       setCheckWakeUp(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [checkWakeUp, setCheckWakeUp]);
 
   //아이콘 메모이제이션
   const BarIcon = React.memo(FaBars);

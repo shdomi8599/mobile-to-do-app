@@ -2,7 +2,11 @@ import styled from "styled-components";
 import MainContent from "../components/MainContent";
 import TitleBox from "../components/TitleBox";
 import { useRecoilValue } from "recoil";
-import { scheduleDataState } from "../recoil/atom";
+import {
+  scheduleDataState,
+  targetContentValue,
+  todayTargetState,
+} from "../recoil/atom";
 import { createTimeArr } from "../function/createTimeArr";
 import { useNavigate } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
@@ -10,12 +14,11 @@ import MainContainer from "../components/MainContainer";
 import React, { useMemo } from "react";
 import {
   bedState,
+  targetContentLength,
   todayValueState,
   wakeUpTimeValState,
 } from "../recoil/selector";
 import { BsShareFill } from "react-icons/bs";
-import { trackingPast } from "../function/trackingPast";
-import { formatDate } from "../function/formatDate";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -41,8 +44,8 @@ const TomorrowTarget = styled.div.attrs({
 })``;
 
 const MainPage = () => {
-  // console.log(trackingPast(formatDate()));
   const navigate = useNavigate();
+
   //오늘의 목표
   const todayContent = useRecoilValue(todayValueState);
 
@@ -79,8 +82,8 @@ const MainPage = () => {
           </TodayTarget>
           <TomorrowTarget>
             <span onClick={() => navigate("/target")}>
-              오늘의 목표 :{" "}
-              {!todayContent ? "목표를 설정해주세요." : todayContent}
+              오늘의 목표 :
+              {!todayContent ? " 목표를 설정해주세요." : " " + todayContent}
             </span>
           </TomorrowTarget>
         </TargetBox>

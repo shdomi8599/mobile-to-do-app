@@ -77,13 +77,15 @@ const NavContent = ({ navHandler }: NavContentProps) => {
   /**
    * 이동하면서 네비를 off하는 이벤트
    */
-  const clickEvent = useCallback((data: SigObj) => {
-    const newDate = new Date();
-    navigate(Object.values(data)[0]);
-    navHandler();
-    setStartDate(newDate);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const clickEvent = useCallback(
+    (data: SigObj) => {
+      const newDate = new Date();
+      navigate(Object.values(data)[0]);
+      navHandler();
+      setStartDate(newDate);
+    },
+    [navHandler, navigate, setStartDate]
+  );
 
   //만든 사람 랜더링 상태
   const [maker, setMaker] = useState(false);

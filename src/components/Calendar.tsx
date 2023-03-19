@@ -23,8 +23,7 @@ const Calendar = () => {
         {date}
       </HeadTh>
     ));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dateArr]);
 
   return (
     <table className="d-flex justify-content-center align-items-center w-100 flex-column">

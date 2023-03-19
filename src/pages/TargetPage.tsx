@@ -30,7 +30,7 @@ const TargetPage = () => {
       ...targetContent.slice(0, idx),
       ...targetContent.slice(idx + 1),
     ]);
-    setToday(undefined)
+    setToday(undefined);
   };
 
   //오늘의 목표 상태
@@ -39,10 +39,9 @@ const TargetPage = () => {
   /**
    * 오늘의 목표 변경
    */
-  const changeTodayTarget = useCallback((idx: number) => {
+  const changeTodayTarget = (idx: number) => {
     setToday(idx);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   //목표 등록 박스 상태
   const [box, setBox] = useState(false);
@@ -68,7 +67,7 @@ const TargetPage = () => {
           {targetContent.map((val, i) => (
             <TargetContent
               message={val}
-              key={i}
+              key={val + i}
               idx={i}
               today={today}
               deleteTargetContent={deleteTargetContent}

@@ -35,8 +35,7 @@ const AlarmPage = () => {
       alarmArr[4]["취침 시간"].push(data);
     }
     return alarmArr;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [bed, timeArr, wakeUp]);
 
   return (
     <MainContainer>

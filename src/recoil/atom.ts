@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 import { successTarget } from "../data/successTarget";
+import { addFailData } from "../function/addSuccessData";
 import { SigObj } from "../type/type";
 
 //텍스트 값
@@ -41,7 +42,7 @@ export const targetContentValue = atom<string[]>({
 //오늘의 목표 인덱스
 export const todayTargetState = atom<number | undefined>({
   key: "todayTarget",
-  default: 0,
+  default: undefined,
 });
 
 //스케줄 설정
@@ -65,8 +66,18 @@ export const startDateState = atom({
 //타겟 성공 데이터
 export const successTargetState = atom({
   key: "successTargetState",
-  default: successTarget,
+  default: { ...successTarget, ...addFailData() },
 });
+
+/**
+ * const lastKey = getLastKey(successTarget)
+ * const lastPeriodData = trackingPast(lastKey)
+ * const addSuccessData = lastPeriodData.reduce((acc:SuccessData,date) =>{
+ * acc[date] = ["실패","목표 미설정","미출석"];
+ * return acc;
+ * },{})
+ * default : {...successTarget,...addSuccessData}
+ */
 
 //모달 상태
 export const modalState = atom({

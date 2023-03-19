@@ -37,8 +37,7 @@ const AlarmSelect = ({ category, value, valueArr }: AlarmSelectProps) => {
           {val}
         </option>
       )),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [valueArr]
   );
 
   return (

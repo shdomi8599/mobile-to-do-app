@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useCallback,  useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { BsBell, BsBellFill } from "react-icons/bs";
@@ -45,8 +45,7 @@ const MainContent = ({ time, content }: MainContentProps) => {
    */
   const moveSchedule = useCallback(() => {
     navigate("/schedule", { state: { time: time } });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [navigate, time]);
 
   //아이콘 메모이제이션
   const BellIcon = React.memo(BsBell);

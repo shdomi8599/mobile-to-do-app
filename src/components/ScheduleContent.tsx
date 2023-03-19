@@ -38,8 +38,7 @@ const ScheduleContent = ({
         behavior: "smooth",
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectTime, time]);
 
   //박스 타겟 설정
   const target = useRef<HTMLDivElement>(null);

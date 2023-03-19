@@ -21,9 +21,9 @@ export const checkDate = (
     checkMonth = checkMonth + 1;
 
   if (String(checkMonth).length === 1) {
-    checkDate = year + "0" + checkMonth + checkDate;
+    checkDate = year + "-0" + checkMonth + "-" + checkDate;
   } else {
-    checkDate = year + checkMonth + checkDate;
+    checkDate = year + "-" + checkMonth + "-" + checkDate;
   }
   return checkDate;
 };
