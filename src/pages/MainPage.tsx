@@ -12,11 +12,10 @@ import {
   wakeUpTimeValState,
 } from "../recoil/selector";
 import { BsShareFill } from "react-icons/bs";
-import { getLocalStorage } from "../function/localStorage/getLocalStorage";
-import { isToday } from "date-fns";
-import { removeLocalStorage } from "../function/localStorage/removeLocalStorage";
 import TitleBox from "../components/common/TitleBox";
 import MainContent from "../components/main/MainContent";
+import { checkToday } from "../function/localStorage/checkToday";
+import { setLocalStorage } from "../function/localStorage/setLocalStorage";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -44,16 +43,21 @@ const TomorrowTarget = styled.div.attrs({
 const MainPage = () => {
   const navigate = useNavigate();
 
-  //현재 날짜의 기상 시간이 아니라면 삭제
+  //현재 날짜의 값이 아니라면 삭제
   useEffect(() => {
-    const wakeUpTime = getLocalStorage("wakeUpTime");
-    if (wakeUpTime && !isToday(new Date(wakeUpTime.date))) {
-      removeLocalStorage("wakeUpTime");
-    }
+    checkToday("wakeUpTime");
+    checkToday("todayContent");
   }, []);
 
-  //오늘의 목표
+  //오늘의 목표로 전달된 값
   const todayContent = useRecoilValue(todayValueState);
+
+  //오늘의 목표 값에 따라 로컬 관리
+  useEffect(() => {
+    if (todayContent) {
+      setLocalStorage("todayContent", todayContent);
+    }
+  }, [todayContent]);
 
   //기상 시간 값
   const wakeUp = useRecoilValue(wakeUpTimeValState);

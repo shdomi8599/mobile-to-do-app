@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import App from "./components/App";
 
 //Duplicate atom key 에러 메시지 없애기 위해 환경변수 설정
 //원인1 : next.js 개발 중 파일변경되면 해당 파일을 다시 build함 build되면서 atom이 재선언됨 그런데 atom key는 중복되지 않는 고유값을 가져야 하는데 재선언되면서 에러가 발생.

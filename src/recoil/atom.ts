@@ -1,6 +1,8 @@
 import { atom } from "recoil";
 import { successTarget } from "../data/successTarget";
 import { addFailData } from "../function/addSuccessData";
+import { checkTarget } from "../function/localStorage/checkTarget";
+import { checkTodayTarget } from "../function/localStorage/checkTodayTarget";
 import { SigObj, SuccessData } from "../type/type";
 
 //텍스트 값
@@ -36,13 +38,13 @@ export const bedTimeState = atom({
 //목표 설정 값들
 export const targetContentValue = atom<string[]>({
   key: "targetContentValue",
-  default: [],
+  default: checkTarget(),
 });
 
 //오늘의 목표 인덱스
 export const todayTargetState = atom<number | undefined>({
   key: "todayTarget",
-  default: undefined,
+  default: checkTodayTarget(),
 });
 
 //스케줄 설정

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { targetContentValue, todayTargetState } from "../recoil/atom";
@@ -9,6 +9,8 @@ import SubTitleBox from "../components/common/SubTitleBox";
 import TargetContent from "../components/target/TargetContent";
 import TextBox from "../components/common/TextBox";
 import TitleBox from "../components/common/TitleBox";
+import { setLocalStorage } from "../function/localStorage/setLocalStorage";
+import { removeLocalStorage } from "../function/localStorage/removeLocalStorage";
 
 const TargetPage = () => {
   //타겟 상태
@@ -21,6 +23,15 @@ const TargetPage = () => {
     setTargetContent([...targetContent, data]);
     setBox(false);
   };
+
+  //targetContent가 바뀔때마다 로컬에 저장하고 삭제하는 이펙트
+  useEffect(() => {
+    if (targetContent.length !== 0) {
+      setLocalStorage("targetContent", targetContent);
+    } else {
+      removeLocalStorage("targetContent");
+    }
+  }, [targetContent]);
 
   /**
    * 컨텐츠 삭제
@@ -35,6 +46,13 @@ const TargetPage = () => {
 
   //오늘의 목표 상태
   const [today, setToday] = useRecoilState(todayTargetState);
+  console.log(today);
+
+  useEffect(() => {
+    if (today === undefined) {
+      removeLocalStorage("todayContent");
+    }
+  }, [today]);
 
   /**
    * 오늘의 목표 변경
