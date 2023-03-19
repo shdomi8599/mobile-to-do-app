@@ -1,8 +1,8 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { navState } from "../recoil/atom";
+import { navState } from "../../recoil/atom";
 
 const Title = styled.header.attrs({
   className: "fs-1 mb-4 w-100 d-flex justify-content-center align-items-center",
@@ -26,10 +26,10 @@ const TitleBox = ({ message, navHandler }: TitleBoxProps) => {
   /**
    * 네비 클릭 이벤트
    */
-  const clickEvent = useCallback(() => {
+  const clickEvent = () => {
     setNav(!nav);
     navigate("/");
-  }, [navigate, setNav]);
+  };
 
   return (
     <Title>

@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import MainContent from "../components/MainContent";
-import TitleBox from "../components/TitleBox";
 import { useRecoilValue } from "recoil";
 import { scheduleDataState } from "../recoil/atom";
-import { createTimeArr } from "../function/createTimeArr";
+import { createTimeArr } from "../function/timeUtill/createTimeArr";
 import { useNavigate } from "react-router-dom";
-import ContentBox from "../components/ContentBox";
-import MainContainer from "../components/MainContainer";
+import ContentBox from "../components/common/ContentBox";
+import MainContainer from "../components/main/MainContainer";
 import React, { useEffect, useMemo } from "react";
 import {
   bedState,
@@ -14,9 +12,11 @@ import {
   wakeUpTimeValState,
 } from "../recoil/selector";
 import { BsShareFill } from "react-icons/bs";
-import { getLocalStorage } from "../function/getLocalStorage";
+import { getLocalStorage } from "../function/localStorage/getLocalStorage";
 import { isToday } from "date-fns";
-import { removeLocalStorage } from "../function/removeLocalStorage";
+import { removeLocalStorage } from "../function/localStorage/removeLocalStorage";
+import TitleBox from "../components/common/TitleBox";
+import MainContent from "../components/main/MainContent";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",

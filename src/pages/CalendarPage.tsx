@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { modalState, successTargetState } from "../recoil/atom";
-import Calendar from "../components/Calendar";
-import ContentBox from "../components/ContentBox";
-import MainContainer from "../components/MainContainer";
-import Modal from "../components/Modal";
-import SubTitleBox from "../components/SubTitleBox";
-import TitleBox from "../components/TitleBox";
+import React from "react";
+import { useRecoilValue } from "recoil";
+import { modalState } from "../recoil/atom";
+import Calendar from "../components/calendar/Calendar";
+import ContentBox from "../components/common/ContentBox";
+import MainContainer from "../components/main/MainContainer";
+import Modal from "../components/common/Modal";
+import SubTitleBox from "../components/common/SubTitleBox";
+import TitleBox from "../components/common/TitleBox";
 
 const CalendarPage = () => {
   //모달 상태

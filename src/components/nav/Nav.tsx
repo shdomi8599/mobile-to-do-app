@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import NavContent from "./NavContent";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { getUpState, navState } from "../recoil/atom";
+import { getUpState, navState } from "../../recoil/atom";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { getUpTimeState } from "../recoil/selector";
+import { getUpTimeState } from "../../recoil/selector";
 import { FaBars } from "react-icons/fa";
-import { setLocalStorage } from "../function/setLocalStorage";
-import { getLocalStorage } from "../function/getLocalStorage";
+import { setLocalStorage } from "../../function/localStorage/setLocalStorage";
+import { getLocalStorage } from "../../function/localStorage/getLocalStorage";
+import NavContent from "./NavContent";
 
 const NavBox = styled.nav.attrs({
   className: "d-flex justify-content-end align-items-start mb-2",

@@ -1,14 +1,14 @@
 import styled, { keyframes } from "styled-components";
-import TitleBox from "./TitleBox";
+import TitleBox from "../common/TitleBox";
 import { useNavigate } from "react-router-dom";
 import React, { useCallback, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
-import { startDateState, textBoxState } from "../recoil/atom";
-import { SigObj } from "../type/type";
+import { startDateState, textBoxState } from "../../recoil/atom";
+import { SigObj } from "../../type/type";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiRotateCcw } from "react-icons/fi";
-import ProfileIcon from "./ProfileIcon";
-import Profile from "./Profile";
+import ProfileIcon from "../common/ProfileIcon";
+import Profile from "../common/Profile";
 
 const navFade = keyframes`
     0% {

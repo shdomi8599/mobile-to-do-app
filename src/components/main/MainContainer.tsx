@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { targetContentLength } from "../recoil/selector";
+import { targetContentLength } from "../../recoil/selector";
 
 const MainBox = styled.div.attrs({
   id: "container",

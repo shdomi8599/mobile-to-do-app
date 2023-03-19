@@ -1,7 +1,7 @@
 import { successTarget } from "../data/successTarget";
 import { SuccessData } from "../type/type";
 import { getLastKey } from "./getLastKey";
-import { trackingPast } from "./trackingPast";
+import { trackingPast } from "./timeUtill/trackingPast";
 
 export const addFailData = () => {
   const lastKey = getLastKey(successTarget)!;

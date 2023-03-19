@@ -1,8 +1,8 @@
-import SelectionCalendar from "./SelectionCalendar";
 import { useRecoilState } from "recoil";
-import { startDateState } from "../recoil/atom";
 import React, { useCallback } from "react";
 import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
+import { startDateState } from "../../recoil/atom";
+import SelectionCalendar from "./SelectionCalendar";
 
 const CalendarSubTitle = () => {
   //현재 달력값 상태
@@ -46,4 +46,4 @@ const CalendarSubTitle = () => {
   );
 };
 
-export default CalendarSubTitle
+export default CalendarSubTitle;

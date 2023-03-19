@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { successTarget } from "../data/successTarget";
+import { successTarget } from "../../data/successTarget";
 
 export const formatDate = () => {
   const successDayLength = Object.keys(successTarget).length;

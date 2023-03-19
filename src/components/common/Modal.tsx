@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { modalState, modalValState } from "../recoil/atom";
+import { modalState, modalValState } from "../../recoil/atom";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Background = styled.div.attrs({

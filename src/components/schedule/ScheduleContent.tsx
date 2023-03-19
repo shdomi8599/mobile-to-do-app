@@ -65,4 +65,4 @@ const ScheduleContent = ({
   );
 };
 
-export default ScheduleContent
+export default ScheduleContent;

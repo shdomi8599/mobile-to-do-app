@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
 import { useRecoilState } from "recoil";
 import { bedTimeState, wakeUpTimeState } from "../recoil/atom";
-import AlarmContent from "../components/AlarmContent";
-import ContentBox from "../components/ContentBox";
-import MainContainer from "../components/MainContainer";
-import SubTitleBox from "../components/SubTitleBox";
-import TitleBox from "../components/TitleBox";
-import { createTimeArr } from "../function/createTimeArr";
+import AlarmContent from "../components/alarm/AlarmContent";
+import ContentBox from "../components/common/ContentBox";
+import MainContainer from "../components/main/MainContainer";
+import SubTitleBox from "../components/common/SubTitleBox";
+import TitleBox from "../components/common/TitleBox";
+import { createTimeArr } from "../function/timeUtill/createTimeArr";
 import { AlarmArr } from "../type/type";
 
 const AlarmPage = () => {

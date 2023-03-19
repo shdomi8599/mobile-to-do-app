@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ProfileIconData } from "../type/type";
+import { ProfileIconData } from "../../type/type";
 
 type ProfileIconProps = {
   addStyle?: string;

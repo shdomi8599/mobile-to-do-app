@@ -1,8 +1,8 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
-import { textState } from "../recoil/atom";
-import { SigObj } from "../type/type";
+import { textState } from "../../recoil/atom";
+import { SigObj } from "../../type/type";
 import ButtonBox from "./ButtonBox";
 
 const textBoxFade = keyframes`

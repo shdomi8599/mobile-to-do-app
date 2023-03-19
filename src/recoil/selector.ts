@@ -1,6 +1,6 @@
 import { selector } from "recoil";
-import { currentTime } from "../function/currentTime";
-import { getLocalStorage } from "../function/getLocalStorage";
+import { currentTime } from "../function/timeUtill/currentTime";
+import { getLocalStorage } from "../function/localStorage/getLocalStorage";
 import {
   bedTimeState,
   getUpState,

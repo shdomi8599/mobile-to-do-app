@@ -6,8 +6,8 @@ import TargetPage from "./pages/TargetPage";
 import SchedulePage from "./pages/SchedulePage";
 import AlarmPage from "./pages/AlarmPage";
 import CalendarPage from "./pages/CalendarPage";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
+import Nav from "./components/nav/Nav";
+import Footer from "./components/common/Footer";
 import React, { useMemo } from "react";
 
 const App = () => {

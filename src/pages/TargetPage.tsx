@@ -1,14 +1,14 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { targetContentValue, todayTargetState } from "../recoil/atom";
-import ButtonBox from "../components/ButtonBox";
-import ContentBox from "../components/ContentBox";
-import MainContainer from "../components/MainContainer";
-import SubTitleBox from "../components/SubTitleBox";
-import TargetContent from "../components/TargetContent";
-import TextBox from "../components/TextBox";
-import TitleBox from "../components/TitleBox";
+import ButtonBox from "../components/common/ButtonBox";
+import ContentBox from "../components/common/ContentBox";
+import MainContainer from "../components/main/MainContainer";
+import SubTitleBox from "../components/common/SubTitleBox";
+import TargetContent from "../components/target/TargetContent";
+import TextBox from "../components/common/TextBox";
+import TitleBox from "../components/common/TitleBox";
 
 const TargetPage = () => {
   //타겟 상태

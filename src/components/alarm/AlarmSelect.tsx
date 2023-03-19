@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import { useRecoilState } from "recoil";
-import { bedTimeState, wakeUpTimeState } from "../recoil/atom";
+import { bedTimeState, wakeUpTimeState } from "../../recoil/atom";
 
 type AlarmSelectProps = {
   category: string;
