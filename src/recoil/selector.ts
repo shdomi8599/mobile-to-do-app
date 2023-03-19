@@ -1,13 +1,10 @@
 import { selector } from "recoil";
 import { currentTime } from "../function/currentTime";
-import { getLastKey } from "../function/getLastKey";
-import { trackingPast } from "../function/trackingPast";
-import { SuccessData } from "../type/type";
+import { getLocalStorage } from "../function/getLocalStorage";
 import {
   bedTimeState,
   getUpState,
   startDateState,
-  successTargetState,
   targetContentValue,
   todayTargetState,
   wakeUpTimeState,
@@ -26,7 +23,7 @@ export const wakeUpTimeValState = selector({
 export const getUpTimeState = selector({
   key: "getUpTimeState",
   get: ({ get }) => {
-    return get(getUpState) && currentTime();
+    if (get(getUpState) && !getLocalStorage("wakeUpTime")) return currentTime();
   },
 });
 
@@ -73,4 +70,3 @@ export const yearMonthState = selector({
     return [year, month];
   },
 });
-

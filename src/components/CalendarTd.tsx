@@ -15,6 +15,8 @@ import {
 } from "../recoil/selector";
 import styled from "styled-components";
 import { currentDate } from "../function/currentDate";
+import { getLocalStorage } from "../function/getLocalStorage";
+import { LocalGetUp } from "../type/type";
 
 const CheckedSpan = styled.span.attrs({
   className: "pointer border p-1 rounded text-white",
@@ -87,26 +89,35 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
    */
   const addTarget = useCallback(
     (date: string) => {
-      if (!todayTarget && !getUpTime) {
+      const localGetUp: LocalGetUp | null = getLocalStorage("wakeUpTime");
+      if (!todayTarget && !getUpTime && !localGetUp) {
         return alert("기상 체크와 오늘의 목표를 먼저 등록해주세요.");
       }
       if (!todayTarget) {
         return alert("오늘의 목표를 먼저 등록해주세요.");
       }
-      if (!getUpTime) {
+      if (!getUpTime && !localGetUp) {
         return alert("기상 체크를 먼저 해주세요.");
       }
       if (window.confirm("오늘 목표를 성공하셨나요?")) {
-        setTarget({
-          ...target,
-          [`${date}`]: ["성공", todayTarget, getUpTime],
-        });
+        if (localGetUp) {
+          setTarget({
+            ...target,
+            [`${date}`]: ["성공", todayTarget, localGetUp.wakeUpTime],
+          });
+        } else if (getUpTime) {
+          setTarget({
+            ...target,
+            [`${date}`]: ["성공", todayTarget, getUpTime],
+          });
+        }
       }
     },
     [getUpTime, setTarget, target, todayTarget]
   );
 
   //날짜값 가져오기
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const day = new Date(firstDate);
 
   //날짜값을 계속해서 1씩 더해주기 위한 작업
@@ -124,9 +135,7 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
   //오늘 날짜
   const today = useMemo(() => currentDate(), []);
 
-  useEffect(()=>{
-
-  },[])
+  useEffect(() => {}, []);
 
   return (
     <td

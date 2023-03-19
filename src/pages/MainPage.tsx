@@ -2,23 +2,21 @@ import styled from "styled-components";
 import MainContent from "../components/MainContent";
 import TitleBox from "../components/TitleBox";
 import { useRecoilValue } from "recoil";
-import {
-  scheduleDataState,
-  targetContentValue,
-  todayTargetState,
-} from "../recoil/atom";
+import { scheduleDataState } from "../recoil/atom";
 import { createTimeArr } from "../function/createTimeArr";
 import { useNavigate } from "react-router-dom";
 import ContentBox from "../components/ContentBox";
 import MainContainer from "../components/MainContainer";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   bedState,
-  targetContentLength,
   todayValueState,
   wakeUpTimeValState,
 } from "../recoil/selector";
 import { BsShareFill } from "react-icons/bs";
+import { getLocalStorage } from "../function/getLocalStorage";
+import { isToday } from "date-fns";
+import { removeLocalStorage } from "../function/removeLocalStorage";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -46,6 +44,14 @@ const TomorrowTarget = styled.div.attrs({
 const MainPage = () => {
   const navigate = useNavigate();
 
+  //현재 날짜의 기상 시간이 아니라면 삭제
+  useEffect(() => {
+    const wakeUpTime = getLocalStorage("wakeUpTime");
+    if (wakeUpTime && !isToday(new Date(wakeUpTime.date))) {
+      removeLocalStorage("wakeUpTime");
+    }
+  }, []);
+
   //오늘의 목표
   const todayContent = useRecoilValue(todayValueState);
 
@@ -62,8 +68,7 @@ const MainPage = () => {
       bed > wakeUp
         ? timeArr.slice(wakeUp, bed)
         : timeArr.slice(wakeUp).concat(timeArr.slice(0, bed)),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [bed, wakeUp]
+    [bed, timeArr, wakeUp]
   );
 
   //스케줄 데이터

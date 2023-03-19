@@ -8,19 +8,28 @@ import AlarmPage from "./pages/AlarmPage";
 import CalendarPage from "./pages/CalendarPage";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import React from "react";
+import React, { useMemo } from "react";
 
 const App = () => {
+  const routeArr = useMemo(
+    () => [
+      { path: "/", element: <MainPage /> },
+      { path: "/target", element: <TargetPage /> },
+      { path: "/schedule", element: <SchedulePage /> },
+      { path: "/alarm", element: <AlarmPage /> },
+      { path: "/calendar", element: <CalendarPage /> },
+    ],
+    []
+  );
+
   return (
     <BrowserRouter>
       <RecoilRoot>
         <Nav />
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/target" element={<TargetPage />} />
-          <Route path="/schedule" element={<SchedulePage />} />
-          <Route path="/alarm" element={<AlarmPage />} />
-          <Route path="/calendar" element={<CalendarPage />} />
+          {routeArr.map((el) => (
+            <Route key={el.path} path={el.path} element={el.element} />
+          ))}
         </Routes>
         <Footer />
       </RecoilRoot>

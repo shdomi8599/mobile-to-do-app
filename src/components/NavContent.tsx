@@ -3,7 +3,7 @@ import TitleBox from "./TitleBox";
 import { useNavigate } from "react-router-dom";
 import React, { useCallback, useMemo, useState } from "react";
 import { useRecoilState } from "recoil";
-import { startDateState } from "../recoil/atom";
+import { startDateState, textBoxState } from "../recoil/atom";
 import { SigObj } from "../type/type";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiRotateCcw } from "react-icons/fi";
@@ -60,6 +60,9 @@ type NavContentProps = {
 const NavContent = ({ navHandler }: NavContentProps) => {
   const navigate = useNavigate();
 
+  //box 상태 체크
+  const [, setBoxState] = useRecoilState(textBoxState);
+
   //달력 값 상태
   const [, setStartDate] = useRecoilState(startDateState);
 
@@ -97,6 +100,14 @@ const NavContent = ({ navHandler }: NavContentProps) => {
     setMaker(!maker);
   };
 
+  /**
+   * 주소에 맞는 이동과 함께 textBox를 off하는 이벤트
+   */
+  const navEvent = (obj: {}) => {
+    setBoxState(false);
+    clickEvent(obj);
+  };
+
   //아이콘 메모이제이션
   const XIcon = React.memo(AiOutlineClose);
   const RotateIcon = React.memo(FiRotateCcw);
@@ -125,9 +136,7 @@ const NavContent = ({ navHandler }: NavContentProps) => {
           <MainContentBox>
             {navArr.map((obj, i) => (
               <Content key={i}>
-                <span onClick={() => clickEvent(obj)}>
-                  {Object.keys(obj)[0]}
-                </span>
+                <span onClick={() => navEvent(obj)}>{Object.keys(obj)[0]}</span>
               </Content>
             ))}
             <Content>

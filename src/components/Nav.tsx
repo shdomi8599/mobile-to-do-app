@@ -2,11 +2,13 @@ import styled from "styled-components";
 import NavContent from "./NavContent";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { getUpState, navState } from "../recoil/atom";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { getUpTimeState } from "../recoil/selector";
 import { FaBars } from "react-icons/fa";
+import { setLocalStorage } from "../function/setLocalStorage";
+import { getLocalStorage } from "../function/getLocalStorage";
 
 const NavBox = styled.nav.attrs({
   className: "d-flex justify-content-end align-items-start mb-2",
@@ -60,6 +62,9 @@ const Nav = () => {
   //기상 시간 값
   const getUpTime = useRecoilValue(getUpTimeState);
 
+  //만일 로컬값으로 기상 시간 값이 저장되있다면 상태
+  const [localUpTime, setLocalUpTime] = useState("");
+
   /**
    * 기상 체크하기 ,00시 이후 하루 1번만 가능하게 바꿀 예정
    */
@@ -68,6 +73,21 @@ const Nav = () => {
       setCheckWakeUp(true);
     }
   }, [checkWakeUp, setCheckWakeUp]);
+
+  //기상 시간이 바뀌면 로컬에 값을 저장하는 이펙트
+  useEffect(() => {
+    if (getUpTime) {
+      setLocalStorage("wakeUpTime", getUpTime);
+    }
+  }, [getUpTime]);
+
+  //로컬에 기상 시간이 존재한다면 원래 있던 값으로 세팅하기 위한 이펙트
+  useEffect(() => {
+    if (getLocalStorage("wakeUpTime")) {
+      setCheckWakeUp(true);
+      setLocalUpTime(getLocalStorage("wakeUpTime").wakeUpTime);
+    }
+  }, [setCheckWakeUp]);
 
   //아이콘 메모이제이션
   const BarIcon = React.memo(FaBars);
@@ -83,6 +103,7 @@ const Nav = () => {
             >
               {checkWakeUp ? "기상시간" : "기상체크"}
             </WakeUpBtnBox>
+            {localUpTime !== "" && <div>{localUpTime}</div>}
             {checkWakeUp && <div>{getUpTime}</div>}
           </WakeTimeBox>
         )}

@@ -57,8 +57,7 @@ const SchedulePage = () => {
       bed > wakeUp
         ? timeArr.slice(wakeUp, bed)
         : timeArr.slice(wakeUp).concat(timeArr.slice(0, bed)),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [bed, wakeUp]
+    [bed, timeArr, wakeUp]
   );
 
   /**

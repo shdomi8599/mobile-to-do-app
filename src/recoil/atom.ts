@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { successTarget } from "../data/successTarget";
 import { addFailData } from "../function/addSuccessData";
-import { SigObj } from "../type/type";
+import { SigObj, SuccessData } from "../type/type";
 
 //텍스트 값
 export const textState = atom({
@@ -64,20 +64,10 @@ export const startDateState = atom({
 });
 
 //타겟 성공 데이터
-export const successTargetState = atom({
+export const successTargetState = atom<SuccessData>({
   key: "successTargetState",
   default: { ...successTarget, ...addFailData() },
 });
-
-/**
- * const lastKey = getLastKey(successTarget)
- * const lastPeriodData = trackingPast(lastKey)
- * const addSuccessData = lastPeriodData.reduce((acc:SuccessData,date) =>{
- * acc[date] = ["실패","목표 미설정","미출석"];
- * return acc;
- * },{})
- * default : {...successTarget,...addSuccessData}
- */
 
 //모달 상태
 export const modalState = atom({
