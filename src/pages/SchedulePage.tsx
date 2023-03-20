@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { scheduleDataState, textBoxState } from "../recoil/atom";
@@ -12,6 +12,8 @@ import { createTimeArr } from "../function/timeUtill/createTimeArr";
 import { SigObj } from "../type/type";
 import { bedState, wakeUpTimeValState } from "../recoil/selector";
 import { useLocation } from "react-router-dom";
+import { setLocalStorage } from "../function/localStorage/setLocalStorage";
+import { scheduleState } from "../function/localStorage/scheduleState";
 
 const SchedulePage = () => {
   const location = useLocation();
@@ -37,6 +39,11 @@ const SchedulePage = () => {
   const changeScheduleData = (data: SigObj) => {
     setScheduleData({ ...scheduleData, ...data });
   };
+
+  //스케줄 데이터 상태가 변하면 로컬에 데이터를 저장하는 이펙트
+  useEffect(() => {
+    setLocalStorage("scheduleData", scheduleData);
+  }, [scheduleData]);
 
   //텍스트 박스 상태
   const [textBox, setTextBox] = useRecoilState(textBoxState);
@@ -67,6 +74,21 @@ const SchedulePage = () => {
     textBoxHandler();
     setPick(time);
   };
+
+  //로컬에 포함되지 않은 데이터 배열
+  const notIncludesLocal: number[] = useMemo(() => {
+    return timeArr.filter((x) => !contentArr.includes(x));
+  }, [contentArr, timeArr]);
+
+  //기상,취침 시간이 변경되었을 때, 시간이 존재하지않으면 데이터 삭제
+  useEffect(() => {
+    const cloneLocalData = scheduleState();
+    // eslint-disable-next-line array-callback-return
+    notIncludesLocal.map((x: number) => {
+      delete cloneLocalData[x];
+    });
+    setLocalStorage("scheduleData", cloneLocalData);
+  }, [bed, notIncludesLocal, wakeUp]);
 
   return (
     <>

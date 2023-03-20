@@ -1,7 +1,6 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
-import { setLocalStorage } from "../../function/localStorage/setLocalStorage";
 import { textState } from "../../recoil/atom";
 import { SigObj } from "../../type/type";
 import ButtonBox from "./ButtonBox";
@@ -71,7 +70,6 @@ const TextBox = ({
       const scheduleData = { [`${message}`]: text };
       changeScheduleData(scheduleData);
       textBoxHandler();
-      setLocalStorage("scheduleData", scheduleData);
       return setText("");
     }
   };

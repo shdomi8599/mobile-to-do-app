@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import { useRecoilState } from "recoil";
+import { setLocalStorage } from "../../function/localStorage/setLocalStorage";
 import { bedTimeState, wakeUpTimeState } from "../../recoil/atom";
 
 type AlarmSelectProps = {
@@ -21,9 +22,11 @@ const AlarmSelect = ({ category, value, valueArr }: AlarmSelectProps) => {
     (e: { target: { name: string; value: string } }) => {
       if (e.target.name === "기상 시간") {
         setWakeUp(e.target.value);
+        setLocalStorage("alarmWakeUp", e.target.value);
       }
       if (e.target.name === "취침 시간") {
         setBed(e.target.value);
+        setLocalStorage("alarmBed", e.target.value);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
