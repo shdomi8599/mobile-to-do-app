@@ -1,11 +1,16 @@
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
-import { scheduleDataState, yesterdayContentState } from "../recoil/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  modalState,
+  modalValState,
+  scheduleDataState,
+  yesterdayContentState,
+} from "../recoil/atom";
 import { createTimeArr } from "../function/timeUtill/createTimeArr";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ContentBox from "../components/common/ContentBox";
 import MainContainer from "../components/main/MainContainer";
-import React, {  useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import {
   bedState,
   todayValueState,
@@ -14,6 +19,9 @@ import {
 import { BsShareFill } from "react-icons/bs";
 import TitleBox from "../components/common/TitleBox";
 import MainContent from "../components/main/MainContent";
+import { getLocalStorage } from "../function/localStorage/getLocalStorage";
+import { setLocalStorage } from "../function/localStorage/setLocalStorage";
+import Modal from "../components/common/Modal";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -39,7 +47,25 @@ const TomorrowTarget = styled.div.attrs({
 })``;
 
 const MainPage = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  // 공유하기를 통해 받은 데이터를 적용하는 이벤트
+  const checkParams = useCallback(() => {
+    if (location.search) {
+      const scheduleDataString = decodeURIComponent(location.search).slice(14);
+      const scheduleData = JSON.parse(scheduleDataString);
+      if (window.confirm("공유받은 스케줄을 적용하시겠습니까?")) {
+        setLocalStorage("scheduleData", scheduleData);
+        navigate("/");
+      }
+    }
+  }, [location.search, navigate]);
+
+  // 공유하기 데이터가 존재한다면 실행
+  useEffect(() => {
+    checkParams();
+  }, [checkParams]);
 
   //오늘의 목표로 전달된 값
   const todayContent = useRecoilValue(todayValueState);
@@ -66,6 +92,25 @@ const MainPage = () => {
   //스케줄 데이터
   const scheduleDataArr = useRecoilValue(scheduleDataState);
 
+  //모달 상태
+  const [, setModal] = useRecoilState(modalState);
+
+  //모달 값 상태
+  const [modalVal, setModalVal] = useRecoilState(modalValState);
+  console.log(modalVal);
+
+  /**
+   * 공유하기 링크 생성 이벤트
+   */
+  const shareEvent = useCallback(() => {
+    const hostName = window.location.href;
+    const localSchedule = getLocalStorage("scheduleData");
+    if (localSchedule) {
+      const data = JSON.stringify(localSchedule.scheduleData);
+      return console.log(`${hostName}?scheduleData=${data}`);
+    }
+  }, []);
+
   //아이콘 메모이제이션
   const ShareIcon = React.memo(BsShareFill);
 
@@ -77,9 +122,7 @@ const MainPage = () => {
           <TodayTarget>
             <span>
               어제의 목표 :{" "}
-              {!yesterdayContent
-                ? "목표 미설정"
-                : " " + yesterdayContent.todayContent}
+              {yesterdayContent === "" ? "목표 미설정" : " " + yesterdayContent}
             </span>
           </TodayTarget>
           <TomorrowTarget>

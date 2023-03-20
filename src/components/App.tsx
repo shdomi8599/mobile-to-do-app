@@ -14,6 +14,7 @@ import { yesterdayState } from "../function/localStorage/yesterdayState";
 import { checkYesterday } from "../function/localStorage/checkYesterday";
 
 const App = () => {
+  //라우트에 들어갈 데이터들
   const routeArr = useMemo(
     () => [
       { path: "/", element: <MainPage /> },
@@ -30,7 +31,7 @@ const App = () => {
     yesterdayState();
     checkToday("wakeUpTime");
     checkToday("todayContent");
-    // checkYesterday();
+    checkYesterday();
   }, []);
 
   return (

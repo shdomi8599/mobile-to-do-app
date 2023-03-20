@@ -1,12 +1,7 @@
 import { atom } from "recoil";
-import { alarmBedState } from "../function/localStorage/alarmBedState";
-import { alarmWakeUpState } from "../function/localStorage/alarmWakeUpState";
-import { calendarState } from "../function/localStorage/calendarState";
-import { checkTargetState } from "../function/localStorage/checkTargetState";
 import { checkTodayTarget } from "../function/localStorage/checkTodayTargetState";
-import { yesterdayState } from "../function/localStorage/yesterdayState";
-import { scheduleState } from "../function/localStorage/scheduleState";
 import { SigObj, SuccessData } from "../type/type";
+import { localState } from "../function/localStorage/localState";
 
 //텍스트 값
 export const textState = atom({
@@ -23,7 +18,7 @@ export const textBoxState = atom({
 //기상 시간
 export const wakeUpTimeState = atom({
   key: "wakeUpTime",
-  default: alarmWakeUpState(),
+  default: localState("alarmWakeUp", "23:00"),
 });
 
 //기상 체크 상태
@@ -35,13 +30,13 @@ export const getUpState = atom({
 //취침 시간
 export const bedTimeState = atom({
   key: "bedTimeState",
-  default: alarmBedState(),
+  default: localState("alarmBed", "23:00"),
 });
 
 //목표 설정 값들
 export const targetContentValue = atom<string[]>({
   key: "targetContentValue",
-  default: checkTargetState(),
+  default: localState("targetContent", []),
 });
 
 //오늘의 목표 인덱스
@@ -53,13 +48,13 @@ export const todayTargetState = atom<number | undefined>({
 //어제의 목표 상태
 export const yesterdayContentState = atom({
   key: "yesterdayContentState",
-  default: yesterdayState(),
+  default: localState("yesterdayContent", ""),
 });
 
 //스케줄 설정
 export const scheduleDataState = atom<SigObj>({
   key: "scheduleDataState",
-  default: scheduleState(),
+  default: localState("scheduleData", {}),
 });
 
 //네비 상태
@@ -77,7 +72,7 @@ export const startDateState = atom({
 //타겟 성공 데이터
 export const successTargetState = atom<SuccessData>({
   key: "successTargetState",
-  default: calendarState(),
+  default: localState("calendarVal", {}),
 });
 
 //모달 상태

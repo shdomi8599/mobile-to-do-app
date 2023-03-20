@@ -13,7 +13,7 @@ import { SigObj } from "../type/type";
 import { bedState, wakeUpTimeValState } from "../recoil/selector";
 import { useLocation } from "react-router-dom";
 import { setLocalStorage } from "../function/localStorage/setLocalStorage";
-import { scheduleState } from "../function/localStorage/scheduleState";
+import { localState } from "../function/localStorage/localState";
 
 const SchedulePage = () => {
   const location = useLocation();
@@ -82,7 +82,7 @@ const SchedulePage = () => {
 
   //기상,취침 시간이 변경되었을 때, 시간이 존재하지않으면 데이터 삭제
   useEffect(() => {
-    const cloneLocalData = scheduleState();
+    const cloneLocalData = localState("scheduleData", {});
     // eslint-disable-next-line array-callback-return
     notIncludesLocal.map((x: number) => {
       delete cloneLocalData[x];
