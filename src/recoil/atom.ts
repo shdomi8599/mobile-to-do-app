@@ -3,6 +3,7 @@ import { calendarState } from "../function/localStorage/calendarState";
 import { checkTarget } from "../function/localStorage/checkTargetState";
 import { checkTodayTarget } from "../function/localStorage/checkTodayTargetState";
 import { checkYesterday } from "../function/localStorage/checkYesterday";
+import { scheduleState } from "../function/localStorage/scheduleState";
 import { SigObj, SuccessData } from "../type/type";
 
 //텍스트 값
@@ -56,7 +57,7 @@ export const yesterdayContentState = atom({
 //스케줄 설정
 export const scheduleDataState = atom<SigObj>({
   key: "scheduleDataState",
-  default: {},
+  default: scheduleState(),
 });
 
 //네비 상태
