@@ -10,7 +10,8 @@ import Nav from "./nav/Nav";
 import Footer from "./common/Footer";
 import React, { useEffect, useMemo } from "react";
 import { checkToday } from "../function/localStorage/checkTodayState";
-import { checkYesterdayState } from "../function/localStorage/checkYesterdayState";
+import { yesterdayState } from "../function/localStorage/yesterdayState";
+import { checkYesterday } from "../function/localStorage/checkYesterday";
 
 const App = () => {
   const routeArr = useMemo(
@@ -26,9 +27,10 @@ const App = () => {
 
   //로컬 값 날짜에 맞게 정리해주는 이펙트
   useEffect(() => {
-    checkYesterdayState();
+    yesterdayState();
     checkToday("wakeUpTime");
     checkToday("todayContent");
+    // checkYesterday();
   }, []);
 
   return (

@@ -3,12 +3,12 @@ import { getLocalStorage } from "./getLocalStorage";
 import { removeLocalStorage } from "./removeLocalStorage";
 import { setLocalStorage } from "./setLocalStorage";
 
-export const checkYesterdayState = () => {
+export const yesterdayState = () => {
   const data = getLocalStorage("todayContent");
   if (data && isYesterday(new Date(data.date))) {
     setLocalStorage("yesterdayContent", data);
     removeLocalStorage("todayContent");
-    return data;
+    return data.todayContent;
   }
   return undefined;
 };
