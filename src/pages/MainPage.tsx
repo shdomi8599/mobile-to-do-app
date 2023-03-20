@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { scheduleDataState } from "../recoil/atom";
+import { scheduleDataState, yesterdayContentState } from "../recoil/atom";
 import { createTimeArr } from "../function/timeUtill/createTimeArr";
 import { useNavigate } from "react-router-dom";
 import ContentBox from "../components/common/ContentBox";
 import MainContainer from "../components/main/MainContainer";
-import React, { useEffect, useMemo } from "react";
+import React, {  useMemo } from "react";
 import {
   bedState,
   todayValueState,
@@ -14,8 +14,6 @@ import {
 import { BsShareFill } from "react-icons/bs";
 import TitleBox from "../components/common/TitleBox";
 import MainContent from "../components/main/MainContent";
-import { checkToday } from "../function/localStorage/checkToday";
-import { setLocalStorage } from "../function/localStorage/setLocalStorage";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -43,21 +41,11 @@ const TomorrowTarget = styled.div.attrs({
 const MainPage = () => {
   const navigate = useNavigate();
 
-  //현재 날짜의 값이 아니라면 삭제
-  useEffect(() => {
-    checkToday("wakeUpTime");
-    checkToday("todayContent");
-  }, []);
-
   //오늘의 목표로 전달된 값
   const todayContent = useRecoilValue(todayValueState);
 
-  //오늘의 목표 값에 따라 로컬 관리
-  useEffect(() => {
-    if (todayContent) {
-      setLocalStorage("todayContent", todayContent);
-    }
-  }, [todayContent]);
+  //어제의 목표 값
+  const yesterdayContent = useRecoilValue(yesterdayContentState);
 
   //기상 시간 값
   const wakeUp = useRecoilValue(wakeUpTimeValState);
@@ -87,7 +75,12 @@ const MainPage = () => {
       <SubTitle>
         <TargetBox>
           <TodayTarget>
-            <span>어제의 목표 : 코딩 테스트</span>
+            <span>
+              어제의 목표 :{" "}
+              {!yesterdayContent
+                ? "목표 미설정"
+                : " " + yesterdayContent.todayContent}
+            </span>
           </TodayTarget>
           <TomorrowTarget>
             <span onClick={() => navigate("/target")}>

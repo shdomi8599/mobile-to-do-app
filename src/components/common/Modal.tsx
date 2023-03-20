@@ -77,7 +77,9 @@ const Modal = () => {
           <div className="pt-1">
             <CheckedSpan checkTarget={check}>{check}</CheckedSpan>
           </div>
-          <div className="pt-1">{time} 기상</div>
+          <div className="pt-1">
+            {time === "미출석" ? "미출석" : `${time} 기상`}
+          </div>
         </div>
       </ModalContent>
     </>

@@ -17,6 +17,7 @@ import { LocalGetUp } from "../../type/type";
 import { checkDate } from "../../function/timeUtill/checkDate";
 import { currentDate } from "../../function/timeUtill/currentDate";
 import { getLocalStorage } from "../../function/localStorage/getLocalStorage";
+import { setLocalStorage } from "../../function/localStorage/setLocalStorage";
 
 const CheckedSpan = styled.span.attrs({
   className: "pointer border p-1 rounded text-white",
@@ -101,15 +102,19 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
       }
       if (window.confirm("오늘 목표를 성공하셨나요?")) {
         if (localGetUp) {
-          setTarget({
+          const data = {
             ...target,
             [`${date}`]: ["성공", todayTarget, localGetUp.wakeUpTime],
-          });
+          };
+          setTarget(data);
+          setLocalStorage("calendarVal", data);
         } else if (getUpTime) {
-          setTarget({
+          const data = {
             ...target,
             [`${date}`]: ["성공", todayTarget, getUpTime],
-          });
+          };
+          setTarget(data);
+          setLocalStorage("calendarVal", data);
         }
       }
     },

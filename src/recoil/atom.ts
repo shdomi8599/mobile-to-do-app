@@ -1,8 +1,8 @@
 import { atom } from "recoil";
-import { successTarget } from "../data/successTarget";
-import { addFailData } from "../function/addSuccessData";
-import { checkTarget } from "../function/localStorage/checkTarget";
-import { checkTodayTarget } from "../function/localStorage/checkTodayTarget";
+import { calendarState } from "../function/localStorage/calendarState";
+import { checkTarget } from "../function/localStorage/checkTargetState";
+import { checkTodayTarget } from "../function/localStorage/checkTodayTargetState";
+import { checkYesterday } from "../function/localStorage/checkYesterday";
 import { SigObj, SuccessData } from "../type/type";
 
 //텍스트 값
@@ -47,6 +47,12 @@ export const todayTargetState = atom<number | undefined>({
   default: checkTodayTarget(),
 });
 
+//어제의 목표 상태
+export const yesterdayContentState = atom({
+  key: "yesterdayContentState",
+  default: checkYesterday(),
+});
+
 //스케줄 설정
 export const scheduleDataState = atom<SigObj>({
   key: "scheduleDataState",
@@ -68,7 +74,7 @@ export const startDateState = atom({
 //타겟 성공 데이터
 export const successTargetState = atom<SuccessData>({
   key: "successTargetState",
-  default: { ...successTarget, ...addFailData() },
+  default: calendarState(),
 });
 
 //모달 상태

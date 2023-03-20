@@ -1,4 +1,4 @@
-import { checkTarget } from "./checkTarget";
+import { checkTarget } from "./checkTargetState";
 import { getLocalStorage } from "./getLocalStorage";
 
 /**
