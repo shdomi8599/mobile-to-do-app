@@ -87,7 +87,7 @@ const Modal = () => {
             <>
               <div>스케줄 공유</div>
               <div className="pt-2 d-flex justify-content-center align-items-center flex-column">
-                <div>url</div>
+                <div className="pb-1">url</div>
                 <button
                   type="button"
                   className="btn btn-dark p-1"

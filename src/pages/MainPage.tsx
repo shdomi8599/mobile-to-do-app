@@ -22,6 +22,8 @@ import MainContent from "../components/main/MainContent";
 import { getLocalStorage } from "../function/localStorage/getLocalStorage";
 import { setLocalStorage } from "../function/localStorage/setLocalStorage";
 import Modal from "../components/common/Modal";
+import { encryption } from "../function/crypto/encryption";
+import { decryption } from "../function/crypto/decryption";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -57,6 +59,8 @@ const MainPage = () => {
       const scheduleData = JSON.parse(scheduleDataString);
       if (window.confirm("공유받은 스케줄을 적용하시겠습니까?")) {
         setLocalStorage("scheduleData", scheduleData);
+        navigate("/");
+      } else {
         navigate("/");
       }
     }
