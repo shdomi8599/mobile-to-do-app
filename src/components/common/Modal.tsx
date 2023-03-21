@@ -53,13 +53,23 @@ const Modal = () => {
   }, [setModal]);
 
   //성공 여부
-  const check: string = useMemo(() => modalVal.check, [modalVal]);
+  const check: string = modalVal.check;
 
   //목표 값
-  const target: string = useMemo(() => modalVal.target, [modalVal]);
+  const target: string = modalVal.target;
 
   //기상 시간 값
-  const time: string = useMemo(() => modalVal.time, [modalVal]);
+  const time: string = modalVal.time;
+
+  //공유하기용 url 값
+  const url: string = useMemo(() => modalVal.url, [modalVal]);
+
+  /**
+   * url 복사 이벤트
+   */
+  const copyUrl = () => {
+    navigator.clipboard.writeText(url);
+  };
 
   //아이콘 메모이제이션
   const XIcon = React.memo(AiOutlineClose);
@@ -72,14 +82,32 @@ const Modal = () => {
           <XIcon onClick={closeModal} className="fs-4 pointer" />
         </div>
         <div className="h-100 d-flex justify-content-start align-items-center w-100 flex-column">
-          <div>{`<목표>`}</div>
-          <div>{!target ? "목표 미설정" : target}</div>
-          <div className="pt-1">
-            <CheckedSpan checkTarget={check}>{check}</CheckedSpan>
-          </div>
-          <div className="pt-1">
-            {time === "미출석" ? "미출석" : `${time} 기상`}
-          </div>
+          {url ? (
+            <>
+              <div>스케줄 공유</div>
+              <div className="pt-2 d-flex justify-content-center align-items-center flex-column">
+                <div>url</div>
+                <button
+                  type="button"
+                  className="btn btn-dark p-1"
+                  onClick={copyUrl}
+                >
+                  복사하기
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>{`<목표>`}</div>
+              <div>{!target ? "목표 미설정" : target}</div>
+              <div className="pt-1">
+                <CheckedSpan checkTarget={check}>{check}</CheckedSpan>
+              </div>
+              <div className="pt-1">
+                {time === "미출석" ? "미출석" : `${time} 기상`}
+              </div>
+            </>
+          )}
         </div>
       </ModalContent>
     </>

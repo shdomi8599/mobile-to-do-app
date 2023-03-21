@@ -8,12 +8,22 @@ import AlarmPage from "../pages/AlarmPage";
 import CalendarPage from "../pages/CalendarPage";
 import Nav from "./nav/Nav";
 import Footer from "./common/Footer";
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { checkToday } from "../function/localStorage/checkTodayState";
 import { yesterdayState } from "../function/localStorage/yesterdayState";
 import { checkYesterday } from "../function/localStorage/checkYesterday";
 
 const App = () => {
+  //로컬 값 날짜에 맞게 1번만 실행되어 모두 정리
+  const isMountedRef = useRef(false);
+  if (!isMountedRef.current) {
+    isMountedRef.current = true;
+    yesterdayState();
+    checkToday("wakeUpTime");
+    checkToday("todayContent");
+    checkYesterday();
+  }
+
   //라우트에 들어갈 데이터들
   const routeArr = useMemo(
     () => [
@@ -25,14 +35,6 @@ const App = () => {
     ],
     []
   );
-
-  //로컬 값 날짜에 맞게 정리해주는 이펙트
-  useEffect(() => {
-    yesterdayState();
-    checkToday("wakeUpTime");
-    checkToday("todayContent");
-    checkYesterday();
-  }, []);
 
   return (
     <BrowserRouter>

@@ -93,11 +93,10 @@ const MainPage = () => {
   const scheduleDataArr = useRecoilValue(scheduleDataState);
 
   //모달 상태
-  const [, setModal] = useRecoilState(modalState);
+  const [modal, setModal] = useRecoilState(modalState);
 
   //모달 값 상태
-  const [modalVal, setModalVal] = useRecoilState(modalValState);
-  console.log(modalVal);
+  const [, setModalVal] = useRecoilState(modalValState);
 
   /**
    * 공유하기 링크 생성 이벤트
@@ -107,15 +106,17 @@ const MainPage = () => {
     const localSchedule = getLocalStorage("scheduleData");
     if (localSchedule) {
       const data = JSON.stringify(localSchedule.scheduleData);
-      return console.log(`${hostName}?scheduleData=${data}`);
+      setModalVal({ url: `${hostName}?scheduleData=${data}` });
+      setModal(true);
     }
-  }, []);
+  }, [setModal, setModalVal]);
 
   //아이콘 메모이제이션
   const ShareIcon = React.memo(BsShareFill);
 
   return (
     <MainContainer>
+      {modal && <Modal />}
       <TitleBox message={"취준생의 하루"} />
       <SubTitle>
         <TargetBox>
@@ -133,7 +134,7 @@ const MainPage = () => {
           </TomorrowTarget>
         </TargetBox>
         <ShareBox>
-          <ShareIcon className="fs-2" />
+          <ShareIcon className="fs-2 pointer" onClick={shareEvent} />
         </ShareBox>
       </SubTitle>
       <ContentBox>
