@@ -108,6 +108,8 @@ const MainPage = () => {
       const data = JSON.stringify(localSchedule.scheduleData);
       setModalVal({ url: `${hostName}?scheduleData=${data}` });
       setModal(true);
+    } else {
+      alert("스케줄을 등록해주세요.");
     }
   }, [setModal, setModalVal]);
 

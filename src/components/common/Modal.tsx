@@ -69,6 +69,7 @@ const Modal = () => {
    */
   const copyUrl = () => {
     navigator.clipboard.writeText(url);
+    alert("복사되었습니다.");
   };
 
   //아이콘 메모이제이션
