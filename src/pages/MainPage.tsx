@@ -53,8 +53,8 @@ const MainPage = () => {
   // 공유하기를 통해 받은 데이터를 적용하는 이벤트
   const checkParams = useCallback(() => {
     if (location.search) {
-      const scheduleDataString = decodeURIComponent(location.search.slice(16));
-      const scheduleData = JSON.parse("{" + scheduleDataString);
+      const scheduleDataString = decodeURIComponent(location.search.slice(14));
+      const scheduleData = JSON.parse(scheduleDataString);
       if (window.confirm("공유받은 스케줄을 적용하시겠습니까?")) {
         setLocalStorage("scheduleData", scheduleData);
         navigate("/");
