@@ -50,19 +50,24 @@ const MainPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  //스케줄 데이터
+  const [scheduleDataArr, setScheduleDataArr] =
+    useRecoilState(scheduleDataState);
+
   // 공유하기를 통해 받은 데이터를 적용하는 이벤트
   const checkParams = useCallback(() => {
     if (location.search) {
       const scheduleDataString = decodeURIComponent(location.search.slice(14));
       const scheduleData = JSON.parse(scheduleDataString);
       if (window.confirm("공유받은 스케줄을 적용하시겠습니까?")) {
+        setScheduleDataArr(scheduleData);
         setLocalStorage("scheduleData", scheduleData);
         navigate("/");
       } else {
         navigate("/");
       }
     }
-  }, [location.search, navigate]);
+  }, [location.search, navigate, setScheduleDataArr]);
 
   // 공유하기 데이터가 존재한다면 실행
   useEffect(() => {
@@ -90,9 +95,6 @@ const MainPage = () => {
         : timeArr.slice(wakeUp).concat(timeArr.slice(0, bed)),
     [bed, timeArr, wakeUp]
   );
-
-  //스케줄 데이터
-  const scheduleDataArr = useRecoilValue(scheduleDataState);
 
   //모달 상태
   const [modal, setModal] = useRecoilState(modalState);
