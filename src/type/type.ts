@@ -39,4 +39,4 @@ export type SuccessData = {
   [key: string]: string[];
 };
 
-export type LocalGetUp = {date:string,wakeUpTime:string}
+export type LocalGetUp = { date: string; wakeUpTime: string };

@@ -46,7 +46,9 @@
     // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
     "outDir": "./dist" /* 컴파일시 JS파일들이 생성될 장소 설정 */,
     "removeComments": true /* 컴파일시 주석 제거 */,
-    // "noEmit": true,                                   /* Disable emitting files from a compilation. */
+    "noEmit": true, //   이렇게 설정하면 npm run build 명령어를 실행할 때 타입스크립트 파일이 컴파일되지만,
+    // 빌드 결과물에는 포함되지 않습니다. 대신에 npm start 명령어로 앱을 실행할 때는 타입스크립트 파일이 실시간으로 컴파일되어 실행
+    // CRA의 자체 포함때문에 적용이 안되는 것 같긴하다.....
     // "importHelpers": true,                            /* Allow importing helper functions from tslib once per project, instead of including them per-file. */
     // "importsNotUsedAsValues": "remove",               /* Specify emit/checking behavior for imports that are only used for types. */
     // "downlevelIteration": true,                       /* Emit more compliant, but verbose and less performant JavaScript for iteration. */
