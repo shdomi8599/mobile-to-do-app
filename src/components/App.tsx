@@ -1,5 +1,5 @@
 import "../css/App.css";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilState } from "recoil";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "../pages/MainPage";
 import TargetPage from "../pages/TargetPage";
@@ -12,16 +12,20 @@ import React, { useMemo, useRef } from "react";
 import { checkToday } from "../function/localStorage/checkTodayState";
 import { yesterdayState } from "../function/localStorage/yesterdayState";
 import { checkDayBeforeYesterday } from "../function/localStorage/checkDayBeforeYesterday";
+import { yesterdayContentState } from "../recoil/atom";
 
 const App = () => {
+  const [, setYesterdayContent] = useRecoilState(yesterdayContentState);
   //로컬 값 날짜에 맞게 1번만 실행되어 모두 정리
   const isMountedRef = useRef(false);
   if (!isMountedRef.current) {
     isMountedRef.current = true;
-    yesterdayState();
+    checkDayBeforeYesterday();
+    yesterdayState().then((res) => {
+      setYesterdayContent(res);
+    });
     checkToday("wakeUpTime");
     checkToday("todayContent");
-    checkDayBeforeYesterday();
   }
 
   //라우트에 들어갈 데이터들
