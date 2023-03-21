@@ -64,11 +64,13 @@ const Modal = () => {
   //공유하기용 url 값
   const url: string = useMemo(() => modalVal.url, [modalVal]);
 
-  /**
+  /**url.slice(0,35)+encodeURIComponent(url.slice(36))
    * url 복사 이벤트
    */
   const copyUrl = () => {
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(
+      url.slice(0, 35) + encodeURIComponent(url.slice(36))
+    );
     alert("복사되었습니다.");
   };
 
