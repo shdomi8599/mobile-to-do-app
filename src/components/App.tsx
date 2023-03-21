@@ -11,7 +11,7 @@ import Footer from "./common/Footer";
 import React, { useMemo, useRef } from "react";
 import { checkToday } from "../function/localStorage/checkTodayState";
 import { yesterdayState } from "../function/localStorage/yesterdayState";
-import { checkYesterday } from "../function/localStorage/checkYesterday";
+import { checkDayBeforeYesterday } from "../function/localStorage/checkDayBeforeYesterday";
 
 const App = () => {
   //로컬 값 날짜에 맞게 1번만 실행되어 모두 정리
@@ -21,7 +21,7 @@ const App = () => {
     yesterdayState();
     checkToday("wakeUpTime");
     checkToday("todayContent");
-    checkYesterday();
+    checkDayBeforeYesterday();
   }
 
   //라우트에 들어갈 데이터들
