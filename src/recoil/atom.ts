@@ -18,7 +18,7 @@ export const textBoxState = atom({
 //기상 시간
 export const wakeUpTimeState = atom({
   key: "wakeUpTime",
-  default: localState("alarmWakeUp", "23:00"),
+  default: localState("alarmWakeUp", "08:00"),
 });
 
 //기상 체크 상태
