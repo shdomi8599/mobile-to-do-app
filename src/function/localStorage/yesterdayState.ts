@@ -8,7 +8,5 @@ export const yesterdayState = async () => {
   if (data && isYesterday(new Date(data.date))) {
     setLocalStorage("yesterdayContent", data.todayContent);
     removeLocalStorage("todayContent");
-    return data.todayContent;
   }
-  return '';
 };

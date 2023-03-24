@@ -1,5 +1,5 @@
 import "../css/App.css";
-import { RecoilRoot, useRecoilState } from "recoil";
+import { RecoilRoot } from "recoil";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "../pages/MainPage";
 import TargetPage from "../pages/TargetPage";
@@ -8,25 +8,18 @@ import AlarmPage from "../pages/AlarmPage";
 import CalendarPage from "../pages/CalendarPage";
 import Nav from "./nav/Nav";
 import Footer from "./common/Footer";
-import React, { useMemo, useRef } from "react";
-import { checkToday } from "../function/localStorage/checkTodayState";
-import { yesterdayState } from "../function/localStorage/yesterdayState";
-import { checkDayBeforeYesterday } from "../function/localStorage/checkDayBeforeYesterday";
-import { yesterdayContentState } from "../recoil/atom";
+import React, { useMemo } from "react";
 
 const App = () => {
-  const [, setYesterdayContent] = useRecoilState(yesterdayContentState);
-  //로컬 값 날짜에 맞게 1번만 실행되어 모두 정리
-  const isMountedRef = useRef(false);
-  if (!isMountedRef.current) {
-    isMountedRef.current = true;
-    checkDayBeforeYesterday();
-    yesterdayState().then((res) => {
-      setYesterdayContent(res);
-    });
-    checkToday("wakeUpTime");
-    checkToday("todayContent");
-  }
+  // // //로컬 값 날짜에 맞게 1번만 실행되어 모두 정리
+  // const isMountedRef = useRef(false);
+  // if (!isMountedRef.current) {
+  //   isMountedRef.current = true;
+  //   checkDayBeforeYesterday();
+  //   yesterdayState()
+  //   checkToday("wakeUpTime");
+  //   checkToday("todayContent");
+  // }
 
   //라우트에 들어갈 데이터들
   const routeArr = useMemo(
