@@ -8,18 +8,21 @@ import AlarmPage from "../pages/AlarmPage";
 import CalendarPage from "../pages/CalendarPage";
 import Nav from "./nav/Nav";
 import Footer from "./common/Footer";
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
+import { checkDayBeforeYesterday } from "../function/localStorage/checkDayBeforeYesterday";
+import { yesterdayState } from "../function/localStorage/yesterdayState";
+import { checkToday } from "../function/localStorage/checkTodayState";
 
 const App = () => {
   // // //로컬 값 날짜에 맞게 1번만 실행되어 모두 정리
-  // const isMountedRef = useRef(false);
-  // if (!isMountedRef.current) {
-  //   isMountedRef.current = true;
-  //   checkDayBeforeYesterday();
-  //   yesterdayState()
-  //   checkToday("wakeUpTime");
-  //   checkToday("todayContent");
-  // }
+  const isMountedRef = useRef(false);
+  if (!isMountedRef.current) {
+    isMountedRef.current = true;
+    checkDayBeforeYesterday();
+    yesterdayState();
+    checkToday("wakeUpTime");
+    checkToday("todayContent");
+  }
 
   //라우트에 들어갈 데이터들
   const routeArr = useMemo(
