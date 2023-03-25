@@ -144,7 +144,7 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
 
   return (
     <td
-      className={`flex-grow-1 d-flex justify-content-start align-items-center flex-column w-100 ${
+      className={`flex-grow-1 d-flex justify-content-start align-items-center flex-column w-100 pointer${
         !isSameMonth(day, monthStart) && "disabled"
       }`}
       onClick={() => {
@@ -160,12 +160,12 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
             {checkTarget[0]}
           </CheckedSpan>
         </div>
-      ) : getDate === today ? (
-        <div>
-          <TodaySpan onClick={() => addTarget(getDate)}>성공</TodaySpan>
-        </div>
       ) : (
-        <></>
+        getDate === today && (
+          <div>
+            <TodaySpan onClick={() => addTarget(getDate)}>성공</TodaySpan>
+          </div>
+        )
       )}
     </td>
   );

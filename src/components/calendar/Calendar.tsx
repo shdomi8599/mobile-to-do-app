@@ -16,7 +16,6 @@ type HeadThProps = {
 const Calendar = () => {
   //요일 배열
   const dateArr = useMemo(() => ["일", "월", "화", "수", "목", "금", "토"], []);
-
   const th = useMemo(() => {
     return dateArr.map((date) => (
       <HeadTh key={date} date={date}>
