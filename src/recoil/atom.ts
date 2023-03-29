@@ -16,7 +16,7 @@ export const textBoxState = atom({
 });
 
 //기상 시간
-export const wakeUpTimeState = atom({
+export const wakeUpTimeState = atom<string>({
   key: "wakeUpTime",
   default: localState("alarmWakeUp", "08:00"),
 });
@@ -28,7 +28,7 @@ export const getUpState = atom({
 });
 
 //취침 시간
-export const bedTimeState = atom({
+export const bedTimeState = atom<string>({
   key: "bedTimeState",
   default: localState("alarmBed", "23:00"),
 });
@@ -46,7 +46,7 @@ export const todayTargetState = atom<number | undefined>({
 });
 
 //어제의 목표 상태
-export const yesterdayContentState = atom({
+export const yesterdayContentState = atom<string>({
   key: "yesterdayContentState",
   default: localState("yesterdayContent", ""),
 });

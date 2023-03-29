@@ -11,7 +11,7 @@ import Footer from "./common/Footer";
 import React, { useMemo, useRef } from "react";
 import { checkDayBeforeYesterday } from "../function/localStorage/checkDayBeforeYesterday";
 import { yesterdayState } from "../function/localStorage/yesterdayState";
-import { checkToday } from "../function/localStorage/checkTodayState";
+import { checkToday } from "../function/localStorage/checkToday";
 
 const App = () => {
   // // //로컬 값 날짜에 맞게 1번만 실행되어 모두 정리
