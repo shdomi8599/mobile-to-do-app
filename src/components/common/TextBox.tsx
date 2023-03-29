@@ -30,6 +30,12 @@ const InputBox = styled.div.attrs({
   className: "d-flex justify-content-start align-items-center w-100",
 })``;
 
+const SelectBox = styled.select.attrs({
+  className: "w-100 me-1",
+})`
+  font-size: 0.9rem;
+`;
+
 type TextBoxProps = {
   message: number | string;
   addTargetContent?: (data: string) => void;
@@ -84,7 +90,14 @@ const TextBox = ({
   return (
     <TargetTextBox>
       <TextTitle>
-        <div className="flex-08">{changeMessage}</div>
+        <div className="flex-07">{changeMessage}</div>
+        <div className="flex-04 d-flex justify-content-center align-items-center">
+          <SelectBox>
+            <option value="01:00">01:00</option>
+            <option value="02:00">02:00</option>
+            <option value="03:00">03:00</option>
+          </SelectBox>
+        </div>
         <ButtonBox
           message={"등록"}
           addStyle={"flex-03 fs-5"}
