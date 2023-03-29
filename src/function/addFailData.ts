@@ -3,6 +3,10 @@ import { SuccessData } from "../type/type";
 import { getLastKey } from "./getLastKey";
 import { trackingPast } from "./timeUtill/trackingPast";
 
+/**
+ * @param target 캘린더에 기록된 목표들
+ * @returns 실패 또는 미출석 데이터
+ */
 export const addFailData = (target: {}) => {
   if (Object.keys(target).length === 0) {
     return {};

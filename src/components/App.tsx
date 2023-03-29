@@ -44,19 +44,16 @@ const App = () => {
     }
   }, [setToday, setYesterDay]);
 
-
+  //실패한 데이터를 추가
   useEffect(() => {
     const failData = addFailData(successTarget);
     setSuccessTarget({ ...successTarget, ...failData });
   }, []);
+
+  //데이터가 변하면 달력 값 저장
   useEffect(() => {
-    setLocalStorage('calendarVal',successTarget);
+    setLocalStorage("calendarVal", successTarget);
   }, [successTarget]);
-
-
-  // useEffect(()=>{
-  //   setLocalStorage('calendarVal',successTarget)
-  // },[successTarget])
 
   return (
     <BrowserRouter>

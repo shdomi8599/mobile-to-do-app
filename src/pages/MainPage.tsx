@@ -109,7 +109,9 @@ const MainPage = () => {
     const hostName = window.location.href;
     const localSchedule = getLocalStorage("scheduleData");
     if (localSchedule) {
-      const data = JSON.stringify(localSchedule.scheduleData);
+      const data = encodeURIComponent(
+        JSON.stringify(localSchedule.scheduleData)
+      );
       setModalVal({ url: `${hostName}?scheduleData=${data}` });
       setModal(true);
     } else {
