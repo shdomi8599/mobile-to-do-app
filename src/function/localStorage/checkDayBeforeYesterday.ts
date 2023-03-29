@@ -1,4 +1,5 @@
 import { isBefore } from "date-fns";
+import { subDays } from "date-fns";
 import { getLocalStorage } from "./getLocalStorage";
 import { removeLocalStorage } from "./removeLocalStorage";
 
@@ -9,8 +10,9 @@ export const checkDayBeforeYesterday = () => {
   const data = getLocalStorage("yesterdayContent");
   if (data) {
     const date = data.date;
-    const isTwoDaysAgo = isBefore(date, new Date());
-    if (isTwoDaysAgo) {
+    const yesterday = subDays(new Date(), 2);
+    if (isBefore(new Date(date), yesterday)) {
+      console.log("hi");
       removeLocalStorage("yesterdayContent");
     }
   }

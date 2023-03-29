@@ -1,5 +1,5 @@
 import "../css/App.css";
-import { RecoilRoot } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "../pages/MainPage";
 import TargetPage from "../pages/TargetPage";
@@ -8,22 +8,20 @@ import AlarmPage from "../pages/AlarmPage";
 import CalendarPage from "../pages/CalendarPage";
 import Nav from "./nav/Nav";
 import Footer from "./common/Footer";
-import React, { useMemo, useRef } from "react";
-import { checkDayBeforeYesterday } from "../function/localStorage/checkDayBeforeYesterday";
-import { yesterdayState } from "../function/localStorage/yesterdayState";
-import { checkToday } from "../function/localStorage/checkToday";
+import React, { useEffect, useMemo } from "react";
+import {
+  successTargetState,
+  todayTargetState,
+  yesterdayContentState,
+} from "../recoil/atom";
+import { getLocalStorage } from "../function/localStorage/getLocalStorage";
+import { addFailData } from "../function/addFailData";
+import { setLocalStorage } from "../function/localStorage/setLocalStorage";
 
 const App = () => {
-  // // //로컬 값 날짜에 맞게 1번만 실행되어 모두 정리
-  const isMountedRef = useRef(false);
-  if (!isMountedRef.current) {
-    isMountedRef.current = true;
-    checkDayBeforeYesterday();
-    yesterdayState();
-    checkToday("wakeUpTime");
-    checkToday("todayContent");
-  }
-
+  const setToday = useSetRecoilState(todayTargetState);
+  const setYesterDay = useSetRecoilState(yesterdayContentState);
+  const [successTarget, setSuccessTarget] = useRecoilState(successTargetState);
   //라우트에 들어갈 데이터들
   const routeArr = useMemo(
     () => [
@@ -36,17 +34,39 @@ const App = () => {
     []
   );
 
+  //오늘,어제의 목표 리랜더링
+  useEffect(() => {
+    if (!getLocalStorage("todayContent")) {
+      setToday(undefined);
+    }
+    if (!getLocalStorage("yesterdayContent")) {
+      setYesterDay("");
+    }
+  }, [setToday, setYesterDay]);
+
+
+  useEffect(() => {
+    const failData = addFailData(successTarget);
+    setSuccessTarget({ ...successTarget, ...failData });
+  }, []);
+  useEffect(() => {
+    setLocalStorage('calendarVal',successTarget);
+  }, [successTarget]);
+
+
+  // useEffect(()=>{
+  //   setLocalStorage('calendarVal',successTarget)
+  // },[successTarget])
+
   return (
     <BrowserRouter>
-      <RecoilRoot>
-        <Nav />
-        <Routes>
-          {routeArr.map((el) => (
-            <Route key={el.path} path={el.path} element={el.element} />
-          ))}
-        </Routes>
-        <Footer />
-      </RecoilRoot>
+      <Nav />
+      <Routes>
+        {routeArr.map((el) => (
+          <Route key={el.path} path={el.path} element={el.element} />
+        ))}
+      </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
