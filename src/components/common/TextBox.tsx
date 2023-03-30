@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
+import { createTimeArr } from "../../function/timeUtill/createTimeArr";
 import { textState } from "../../recoil/atom";
 import { SigObj } from "../../type/type";
 import ButtonBox from "./ButtonBox";
@@ -87,16 +88,34 @@ const TextBox = ({
       : `오후 ${message}:00`
     : message;
 
+  const optionVal = useMemo(() => {
+    return createTimeArr()
+      .map(String)
+      .map((time) => {
+        if (time.length !== 1) {
+          time = `${time}:00`;
+          return time;
+        } else {
+          time = `0${time}:00`;
+          return time;
+        }
+      });
+  }, []);
+
   return (
     <TargetTextBox>
       <TextTitle>
         <div className="flex-07">{changeMessage}</div>
         <div className="flex-04 d-flex justify-content-center align-items-center">
-          <SelectBox>
-            <option value="01:00">01:00</option>
-            <option value="02:00">02:00</option>
-            <option value="03:00">03:00</option>
-          </SelectBox>
+          {typeof message === "number" && (
+            <SelectBox>
+              {optionVal.map((time) => (
+                <option key={time} value={time}>
+                  {time}
+                </option>
+              ))}
+            </SelectBox>
+          )}
         </div>
         <ButtonBox
           message={"등록"}
