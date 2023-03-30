@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled, { keyframes } from "styled-components";
 import { createTimeArr } from "../../function/timeUtill/createTimeArr";
-import { textState } from "../../recoil/atom";
+import { bedTimeState, textState } from "../../recoil/atom";
 import { SigObj } from "../../type/type";
 import ButtonBox from "./ButtonBox";
 
@@ -62,6 +62,9 @@ const TextBox = ({
 
   //옵션 상태
   const [option, setOption] = useState(`${message}:00`);
+
+  //취침 시간 상태
+  const bedTime = useRecoilValue(bedTimeState);
 
   /**
    * 옵션을 바꿔주는 함수
@@ -129,11 +132,13 @@ const TextBox = ({
         <div className="flex-04 d-flex justify-content-center align-items-center">
           {typeof message === "number" && (
             <SelectBox onChange={changeOption}>
-              {optionVal.slice(message).map((time) => (
-                <option key={time} value={time}>
-                  {time}
-                </option>
-              ))}
+              {optionVal
+                .slice(message, Number(bedTime.slice(0, 2)))
+                .map((time) => (
+                  <option key={time} value={time}>
+                    {time}
+                  </option>
+                ))}
             </SelectBox>
           )}
         </div>
