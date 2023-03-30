@@ -57,6 +57,9 @@ li {
 .trans-click:active {
   opacity: 0.6;
 }
+.test {
+  opacity: 0.35;
+}
 .disabled {
   opacity: 0.35;
 }

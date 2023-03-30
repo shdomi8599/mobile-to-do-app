@@ -141,10 +141,11 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
   const today = useMemo(() => currentDate(), []);
 
   useEffect(() => {}, []);
+  console.log(!isSameMonth(day, monthStart));
 
   return (
     <td
-      className={`flex-grow-1 d-flex justify-content-start align-items-center flex-column w-100 pointer${
+      className={`flex-grow-1 d-flex justify-content-start align-items-center flex-column w-100 pointer ${
         !isSameMonth(day, monthStart) && "disabled"
       }`}
       onClick={() => {
