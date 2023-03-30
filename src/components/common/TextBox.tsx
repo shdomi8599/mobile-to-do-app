@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import styled, { keyframes } from "styled-components";
 import { createTimeArr } from "../../function/timeUtill/createTimeArr";
@@ -50,8 +50,39 @@ const TextBox = ({
   changeScheduleData,
   textBoxHandler,
 }: TextBoxProps) => {
+  //메세지 변경
+  const changeMessage = changeScheduleData
+    ? message < 12
+      ? `오전 ${message}:00`
+      : `오후 ${message}:00`
+    : message;
+
   //텍스트 상태
   const [text, setText] = useRecoilState(textState);
+
+  //옵션 상태
+  const [option, setOption] = useState(`${message}:00`);
+
+  /**
+   * 옵션을 바꿔주는 함수
+   */
+  const changeOption = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setOption(e.target.value);
+  };
+
+  //선택된 시간보다 뒤의 시간 옵션val을 생성하기 위한 함수
+  const optionVal = createTimeArr().map((time) => {
+    time = String(time);
+    if (time.length !== 1) {
+      time = `${time}:00`;
+      return time;
+    } else {
+      time = `0${time}:00`;
+      return time;
+    }
+  });
 
   /**
    * 텍스트 change 이벤트
@@ -64,6 +95,7 @@ const TextBox = ({
 
   /**
    * 목표,스케줄 등록 이벤트
+   * 타입때문에 코드가 많이 더러워져서 나중에 리팩토링해야할듯
    */
   const sumbitText = () => {
     if (text.length === 0) {
@@ -73,34 +105,22 @@ const TextBox = ({
       addTargetContent(text);
       return setText("");
     }
-    if (changeScheduleData && textBoxHandler) {
-      const scheduleData = { [`${message}`]: text };
-      changeScheduleData(scheduleData);
+    if (typeof message === "number" && changeScheduleData && textBoxHandler) {
+      const data = [];
+      for (let i = message; i < Number(option.slice(0, 2)) + 1; i++) {
+        const scheduleData = { [`${i}`]: text };
+        data.push(scheduleData);
+      }
+      if (data.length === 0) {
+        changeScheduleData({ [`${message}`]: text });
+      } else {
+        const mergeData: {} = Object.assign({}, ...data);
+        changeScheduleData(mergeData);
+      }
       textBoxHandler();
       return setText("");
     }
   };
-
-  //메세지 변경
-  const changeMessage = changeScheduleData
-    ? message < 12
-      ? `오전 ${message}:00`
-      : `오후 ${message}:00`
-    : message;
-
-  const optionVal = useMemo(() => {
-    return createTimeArr()
-      .map(String)
-      .map((time) => {
-        if (time.length !== 1) {
-          time = `${time}:00`;
-          return time;
-        } else {
-          time = `0${time}:00`;
-          return time;
-        }
-      });
-  }, []);
 
   return (
     <TargetTextBox>
@@ -108,8 +128,8 @@ const TextBox = ({
         <div className="flex-07">{changeMessage}</div>
         <div className="flex-04 d-flex justify-content-center align-items-center">
           {typeof message === "number" && (
-            <SelectBox>
-              {optionVal.map((time) => (
+            <SelectBox onChange={changeOption}>
+              {optionVal.slice(message).map((time) => (
                 <option key={time} value={time}>
                   {time}
                 </option>
