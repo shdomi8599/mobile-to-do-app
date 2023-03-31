@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { modalState, modalValState } from "../../recoil/atom";
@@ -54,7 +54,7 @@ const Modal = () => {
   }, [setModal]);
 
   //성공 여부
-  const check: string =modalVal.check;
+  const check: string = modalVal.check;
 
   //목표 값
   const target: string = modalVal.target;
@@ -65,12 +65,14 @@ const Modal = () => {
   //공유하기용 url 값
   const url: string = useMemo(() => modalVal.url, [modalVal]);
 
+  const [checkCopy, setCheckCopy] = useState(false);
+
   /**
    * url 복사 이벤트
    */
   const copyUrl = () => {
     navigator.clipboard.writeText(url);
-    alert("복사되었습니다.");
+    setCheckCopy(true);
   };
 
   //아이콘 메모이제이션
@@ -88,14 +90,20 @@ const Modal = () => {
             <>
               <div>스케줄 공유</div>
               <div className="pt-2 d-flex justify-content-center align-items-center flex-column">
-                <div className="pb-1">url</div>
-                <button
-                  type="button"
-                  className="btn btn-dark p-1"
-                  onClick={copyUrl}
-                >
-                  복사하기
-                </button>
+                {checkCopy ? (
+                  <div>복사완료</div>
+                ) : (
+                  <>
+                    <div className="pb-1">url</div>
+                    <button
+                      type="button"
+                      className="btn btn-dark p-1"
+                      onClick={copyUrl}
+                    >
+                      복사하기
+                    </button>
+                  </>
+                )}
               </div>
             </>
           ) : (
