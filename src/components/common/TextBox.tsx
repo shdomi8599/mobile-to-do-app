@@ -52,7 +52,7 @@ const TextBox = ({
 }: TextBoxProps) => {
   //메세지 변경
   const changeMessage = changeScheduleData
-    ? message < 12
+    ? Number(message) < 12
       ? `오전 ${message}:00`
       : `오후 ${message}:00`
     : message;

@@ -20,12 +20,20 @@ const TargetPage = () => {
 
   //오늘의 목표로 전달된 값
   const todayContent = useRecoilValue(todayValueState);
-
+  console.log(targetContent);
   /**
-   * 컨텐츠 추가
+   * 컨텐츠 추가 // 길이가 20일때 마지막거 삭제하고 추가하도록 넣음
    */
   const addTargetContent = (data: string) => {
-    setTargetContent([...targetContent, data]);
+    if (targetContent.includes(data)) {
+      setBox(false);
+      return alert("이미 같은 목표가 존재합니다.");
+    }
+    if (targetContent.length > 19) {
+      setTargetContent([data, ...targetContent.slice(0, 19)]);
+    } else {
+      setTargetContent([data, ...targetContent]);
+    }
     setBox(false);
   };
 
@@ -85,7 +93,7 @@ const TargetPage = () => {
       <MainContainer>
         <TitleBox message={"목표 설정"} />
         <section className="d-flex justify-content-start align-items-center w-100">
-          <SubTitleBox message={"최근 14일 간의 목표"} />
+          <SubTitleBox message={"최근 20개의 목표"} />
           <div className="d-flex justify-content-end align-items-center w-100 pe-3 pb-3">
             <ButtonBox buttonEvent={boxHandler} message={"목표 등록"} />
           </div>

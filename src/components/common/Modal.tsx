@@ -14,8 +14,9 @@ const Background = styled.div.attrs({
 
 const ModalContent = styled.div.attrs({
   className:
-    "position-absolute bg-white border shadow w-50 h-25 d-flex  flex-column",
+    "position-absolute bg-white border shadow w-50 d-flex  flex-column",
 })`
+  height: 17%;
   z-index: 2;
   top: 40%;
 `;
@@ -63,7 +64,7 @@ const Modal = () => {
 
   //공유하기용 url 값
   const url: string = useMemo(() => modalVal.url, [modalVal]);
-  
+
   /**
    * url 복사 이벤트
    */
