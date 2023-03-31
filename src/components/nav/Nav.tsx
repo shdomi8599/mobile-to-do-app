@@ -112,7 +112,9 @@ const Nav = () => {
 
   return (
     <>
-      {alertModal && <AlertModal accept={checkWakeUpHandler} />}
+      {!location.search && alertModal && (
+        <AlertModal accept={checkWakeUpHandler} />
+      )}
       <NavBox>
         {pathName === "/" && (
           <WakeTimeBox>

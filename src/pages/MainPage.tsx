@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   modalState,
   modalValState,
@@ -10,7 +10,7 @@ import { createTimeArr } from "../function/timeUtill/createTimeArr";
 import { useLocation, useNavigate } from "react-router-dom";
 import ContentBox from "../components/common/ContentBox";
 import MainContainer from "../components/main/MainContainer";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   bedState,
   todayValueState,
@@ -22,6 +22,9 @@ import MainContent from "../components/main/MainContent";
 import { getLocalStorage } from "../function/localStorage/getLocalStorage";
 import { setLocalStorage } from "../function/localStorage/setLocalStorage";
 import Modal from "../components/common/Modal";
+import AlertModal from "../components/common/AlertModal";
+import { alertModalState } from "../recoil/atom";
+import { alertModalValState } from "../recoil/atom";
 
 const SubTitle = styled.section.attrs({
   className: "d-flex justify-content-center align-items-center w-100 px-4 mb-4",
@@ -54,20 +57,39 @@ const MainPage = () => {
   const [scheduleDataArr, setScheduleDataArr] =
     useRecoilState(scheduleDataState);
 
+  //모달 상태
+  const [alertModal, setAlertModal] = useRecoilState(alertModalState);
+
+  //모달 값 set
+  const setAlertModalState = useSetRecoilState(alertModalValState);
+
+  //공유하기 상태
+  const [apply, setApply] = useState(false);
+
+  //공유하기 수락이벤트
+  const acceptApply = () => {
+    setApply(true);
+    setAlertModal(false);
+  };
+
   // 공유하기를 통해 받은 데이터를 적용하는 이벤트
   const checkParams = useCallback(() => {
     if (location.search) {
+      setAlertModal(true);
+      setAlertModalState("공유받은 스케줄을 적용하시겠습니까?");
+    }
+  }, [location.search, setAlertModal, setAlertModalState]);
+
+  //apply가 true가 되면 실행할 이펙트
+  useEffect(() => {
+    if (location.search && apply) {
       const scheduleDataString = decodeURIComponent(location.search.slice(14));
       const scheduleData = JSON.parse(scheduleDataString);
-      if (window.confirm("공유받은 스케줄을 적용하시겠습니까?")) {
-        setScheduleDataArr(scheduleData);
-        setLocalStorage("scheduleData", scheduleData);
-        navigate("/");
-      } else {
-        navigate("/");
-      }
+      setScheduleDataArr(scheduleData);
+      setLocalStorage("scheduleData", scheduleData);
+      navigate("/");
     }
-  }, [location.search, navigate, setScheduleDataArr]);
+  }, [apply]);
 
   // 공유하기 데이터가 존재한다면 실행
   useEffect(() => {
@@ -124,6 +146,7 @@ const MainPage = () => {
 
   return (
     <MainContainer>
+      {location.search && alertModal && <AlertModal accept={acceptApply} />}
       {modal && <Modal />}
       <TitleBox message={"취준생의 하루"} />
       <SubTitle>
@@ -147,7 +170,12 @@ const MainPage = () => {
       </SubTitle>
       <ContentBox>
         {contentArr.map((time, i) => (
-          <MainContent key={i} time={time} preContent={scheduleDataArr[time-1]} content={scheduleDataArr[time]} />
+          <MainContent
+            key={i}
+            time={time}
+            preContent={scheduleDataArr[time - 1]}
+            content={scheduleDataArr[time]}
+          />
         ))}
       </ContentBox>
     </MainContainer>

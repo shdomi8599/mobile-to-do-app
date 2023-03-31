@@ -3,6 +3,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { alertModalState, alertModalValState } from "../../recoil/atom";
 import { AiOutlineClose } from "react-icons/ai";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Background = styled.div.attrs({
   className: "position-absolute w-100",
@@ -15,11 +16,12 @@ const Background = styled.div.attrs({
 const ModalContent = styled.div.attrs({
   className:
     "position-absolute bg-white border shadow w-50 d-flex flex-column ",
-})`
+})<test>`
   height: 17%;
   z-index: 2;
   top: 40%;
-  transform: translate(50%, 0%);
+  transform: ${(props) =>
+    props.params ? "translate(0%, 0%)" : "translate(50%, 0%)"};
 `;
 
 const CheckedSpan = styled.span.attrs({
@@ -39,7 +41,13 @@ type ModalBoxProps = {
   bodyHeight: number;
 };
 
+type test = {
+  params: string;
+};
+
 const AlertModal = ({ accept }: { accept: () => void }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
   //바디의 높이
   const bodyHeight = useMemo(() => document.body.offsetHeight, []);
 
@@ -54,6 +62,7 @@ const AlertModal = ({ accept }: { accept: () => void }) => {
    */
   const closeModal = useCallback(() => {
     alertModal(false);
+    navigate("/");
   }, [alertModal]);
 
   //아이콘 메모이제이션
@@ -62,7 +71,7 @@ const AlertModal = ({ accept }: { accept: () => void }) => {
   return (
     <>
       <Background bodyHeight={bodyHeight} onClick={closeModal}></Background>
-      <ModalContent>
+      <ModalContent params={location.search}>
         <div className="h-25 w-100 text-end pt-2 pe-2">
           <XIcon onClick={closeModal} className="fs-4 pointer" />
         </div>
