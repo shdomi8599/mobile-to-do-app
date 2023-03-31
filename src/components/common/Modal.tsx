@@ -54,7 +54,7 @@ const Modal = () => {
   }, [setModal]);
 
   //성공 여부
-  const check: string = modalVal.check;
+  const check: string =modalVal.check;
 
   //목표 값
   const target: string = modalVal.target;
@@ -83,7 +83,7 @@ const Modal = () => {
         <div className="h-25 text-end pt-2 pe-2">
           <XIcon onClick={closeModal} className="fs-4 pointer" />
         </div>
-        <div className="h-100 d-flex justify-content-start align-items-center w-100 flex-column">
+        <div className="h-75 d-flex justify-content-start align-items-center w-100 flex-column">
           {url ? (
             <>
               <div>스케줄 공유</div>

@@ -122,9 +122,6 @@ const MainPage = () => {
   //아이콘 메모이제이션
   const ShareIcon = React.memo(BsShareFill);
 
-  // console.log(contentArr)
-  // console.log(scheduleDataArr)
-
   return (
     <MainContainer>
       {modal && <Modal />}

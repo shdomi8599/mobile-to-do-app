@@ -20,9 +20,9 @@ const TargetPage = () => {
 
   //오늘의 목표로 전달된 값
   const todayContent = useRecoilValue(todayValueState);
-  console.log(targetContent);
+
   /**
-   * 컨텐츠 추가 // 길이가 20일때 마지막거 삭제하고 추가하도록 넣음
+   * 컨텐츠 추가 // 길이가 20일때 마지막거 삭제하고 추가하도록 넣음, set함수의 비동기처리때문에 조건을 if,else로 나눠놓음
    */
   const addTargetContent = (data: string) => {
     if (targetContent.includes(data)) {

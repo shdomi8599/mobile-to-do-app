@@ -1,6 +1,11 @@
 import styled from "styled-components";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { getUpState, navState } from "../../recoil/atom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  alertModalState,
+  alertModalValState,
+  getUpState,
+  navState,
+} from "../../recoil/atom";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import React from "react";
 import { useLocation } from "react-router-dom";
@@ -9,6 +14,7 @@ import { FaBars } from "react-icons/fa";
 import { setLocalStorage } from "../../function/localStorage/setLocalStorage";
 import { getLocalStorage } from "../../function/localStorage/getLocalStorage";
 import NavContent from "./NavContent";
+import AlertModal from "../common/AlertModal";
 
 const NavBox = styled.nav.attrs({
   className: "d-flex justify-content-end align-items-start mb-2",
@@ -65,14 +71,26 @@ const Nav = () => {
   //만일 로컬값으로 기상 시간 값이 저장되있다면 상태
   const [localUpTime, setLocalUpTime] = useState("");
 
+  //모달 상태
+  const [alertModal, setAlertModal] = useRecoilState(alertModalState);
+
+  //모달 값 set
+  const setAlertModalState = useSetRecoilState(alertModalValState);
+
   /**
    * 기상 체크하기 ,00시 이후 하루 1번만 가능하게 바꿀 예정
    */
-  const checkWakeUpHandler = useCallback(() => {
-    if (!checkWakeUp && window.confirm("기상 체크를 하시겠습니까?")) {
-      setCheckWakeUp(true);
+  const alertModalHandler = useCallback(() => {
+    if (!checkWakeUp) {
+      setAlertModal(true);
+      setAlertModalState(`기상 체크를 하시겠습니까?`);
     }
-  }, [checkWakeUp, setCheckWakeUp]);
+  }, [checkWakeUp, setAlertModal, setAlertModalState]);
+
+  const checkWakeUpHandler = () => {
+    setAlertModal(false);
+    setCheckWakeUp(true);
+  };
 
   //기상 시간이 바뀌면 로컬에 값을 저장하는 이펙트
   useEffect(() => {
@@ -94,13 +112,11 @@ const Nav = () => {
 
   return (
     <>
+      {alertModal && <AlertModal accept={checkWakeUpHandler} />}
       <NavBox>
         {pathName === "/" && (
           <WakeTimeBox>
-            <WakeUpBtnBox
-              checkWakeUp={checkWakeUp}
-              onClick={checkWakeUpHandler}
-            >
+            <WakeUpBtnBox checkWakeUp={checkWakeUp} onClick={alertModalHandler}>
               {checkWakeUp ? "기상시간" : "기상체크"}
             </WakeUpBtnBox>
             {localUpTime !== "" && <div>{localUpTime}</div>}

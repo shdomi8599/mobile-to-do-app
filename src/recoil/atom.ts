@@ -87,6 +87,18 @@ export const modalValState = atom<SigObj>({
   default: undefined,
 });
 
+//alert모달 상태
+export const alertModalState = atom({
+  key: "alertModalState",
+  default: false,
+});
+
+//모달 값 상태
+export const alertModalValState = atom({
+  key: "alertModalValState",
+  default: "",
+});
+
 //선택한 시간 상태
 export const pickTimeState = atom({
   key: "pickTimeState",
