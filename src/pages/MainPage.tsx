@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
+  alarmDataState,
   modalState,
   modalValState,
   scheduleDataState,

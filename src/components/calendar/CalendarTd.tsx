@@ -1,6 +1,6 @@
 import { isSameMonth, startOfMonth, startOfWeek } from "date-fns";
 import { useRecoilState, useRecoilValue } from "recoil";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback,  useMemo } from "react";
 import styled from "styled-components";
 import {
   modalState,

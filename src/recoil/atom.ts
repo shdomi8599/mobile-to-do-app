@@ -57,6 +57,23 @@ export const scheduleDataState = atom<SigObj>({
   default: localState("scheduleData", {}),
 });
 
+//알람 설정
+export const alarmDataState = atom<any>({
+  key: "alarmDataState",
+  default: () => {
+    const data = localState("alarmData", {});
+    if (Object.keys(data).length !== 0) {
+      return data;
+    } else {
+      const data = localState("scheduleData", {});
+      for (let key in data) {
+        data[key] = false;
+      }
+      return data;
+    }
+  },
+});
+
 //네비 상태
 export const navState = atom({
   key: "navState",

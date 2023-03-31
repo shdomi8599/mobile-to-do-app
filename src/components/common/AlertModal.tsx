@@ -45,7 +45,7 @@ type test = {
   params: string;
 };
 
-const AlertModal = ({ accept }: { accept: () => void }) => {
+const AlertModal = ({ accept }: { accept?: () => void }) => {
   const location = useLocation();
   const navigate = useNavigate();
   //바디의 높이
