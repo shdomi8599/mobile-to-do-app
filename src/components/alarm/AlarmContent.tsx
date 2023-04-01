@@ -31,7 +31,7 @@ const AlarmContent = ({ category, valueArr, value }: AlarmContentProps) => {
         <div className="flex-01 d-flex justify-content-start align-items-start w-100 ps-3">
           <Category>{category}</Category>
         </div>
-        <div className="flex-10 fs-3 w-100 d-flex justify-content-center align-items-start">
+        <div className="flex-10 fs-3 w-100 d-flex justify-content-center align-items-start pt-3">
           <AlarmSelect category={category} valueArr={valueArr} value={value} />
         </div>
       </MainContentBox>
