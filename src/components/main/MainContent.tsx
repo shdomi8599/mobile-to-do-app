@@ -89,8 +89,10 @@ const MainContent = ({ time, content, preContent }: MainContentProps) => {
   const BellFillIcon = React.memo(BsBellFill);
 
   useEffect(() => {
-    const data = getLocalStorage("alarmData");
-    setBell(data.alarmData[time]);
+    if (getLocalStorage("alarmData")) {
+      const data = getLocalStorage("alarmData");
+      setBell(data.alarmData[time]);
+    }
   }, []);
 
   return (
