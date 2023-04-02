@@ -17,6 +17,7 @@ import {
 import { getLocalStorage } from "../function/localStorage/getLocalStorage";
 import { addFailData } from "../function/addFailData";
 import { setLocalStorage } from "../function/localStorage/setLocalStorage";
+import { localState } from "../function/localStorage/localState";
 
 const App = () => {
   const setToday = useSetRecoilState(todayTargetState);
@@ -48,6 +49,7 @@ const App = () => {
   useEffect(() => {
     const failData = addFailData(successTarget);
     setSuccessTarget({ ...successTarget, ...failData });
+    setYesterDay(localState("yesterdayContent", "")); //어제의 목표가 바로 적용안되서 의도적으로 한 번더 적용 시도
   }, []);
 
   //데이터가 변하면 달력 값 저장
