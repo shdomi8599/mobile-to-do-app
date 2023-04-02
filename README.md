@@ -47,6 +47,8 @@
 
 목표를 등록할 수 있습니다.
 
+※목표는 최대 20개까지만 등록됩니다.※
+
 ![5 목표 등록(1)](https://user-images.githubusercontent.com/117655658/229328306-7ede9d34-271b-4645-8d5a-0a8f54a4c086.gif)\
 ![5 목표 등록(2)](https://user-images.githubusercontent.com/117655658/229328308-c99bee66-bb6a-4b4b-ba1d-7db03ffad664.gif)
 
