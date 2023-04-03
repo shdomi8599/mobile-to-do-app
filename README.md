@@ -2,6 +2,10 @@
 
 이 앱은 취직을 준비하는 학생들의 스케줄을 효율적으로 관리하도록 도와주는 앱입니다.
 
+## 앱 다운로드 (플레이스토어 심사 중)
+
+  <a href='https://expo.dev/artifacts/eas/dp4XMRoLYeVm4cq14MqrSg.apk'><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"></a>
+
 ## 기능 소개
 
 ### `1`.기상체크
@@ -94,7 +98,3 @@
 저장된 목표는 언제든지 조회할 수 있고, 달력의 '성공' 버튼을 누르지 못하거나 앱에 접속하지 않은 날은 '실패'로 등록됩니다.
 
 ![10 달력 목표 달성](https://user-images.githubusercontent.com/117655658/229328493-74e6edb7-79ad-41d2-83d8-2229d4ef7103.gif)
-
-## 앱 다운로드 (플레이스토어 심사 중)
-
-  <a href='https://expo.dev/artifacts/eas/dp4XMRoLYeVm4cq14MqrSg.apk'><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"></a>
