@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -24,5 +24,4 @@ jobs:
         with:
           ghtoken: ${{ secrets.JOB_SEEKER_DIARY_TOKEN }}
           branch: gh-pages
-          folder: ./build
-          CLEAN: true
+          folder: build
