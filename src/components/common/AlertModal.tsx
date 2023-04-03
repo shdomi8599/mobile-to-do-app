@@ -63,7 +63,7 @@ const AlertModal = ({ accept }: { accept?: () => void }) => {
   const closeModal = useCallback(() => {
     alertModal(false);
     navigate("/");
-  }, [alertModal]);
+  }, [alertModal, navigate]);
 
   //아이콘 메모이제이션
   const XIcon = React.memo(AiOutlineClose);

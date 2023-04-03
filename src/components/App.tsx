@@ -53,7 +53,7 @@ const App = () => {
     const failData = addFailData(successTarget);
     setSuccessTarget({ ...successTarget, ...failData });
     setYesterDay(localState("yesterdayContent", "")); //어제의 목표가 바로 적용안되서 의도적으로 한 번더 적용 시도
-  }, []);
+  }, [setSuccessTarget, setYesterDay, successTarget]);
 
   //데이터가 변하면 달력 값 저장
   useEffect(() => {

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
-  alarmDataState,
   modalState,
   modalValState,
   scheduleDataState,
@@ -90,6 +89,7 @@ const MainPage = () => {
       setLocalStorage("scheduleData", scheduleData);
       navigate("/");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apply]);
 
   // 공유하기 데이터가 존재한다면 실행

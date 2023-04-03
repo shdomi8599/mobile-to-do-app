@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { BsBell, BsBellFill } from "react-icons/bs";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { alarmDataState } from "../../recoil/atom";
 import { setLocalStorage } from "../../function/localStorage/setLocalStorage";
 import { getLocalStorage } from "../../function/localStorage/getLocalStorage";
@@ -93,7 +93,7 @@ const MainContent = ({ time, content, preContent }: MainContentProps) => {
       const data = getLocalStorage("alarmData");
       setBell(data.alarmData[time]);
     }
-  }, []);
+  }, [time]);
 
   return (
     <>
