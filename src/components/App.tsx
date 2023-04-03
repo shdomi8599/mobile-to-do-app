@@ -21,7 +21,9 @@ import { localState } from "../function/localStorage/localState";
 
 const App = () => {
   console.log("배포 자동화 테스트");
-  
+  console.log("배포 자동화 테스트");
+  console.log("배포 자동화 테스트");
+
   const setToday = useSetRecoilState(todayTargetState);
   const setYesterDay = useSetRecoilState(yesterdayContentState);
   const [successTarget, setSuccessTarget] = useRecoilState(successTargetState);
