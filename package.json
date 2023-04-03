@@ -1,4 +1,5 @@
 {
+  "homepage": "https://shdomi8599.github.io/mobile-to-do-app/",
   "name": "my-to-do-app",
   "version": "0.3.0",
   "private": true,
@@ -29,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +55,7 @@
   "devDependencies": {
     "@types/react-datepicker": "^4.10.0",
     "@types/styled-components": "^5.1.26",
-    "@types/uuid": "^9.0.1"
+    "@types/uuid": "^9.0.1",
+    "gh-pages": "^5.0.0"
   }
 }
