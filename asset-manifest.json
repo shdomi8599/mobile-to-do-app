@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/mobile-to-do-app/static/css/main.08f0b9a4.css",
-    "main.js": "/mobile-to-do-app/static/js/main.3ff6a998.js",
+    "main.js": "/mobile-to-do-app/static/js/main.07f74b65.js",
     "index.html": "/mobile-to-do-app/index.html",
     "main.08f0b9a4.css.map": "/mobile-to-do-app/static/css/main.08f0b9a4.css.map",
-    "main.3ff6a998.js.map": "/mobile-to-do-app/static/js/main.3ff6a998.js.map"
+    "main.07f74b65.js.map": "/mobile-to-do-app/static/js/main.07f74b65.js.map"
   },
   "entrypoints": [
     "static/css/main.08f0b9a4.css",
-    "static/js/main.3ff6a998.js"
+    "static/js/main.07f74b65.js"
   ]
 }
