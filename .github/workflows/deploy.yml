@@ -22,7 +22,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          lfs: true
           token: ${{ secrets.JOB_SEEKER_DIARY_TOKEN }}
           branch: gh-pages
           folder: build
