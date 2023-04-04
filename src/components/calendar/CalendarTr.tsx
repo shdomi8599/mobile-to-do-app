@@ -11,16 +11,17 @@ const BodyTr = styled.tr.attrs({
 type CalendarTrProps = {
   dateArr: string[];
   trIdx: number;
+  holiday: number[];
 };
 
-const CalendarTr = ({ dateArr, trIdx }: CalendarTrProps) => {
+const CalendarTr = ({ dateArr, trIdx, holiday }: CalendarTrProps) => {
   return (
     <BodyTr>
       {dateArr.map((date, i) => (
-        <CalendarTd formattedDate={date} key={date} tdIdx={i} trIdx={trIdx} />
+        <CalendarTd formattedDate={date} key={date} tdIdx={i} trIdx={trIdx} holiday={holiday}/>
       ))}
     </BodyTr>
   );
 };
 
-export default CalendarTr
+export default CalendarTr;

@@ -67,3 +67,11 @@ li {
   height: 100%;
   overflow: hidden;
 }
+
+.text-red {
+  color: red;
+}
+
+.text-blue {
+  color: blue;
+}

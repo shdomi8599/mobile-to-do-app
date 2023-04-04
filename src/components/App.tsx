@@ -48,7 +48,6 @@ const App = () => {
   //실패한 데이터를 추가 , 문제가 되는 지점을 찾았다 50,51번째 줄이 문제인데 왜일까???
   useEffect(() => {
     const failData = addFailData(successTarget);
-    console.log(failData);
     setSuccessTarget({ ...successTarget, ...failData });
     setYesterDay(localState("yesterdayContent", "")); //어제의 목표가 바로 적용안되서 의도적으로 한 번더 적용 시도
     // eslint-disable-next-line react-hooks/exhaustive-deps

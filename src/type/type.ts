@@ -40,3 +40,5 @@ export type SuccessData = {
 };
 
 export type LocalGetUp = { date: string; wakeUpTime: string };
+
+export type Holiday = {dateKind: string; dateName : string ; isHoliday : string ; locdate : number ; seq:number}

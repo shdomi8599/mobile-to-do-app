@@ -1,6 +1,6 @@
 import { isSameMonth, startOfMonth, startOfWeek } from "date-fns";
 import { useRecoilState, useRecoilValue } from "recoil";
-import React, { useCallback,  useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import {
   modalState,
@@ -38,9 +38,15 @@ type CalendarTdProps = {
   formattedDate: string;
   tdIdx: number;
   trIdx: number;
+  holiday: number[];
 };
 
-const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
+const CalendarTd = ({
+  formattedDate,
+  tdIdx,
+  trIdx,
+  holiday,
+}: CalendarTdProps) => {
   //현재 선택되있는 달력 상태 값
   const startDate = useRecoilValue(startDateState);
 
@@ -133,12 +139,15 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
     () => checkDate(formattedDate, year, month, day, monthStart),
     [day, formattedDate, month, monthStart, year]
   );
-
   //목표값이 설정된 날짜가 있는지 체크
   const checkTarget = useMemo(() => target[getDate], [getDate, target]);
 
   //오늘 날짜
   const today = useMemo(() => currentDate(), []);
+
+  const numberDay = Number(
+    getDate.slice(0, 4) + getDate.slice(5, 7) + getDate.slice(8, 10)
+  );
 
   return (
     <td
@@ -150,7 +159,20 @@ const CalendarTd = ({ formattedDate, tdIdx, trIdx }: CalendarTdProps) => {
       }}
     >
       <div className="pb-1">
-        <span>{formattedDate}</span>
+        <span
+          className={
+            (holiday && holiday.length > 0 && holiday.includes(numberDay)) ||
+            tdIdx === 0
+              ? tdIdx === 6
+                ? "text-blue"
+                : "text-red"
+              : tdIdx === 6
+              ? "text-blue"
+              : ""
+          }
+        >
+          {formattedDate}
+        </span>
       </div>
       {checkTarget ? (
         <div>

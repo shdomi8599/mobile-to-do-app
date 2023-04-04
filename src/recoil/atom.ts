@@ -2,6 +2,7 @@ import { atom } from "recoil";
 import { checkTodayTarget } from "../function/localStorage/checkTodayTargetState";
 import { SigObj, SuccessData } from "../type/type";
 import { localState } from "../function/localStorage/localState";
+import { getHoliday } from "../function/api/getHoliday";
 
 //텍스트 값
 export const textState = atom({
@@ -120,4 +121,10 @@ export const alertModalValState = atom({
 export const pickTimeState = atom({
   key: "pickTimeState",
   default: 0,
+});
+
+//공휴일 데이터
+export const holidayState = atom({
+  key: "holidayState",
+  default: getHoliday(2023),
 });

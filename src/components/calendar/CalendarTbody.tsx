@@ -1,12 +1,20 @@
-import { format } from "date-fns";
-import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns";
-import { addDays } from "date-fns";
+import {
+  format,
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+  addDays,
+} from "date-fns";
 import { useRecoilValue } from "recoil";
 import React, { useMemo } from "react";
-import { startDateState } from "../../recoil/atom";
+import { holidayState, startDateState } from "../../recoil/atom";
 import CalendarTr from "./CalendarTr";
 
 const CalendarTbody = () => {
+  //td에서 holiday를 직접 호출했더니 get요청이 td수만큼 들어가서 tbody에서 내리는 것으로 결정
+  const holiday = useRecoilValue(holidayState);
+
   //현재 선택되있는 달력 상태 값
   const startDate = useRecoilValue(startDateState);
 
@@ -55,7 +63,12 @@ const CalendarTbody = () => {
     <>
       <tbody key={formattedDate} className="w-100">
         {trData.map((tr, i) => (
-          <CalendarTr dateArr={tr} key={`${i}+${tr[0]}`} trIdx={i} />
+          <CalendarTr
+            dateArr={tr}
+            key={`${i}+${tr[0]}`}
+            trIdx={i}
+            holiday={holiday}
+          />
         ))}
       </tbody>
     </>

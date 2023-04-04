@@ -1,13 +1,15 @@
-import React, { ForwardedRef, forwardRef, useMemo } from "react";
+import React, { ForwardedRef, forwardRef, useEffect, useMemo } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker, {
   ReactDatePickerProps,
   registerLocale,
 } from "react-datepicker";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { startDateState } from "../../recoil/atom";
+import { holidayState, startDateState } from "../../recoil/atom";
 import { yearMonthState } from "../../recoil/selector";
 import ko from "date-fns/locale/ko"; // 한국어적용
+import { getHoliday } from "../../function/api/getHoliday";
+import { Holiday } from "../../type/type";
 registerLocale("ko", ko); // 한국어적용
 // ForwardedRef<HTMLSpanElement>
 interface Props extends Omit<ReactDatePickerProps, "onChange"> {
@@ -15,6 +17,9 @@ interface Props extends Omit<ReactDatePickerProps, "onChange"> {
 }
 
 const SelectionCalendar = () => {
+  //공휴일 상태
+  const [, setHoliday] = useRecoilState(holidayState);
+
   //현재 달력값 상태
   const [startDate, setStartDate] = useRecoilState(startDateState);
 
@@ -23,6 +28,12 @@ const SelectionCalendar = () => {
 
   //달력 값 메모이제이션
   const calendarValue = useMemo(() => `${year}년 ${month}월`, [year, month]);
+
+  useEffect(() => {
+    getHoliday(Number(year)).then((res) => {
+      setHoliday(res);
+    });
+  }, [setHoliday, year]);
 
   //커스텀 input
   const CustomInput = forwardRef(
