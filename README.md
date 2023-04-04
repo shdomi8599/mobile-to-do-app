@@ -93,11 +93,11 @@ https://shdomi8599.github.io/mobile-to-do-app/
 ### `5-(1)` 달력 조회
 네비바를 통해 달력 보기 페이지로 이동하면 달력을 조회할 수 있습니다. 
 
-![9 달력 조회](https://user-images.githubusercontent.com/117655658/229328483-57ae1eb3-9d93-46e2-8ad2-f062d083835b.gif)
+![9 달력 조회](https://user-images.githubusercontent.com/117655658/229786390-df2379c8-50f1-4fc2-859d-c6ac97c95caf.gif)
 
 ### `5-(2)` 달력 목표 달성
 달력에 있는 '성공'버튼을 누르게 되면 `1`기상 시간과 `3-(4)`오늘의 목표가 저장됩니다.
 
 저장된 목표는 언제든지 조회할 수 있고, 달력의 '성공' 버튼을 누르지 못하거나 앱에 접속하지 않은 날은 '실패'로 등록됩니다.
 
-![10 달력 목표 달성](https://user-images.githubusercontent.com/117655658/229328493-74e6edb7-79ad-41d2-83d8-2229d4ef7103.gif)
+![10 달력 목표 달성](https://user-images.githubusercontent.com/117655658/229786428-a96d4851-76ca-46b4-9d12-f2c6dc54cd3b.gif)
