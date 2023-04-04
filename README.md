@@ -16,7 +16,7 @@ https://shdomi8599.github.io/mobile-to-do-app/
 
 ※자정이 되면 기상 시간이 초기화됩니다.※
 
-![1 기상체크](https://user-images.githubusercontent.com/117655658/229328005-de74b9fd-c108-4ad9-8f6f-b67bbcb275bc.gif)
+![1  기상 체크](https://user-images.githubusercontent.com/117655658/229854402-84b1c4d2-710a-4e3a-886e-b7cad0dbae5c.gif)
 
 ### `2-(1)` 스케줄 등록
 홈 화면에서 '스케줄을 등록해주세요' 버튼을 누르거나 네비바를 통해
