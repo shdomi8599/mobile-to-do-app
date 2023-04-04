@@ -9,7 +9,6 @@ import { holidayState, startDateState } from "../../recoil/atom";
 import { yearMonthState } from "../../recoil/selector";
 import ko from "date-fns/locale/ko"; // 한국어적용
 import { getHoliday } from "../../function/api/getHoliday";
-import { Holiday } from "../../type/type";
 registerLocale("ko", ko); // 한국어적용
 // ForwardedRef<HTMLSpanElement>
 interface Props extends Omit<ReactDatePickerProps, "onChange"> {
