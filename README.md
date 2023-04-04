@@ -5,6 +5,9 @@
 ## 앱 다운로드 (플레이스토어 심사 중)
 
   <a href='https://expo.dev/artifacts/eas/dp4XMRoLYeVm4cq14MqrSg.apk'><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"></a>
+  
+## 웹 
+https://shdomi8599.github.io/mobile-to-do-app/
 
 ## 기능 소개
 
