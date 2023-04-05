@@ -2,9 +2,9 @@
 
 이 앱은 취직을 준비하는 학생들의 스케줄을 효율적으로 관리하도록 도와주는 앱입니다.
 
-## 앱 다운로드 (플레이스토어 심사 중)
+## 앱 다운로드 (플레이스토어)
 
-  <a href='https://expo.dev/artifacts/eas/dp4XMRoLYeVm4cq14MqrSg.apk'><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"></a>
+  <a href='https://play.google.com/store/apps/details?id=com.JobSeekerDiary.app'><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"></a>
   
 ## 웹 
 https://shdomi8599.github.io/mobile-to-do-app/
