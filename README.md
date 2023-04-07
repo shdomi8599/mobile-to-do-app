@@ -2,9 +2,9 @@
 
 이 앱은 취직을 준비하는 학생들의 스케줄을 효율적으로 관리하도록 도와주는 앱입니다.
 
-## 앱 다운로드 (플레이스토어 심사 중)
+## 앱 다운로드 (플레이스토어)
 
-  <a href='https://expo.dev/artifacts/eas/dp4XMRoLYeVm4cq14MqrSg.apk'><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"></a>
+  <a href='https://play.google.com/store/apps/details?id=com.JobSeekerDiary.app'><img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=Android&logoColor=white"></a>
   
 ## 웹 
 https://shdomi8599.github.io/mobile-to-do-app/
@@ -16,7 +16,7 @@ https://shdomi8599.github.io/mobile-to-do-app/
 
 ※자정이 되면 기상 시간이 초기화됩니다.※
 
-![1 기상체크](https://user-images.githubusercontent.com/117655658/229328005-de74b9fd-c108-4ad9-8f6f-b67bbcb275bc.gif)
+![1  기상 체크](https://user-images.githubusercontent.com/117655658/229854402-84b1c4d2-710a-4e3a-886e-b7cad0dbae5c.gif)
 
 ### `2-(1)` 스케줄 등록
 홈 화면에서 '스케줄을 등록해주세요' 버튼을 누르거나 네비바를 통해
@@ -93,11 +93,11 @@ https://shdomi8599.github.io/mobile-to-do-app/
 ### `5-(1)` 달력 조회
 네비바를 통해 달력 보기 페이지로 이동하면 달력을 조회할 수 있습니다. 
 
-![9 달력 조회](https://user-images.githubusercontent.com/117655658/229328483-57ae1eb3-9d93-46e2-8ad2-f062d083835b.gif)
+![9 달력 조회](https://user-images.githubusercontent.com/117655658/229786390-df2379c8-50f1-4fc2-859d-c6ac97c95caf.gif)
 
 ### `5-(2)` 달력 목표 달성
 달력에 있는 '성공'버튼을 누르게 되면 `1`기상 시간과 `3-(4)`오늘의 목표가 저장됩니다.
 
 저장된 목표는 언제든지 조회할 수 있고, 달력의 '성공' 버튼을 누르지 못하거나 앱에 접속하지 않은 날은 '실패'로 등록됩니다.
 
-![10 달력 목표 달성](https://user-images.githubusercontent.com/117655658/229328493-74e6edb7-79ad-41d2-83d8-2229d4ef7103.gif)
+![10 달력 목표 달성](https://user-images.githubusercontent.com/117655658/229786428-a96d4851-76ca-46b4-9d12-f2c6dc54cd3b.gif)
