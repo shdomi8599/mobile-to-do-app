@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { setLocalStorage } from "../../function/localStorage/setLocalStorage";
 import { bedTimeState, wakeUpTimeState } from "../../recoil/atom";
 
@@ -11,10 +11,11 @@ type AlarmSelectProps = {
 
 const AlarmSelect = ({ category, value, valueArr }: AlarmSelectProps) => {
   //기상 시간 상태변경
-  const [, setWakeUp] = useRecoilState(wakeUpTimeState);
+  const setWakeUp = useSetRecoilState(wakeUpTimeState);
 
   //취침 시간 상태변경
-  const [, setBed] = useRecoilState(bedTimeState);
+  const setBed = useSetRecoilState(bedTimeState);
+
   /**
    * 기상 시간 설정
    */
@@ -29,8 +30,7 @@ const AlarmSelect = ({ category, value, valueArr }: AlarmSelectProps) => {
         setLocalStorage("alarmBed", e.target.value);
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [setBed, setWakeUp]
   );
 
   const optionVal = useMemo(

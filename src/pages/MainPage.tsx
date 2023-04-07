@@ -63,6 +63,19 @@ const MainPage = () => {
   //모달 값 set
   const setAlertModalState = useSetRecoilState(alertModalValState);
 
+  // 공유하기를 통해 받은 데이터를 적용하는 이벤트
+  const checkParams = useCallback(() => {
+    if (location.search) {
+      setAlertModal(true);
+      setAlertModalState("공유받은 스케줄을 적용하시겠습니까?");
+    }
+  }, [location.search, setAlertModal, setAlertModalState]);
+
+  // 공유하기 데이터가 존재한다면 실행
+  useEffect(() => {
+    checkParams();
+  }, [checkParams]);
+
   //공유하기 상태
   const [apply, setApply] = useState(false);
 
@@ -71,14 +84,6 @@ const MainPage = () => {
     setApply(true);
     setAlertModal(false);
   };
-
-  // 공유하기를 통해 받은 데이터를 적용하는 이벤트
-  const checkParams = useCallback(() => {
-    if (location.search) {
-      setAlertModal(true);
-      setAlertModalState("공유받은 스케줄을 적용하시겠습니까?");
-    }
-  }, [location.search, setAlertModal, setAlertModalState]);
 
   //apply가 true가 되면 실행할 이펙트
   useEffect(() => {
@@ -89,13 +94,8 @@ const MainPage = () => {
       setLocalStorage("scheduleData", scheduleData);
       navigate("/");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apply]);
-
-  // 공유하기 데이터가 존재한다면 실행
-  useEffect(() => {
-    checkParams();
-  }, [checkParams]);
 
   //오늘의 목표로 전달된 값
   const todayContent = useRecoilValue(todayValueState);
@@ -126,7 +126,7 @@ const MainPage = () => {
   const [, setModalVal] = useRecoilState(modalValState);
 
   /**
-   * 공유하기 링크 생성 이벤트
+   * 공유하기 링크 생성
    */
   const shareEvent = useCallback(() => {
     const hostName = window.location.href;

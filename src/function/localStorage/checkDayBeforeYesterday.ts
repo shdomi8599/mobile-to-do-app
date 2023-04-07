@@ -12,7 +12,6 @@ export const checkDayBeforeYesterday = () => {
     const date = data.date;
     const yesterday = subDays(new Date(), 2);
     if (isBefore(new Date(date), yesterday)) {
-      console.log("hi");
       removeLocalStorage("yesterdayContent");
     }
   }

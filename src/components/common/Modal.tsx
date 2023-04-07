@@ -62,10 +62,11 @@ const Modal = () => {
   //기상 시간 값
   const time: string = modalVal.time;
 
+  const [checkCopy, setCheckCopy] = useState(false);
+
+
   //공유하기용 url 값
   const url: string = useMemo(() => modalVal.url, [modalVal]);
-
-  const [checkCopy, setCheckCopy] = useState(false);
 
   /**
    * url 복사 이벤트

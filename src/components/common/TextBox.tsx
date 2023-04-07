@@ -98,7 +98,6 @@ const TextBox = ({
 
   /**
    * 목표,스케줄 등록 이벤트
-   * 타입때문에 코드가 많이 더러워져서 나중에 리팩토링해야할듯
    */
   const sumbitText = () => {
     if (text.length === 0) {
@@ -117,7 +116,7 @@ const TextBox = ({
       if (data.length === 0) {
         changeScheduleData({ [`${message}`]: text });
       } else {
-        const mergeData: {} = Object.assign({}, ...data);
+        const mergeData: SigObj = Object.assign({}, ...data);
         changeScheduleData(mergeData);
       }
       textBoxHandler();

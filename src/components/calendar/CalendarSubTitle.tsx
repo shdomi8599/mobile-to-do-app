@@ -1,31 +1,30 @@
 import { useRecoilState } from "recoil";
-import React, { useCallback } from "react";
+import React from "react";
 import { BsCaretUpFill, BsCaretDownFill } from "react-icons/bs";
-import {  startDateState } from "../../recoil/atom";
+import { startDateState } from "../../recoil/atom";
 import SelectionCalendar from "./SelectionCalendar";
 
 const CalendarSubTitle = () => {
-
   //현재 달력값 상태
   const [startDate, setStartDate] = useRecoilState(startDateState);
 
   /**
    * 다음 달 이동
    */
-  const upEvent = useCallback(() => {
+  const upEvent = () => {
     const month = startDate.getMonth();
     const newDate = new Date(startDate.setMonth(month + 1));
     setStartDate(newDate);
-  }, [setStartDate, startDate]);
+  };
 
   /**
    * 이전 달 이동
    */
-  const downEvent = useCallback(() => {
+  const downEvent = () => {
     const month = startDate.getMonth();
     const newDate = new Date(startDate.setMonth(month - 1));
     setStartDate(newDate);
-  }, [setStartDate, startDate]);
+  };
 
   //아이콘 메모이제이션
   const UpIcon = React.memo(BsCaretUpFill);

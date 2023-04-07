@@ -13,7 +13,6 @@ yesterdayState();
 checkDayBeforeYesterday();
 checkToday("wakeUpTime");
 checkToday("todayContent");
-//의도적 새로고침 1번주면 될듯?
 root.render(
   <RecoilRoot>
     <App />
