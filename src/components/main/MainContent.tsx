@@ -115,9 +115,17 @@ const MainContent = ({ time, content, preContent }: MainContentProps) => {
           </MainContentBox>
           <ShareBox>
             {bell ? (
-              <BellFillIcon onClick={bellHandler} className="fs-1" />
+              <BellFillIcon
+                onClick={bellHandler}
+                className="fs-1"
+                id="notification"
+              />
             ) : (
-              <BellIcon onClick={bellHandler} className="fs-1" />
+              <BellIcon
+                onClick={bellHandler}
+                className="fs-1"
+                id="check-notification"
+              />
             )}
           </ShareBox>
         </Content>
